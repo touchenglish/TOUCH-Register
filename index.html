@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOUCH English — makes you visible</title>
+<meta name="description" content="英文不只是考试，而是让你在职场和生活中被看见。16 年 · 16,397+ 学员 · 97.5% 进步率。">
+<style>
+/* ================= TOKENS ================= */
+:root{
+  --ink:#15357B; --ink2:#41537f; --mut:#7284a8;
+  --blue:#1F78D2; --red:#E0303B; --gold:#D2A23C; --deep:#0E2A63;
+  --bg:#F3F7FC;
+  --glass:rgba(255,255,255,.62); --gbrd:rgba(255,255,255,.85);
+  --rad:26px;
+  --sh:0 18px 50px -18px rgba(21,53,123,.22), 0 4px 14px -6px rgba(21,53,123,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+
+/* language toggle: default ZH primary; body.te-en → EN */
+.en{display:none!important}
+body.te-en .en{display:revert!important}
+body.te-en .zh{display:none!important}
+
+/* ambient brand light */
+.amb{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(46% 40% at 14% 8%,rgba(31,120,210,.13),transparent 70%),
+   radial-gradient(36% 34% at 88% 12%,rgba(224,48,59,.08),transparent 72%),
+   radial-gradient(60% 44% at 50% 108%,rgba(14,42,99,.10),transparent 70%)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:84px 0;position:relative}
+
+/* eyebrow / headings */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);background:rgba(31,120,210,.08);border:1px solid rgba(31,120,210,.18);padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.eyebrow.r{color:var(--red);background:rgba(224,48,59,.07);border-color:rgba(224,48,59,.16)}
+.eyebrow.g{color:#9a7420;background:rgba(210,162,60,.10);border-color:rgba(210,162,60,.25)}
+h2{font-size:clamp(26px,4vw,40px);line-height:1.18;letter-spacing:-.02em;font-weight:800}
+.sub{font-size:clamp(15px,1.8vw,18px);color:var(--ink2);line-height:1.75;max-width:640px;margin-top:14px}
+.center{text-align:center}
+.center .sub{margin-left:auto;margin-right:auto}
+mark{background:none;color:var(--red);position:relative;white-space:nowrap}
+mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;background:rgba(224,48,59,.14);border-radius:4px;z-index:-1}
+
+/* glass card */
+.card{background:var(--glass);border:1px solid var(--gbrd);border-radius:var(--rad);box-shadow:var(--sh);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,.8,.3,1)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* CTA buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:999px;font-weight:700;font-size:16px;padding:16px 34px;transition:.25s;position:relative}
+.btn--red{background:linear-gradient(180deg,#F04A54,#DC2430);color:#fff;box-shadow:0 14px 34px -10px rgba(224,48,59,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn--red:hover{transform:translateY(-2px);box-shadow:0 20px 44px -12px rgba(224,48,59,.62),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn--ghost{background:rgba(255,255,255,.7);border:1px solid rgba(21,53,123,.16);color:var(--ink);box-shadow:0 8px 22px -12px rgba(21,53,123,.25)}
+.btn--ghost:hover{transform:translateY(-2px)}
+.btn small{display:block;font-size:11px;font-weight:600;opacity:.85}
+
+/* ================= TOPBAR ================= */
+.topbar{position:sticky;top:0;z-index:60;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(243,247,252,.78);border-bottom:1px solid rgba(21,53,123,.08)}
+.topbar__in{max-width:1080px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.logo-disc{width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:0 6px 16px -6px rgba(21,53,123,.35);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}
+.logo-disc img{width:76%;height:76%;object-fit:contain}
+.logo-disc b{font-size:17px;color:var(--blue)}
+.tb__t{line-height:1.15}
+.tb__t b{font-size:15px;letter-spacing:.02em}
+.tb__t span{display:block;font-size:11px;color:var(--mut);font-weight:600}
+.tb__sp{flex:1}
+.langbtn{border:1px solid rgba(21,53,123,.16);background:rgba(255,255,255,.7);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--ink)}
+.tb__cta{padding:10px 22px;font-size:14px}
+
+/* ================= HERO ================= */
+.hero{padding:96px 0 70px;text-align:center;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.12;letter-spacing:-.03em;font-weight:800;max-width:900px;margin:0 auto}
+.hero h1 .vis{color:var(--red);position:relative;display:inline-block}
+.hero h1 .vis::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:4px;border-radius:3px;background:linear-gradient(90deg,var(--red),#ff8f96)}
+.hero h1 .vis i{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.85) 50%,transparent 70%);background-size:250% 100%;mix-blend-mode:overlay;animation:scan 5s ease-in-out infinite;border-radius:6px;font-style:normal;pointer-events:none}
+@keyframes scan{0%,68%{background-position:180% 0}86%,100%{background-position:-80% 0}}
+.hero__kick{font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-bottom:22px}
+.hero__sub{font-size:clamp(16px,2vw,20px);color:var(--ink2);line-height:1.8;max-width:620px;margin:24px auto 0}
+.hero__cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.hero__note{margin-top:14px;font-size:13px;color:var(--mut)}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+.stat{padding:18px 26px;border-radius:20px;min-width:150px}
+.stat b{display:block;font-size:clamp(24px,3vw,32px);letter-spacing:-.02em}
+.stat b em{font-style:normal;color:var(--blue)}
+.stat span{font-size:12.5px;color:var(--mut);font-weight:600}
+.trustline{margin-top:44px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tchip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--ink2);background:rgba(255,255,255,.66);border:1px solid rgba(21,53,123,.10);border-radius:999px;padding:8px 16px;box-shadow:0 6px 16px -10px rgba(21,53,123,.25)}
+.tchip s{width:7px;height:7px;border-radius:50%;background:var(--gold);text-decoration:none;flex:none}
+
+/* ================= PAIN ================= */
+.pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:38px}
+.pain{padding:24px 22px;display:flex;gap:14px;align-items:flex-start}
+.pain__ic{width:38px;height:38px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;font-size:17px;background:linear-gradient(160deg,rgba(224,48,59,.12),rgba(224,48,59,.05));border:1px solid rgba(224,48,59,.15)}
+.pain b{display:block;font-size:15.5px;margin-bottom:5px}
+.pain p{font-size:13.5px;color:var(--ink2);line-height:1.65}
+.blame{margin-top:46px;padding:40px clamp(22px,5vw,56px);text-align:center;background:linear-gradient(160deg,rgba(21,53,123,.92),rgba(14,42,99,.96));color:#fff;border-radius:30px;box-shadow:0 26px 60px -20px rgba(14,42,99,.55);position:relative;overflow:hidden}
+.blame::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 20% 0%,rgba(31,120,210,.35),transparent 70%),radial-gradient(50% 80% at 90% 100%,rgba(224,48,59,.25),transparent 70%)}
+.blame>*{position:relative}
+.blame h3{font-size:clamp(21px,3vw,30px);line-height:1.35;font-weight:800}
+.blame p{margin-top:14px;font-size:clamp(14px,1.8vw,17px);line-height:1.8;color:rgba(255,255,255,.85);max-width:640px;margin-left:auto;margin-right:auto}
+.blame b{color:#FFD98A}
+
+/* ================= VISIBLE ECO-RING ================= */
+.conv .glass-stage{position:relative;border-radius:26px;overflow:hidden;margin-top:44px;
+  padding:30px 26px;background:linear-gradient(135deg,#EEF2FB,#E4EBF7);box-shadow:var(--sh)}
+.conv .glass-stage .glow{position:absolute;width:300px;height:300px;border-radius:50%;
+  filter:blur(66px);opacity:.46;z-index:0;pointer-events:none}
+.conv .glass-stage>*{position:relative;z-index:1}
+.conv{--p1:#EBB12A;--l1:#2E9E50;--l2:#1F9FE6;--l3:#E8472B;--l4:#15335E}
+.eco-ring{display:flex;justify-content:center}
+.eco-ring .eco-stage{width:100%;max-width:1080px;display:flex;align-items:center;justify-content:center;padding:42px 30px 52px}
+.eco-ring svg{width:100%;max-width:558px;height:auto;display:block;overflow:visible}
+.eco-item{font-weight:600;fill:var(--ink);letter-spacing:.4px}
+.eco-name{font-weight:700;fill:var(--mut);letter-spacing:1px}
+.eco-name--tag{fill:#15357B;font-weight:800;letter-spacing:1.3px}
+.eco-node-ic{fill:none;stroke:#586a8c;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;color:#586a8c}
+.eco-node-ic *{vector-effect:non-scaling-stroke}
+.eco-person{fill:#46566f}
+.eco-disc{stroke:rgba(255,255,255,.55);stroke-width:1}
+.eco-disc,.eco-core,.eco-core-glow,.eco-lab,.eco-node-ic{opacity:0}
+.eco-disc,.eco-core,.eco-core-glow{transform-box:view-box;transform-origin:460px 460px}
+.eco-ring.is-on .eco-disc{animation-name:ecoRing;animation-duration:.85s;animation-timing-function:cubic-bezier(.25,.7,.25,1);animation-fill-mode:both}
+.eco-ring.is-on .eco-lab,.eco-ring.is-on .eco-node-ic{animation-name:ecoFade;animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:both}
+.eco-ring.is-on .eco-lab,.eco-ring.is-on .eco-node-ic,.eco-ring.is-on .eco-core{opacity:1}
+.eco-ring.is-on .eco-core{animation-name:ecoCore;animation-duration:.95s;animation-timing-function:cubic-bezier(.2,.7,.2,1);animation-fill-mode:both;animation-delay:.1s}
+.eco-ring.is-on .eco-core-glow{animation-name:ecoGlow;animation-duration:1.7s;animation-timing-function:ease;animation-fill-mode:both;animation-delay:.05s}
+@keyframes ecoRing{0%{opacity:0;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}
+@keyframes ecoFade{from{opacity:0}to{opacity:1}}
+@keyframes ecoCore{0%{opacity:0;transform:scale(.5)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
+@keyframes ecoGlow{0%{opacity:0;transform:scale(.45)}40%{opacity:.6}100%{opacity:.3;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.eco-disc,.eco-core,.eco-core-glow,.eco-lab,.eco-node-ic{opacity:1!important;animation:none!important;transform:none!important}}
+
+/* ================= 5C ================= */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:40px}
+.ccard{padding:26px 22px;position:relative;overflow:hidden;transition:.3s}
+.ccard:hover{transform:translateY(-5px)}
+.ccard::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--cc)}
+.ccard__n{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--cc)}
+.ccard b{display:block;font-size:19px;margin:8px 0 4px}
+.ccard i{display:block;font-style:normal;font-size:12.5px;color:var(--mut);font-weight:700;margin-bottom:10px}
+.ccard p{font-size:13px;color:var(--ink2);line-height:1.65}
+
+/* ================= JOURNEY ================= */
+.jour{overflow:hidden}
+.jour__stage{margin-top:50px;position:relative}
+.jr-svg{width:100%;height:auto}
+.jr-base{fill:none;stroke:rgba(21,53,123,.12);stroke-width:3;stroke-linecap:round}
+.jr-lit{fill:none;stroke:url(#jrGrad);stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(31,120,210,.55))}
+.jr-comet{filter:drop-shadow(0 0 8px rgba(31,120,210,.9))}
+.jnodes{position:absolute;inset:0;pointer-events:none}
+.jn{position:absolute;transform:translate(-50%,-50%);text-align:center;width:110px}
+.jn__dot{width:16px;height:16px;border-radius:50%;margin:0 auto 8px;background:#fff;border:3px solid rgba(21,53,123,.22);transition:.5s;box-shadow:0 4px 10px -4px rgba(21,53,123,.3)}
+.jn.lit .jn__dot{border-color:var(--blue);background:radial-gradient(circle at 32% 30%,#fff,#BFE0FF);box-shadow:0 0 0 5px rgba(31,120,210,.12),0 0 18px rgba(31,120,210,.55)}
+.jn.lit.fin .jn__dot{border-color:var(--red);box-shadow:0 0 0 5px rgba(224,48,59,.12),0 0 18px rgba(224,48,59,.55)}
+.jn b{display:block;font-size:12.5px;line-height:1.3}
+.jn span{display:block;font-size:11px;color:var(--mut);font-weight:600}
+.jn.lit b{color:var(--blue)}
+.jn.lit.fin b{color:var(--red)}
+.jour__cap{text-align:center;margin-top:26px;font-size:14px;color:var(--mut);font-weight:600}
+
+/* ================= STORIES ================= */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:40px}
+.story{overflow:hidden;transition:.3s;cursor:pointer}
+.story:hover{transform:translateY(-5px)}
+.story__th{position:relative;aspect-ratio:16/9;background:#0E2A63}
+.story__th img{width:100%;height:100%;object-fit:cover}
+.story__th::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(14,42,99,.45))}
+.story__pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);transition:.3s;z-index:2}
+.story:hover .story__pl{transform:translate(-50%,-50%) scale(1.1)}
+.story__pl::before{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--red);margin-left:4px}
+.story__meta{padding:16px 18px 18px}
+.story__meta b{font-size:15.5px}
+.story__meta i{display:block;font-style:normal;font-size:12px;color:var(--blue);font-weight:700;margin-top:3px}
+.story__meta p{font-size:12.5px;color:var(--ink2);line-height:1.6;margin-top:8px}
+.splayer{margin-top:22px;overflow:hidden;display:none}
+.splayer.open{display:block}
+.splayer__vid{aspect-ratio:16/9;background:#000}
+.splayer__vid iframe{width:100%;height:100%;border:0}
+.splayer__sum{padding:20px 24px}
+.splayer__sum b{font-size:16px}
+.splayer__sum p{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-top:6px}
+.adv-note-row{margin-top:26px;text-align:center}
+.adv-note{font-size:12px;font-weight:700;color:var(--mut);background:rgba(255,255,255,.6);border:1px dashed rgba(21,53,123,.25);border-radius:999px;padding:8px 18px;transition:.25s}
+.adv-note:hover{color:var(--blue);border-color:var(--blue)}
+
+/* advisor edit panel */
+.advm{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(14,42,99,.35);backdrop-filter:blur(6px)}
+.advm__card{width:min(720px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:28px;box-shadow:0 30px 80px -20px rgba(14,42,99,.5)}
+.advm__card h3{font-size:19px}
+.advm__hint{font-size:12.5px;color:var(--mut);margin:8px 0 18px;line-height:1.6}
+.advm__hint a{color:var(--blue);font-weight:700;text-decoration:underline}
+.stcard{border:1px solid rgba(21,53,123,.12);border-radius:16px;padding:16px;margin-bottom:14px;background:#F8FAFE}
+.stcard__t{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.stcard__t b{font-size:13.5px}
+.stcard__del{border:none;background:none;color:var(--red);font-size:12px;font-weight:700}
+.stf{display:block;margin-bottom:10px}
+.stf span{display:block;font-size:11px;font-weight:700;color:var(--mut);margin-bottom:4px}
+.stf input,.stf textarea{width:100%;border:1px solid rgba(21,53,123,.16);border-radius:10px;padding:9px 12px;font-size:13.5px;font-family:inherit;background:#fff}
+.stf textarea{resize:vertical;min-height:54px}
+.advm__btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
+.abtn{border-radius:999px;padding:10px 22px;font-size:13.5px;font-weight:700;border:1px solid rgba(21,53,123,.18);background:#fff;color:var(--ink)}
+.abtn--save{background:var(--blue);border-color:var(--blue);color:#fff}
+.abtn--add{border-style:dashed}
+
+/* ================= CLASS EXPERIENCE ================= */
+.exp{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;margin-top:44px}
+.exp__pts{display:grid;gap:14px}
+.ept{padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.ept__ic{width:36px;height:36px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;font-size:16px;background:linear-gradient(160deg,rgba(31,120,210,.13),rgba(31,120,210,.05));border:1px solid rgba(31,120,210,.18)}
+.ept b{display:block;font-size:15px;margin-bottom:4px}
+.ept p{font-size:13px;color:var(--ink2);line-height:1.6}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ph{aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.55);border:1.5px dashed rgba(21,53,123,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mut);font-size:12.5px;font-weight:700}
+.ph em{font-style:normal;font-size:22px}
+.ph.tall{grid-row:span 2;aspect-ratio:auto}
+.ph img{width:100%;height:100%;object-fit:cover}
+
+/* rotating 3D gem showcase */
+.cubewrap{margin-top:44px;text-align:center;position:relative}
+.cube-scene{width:250px;height:250px;margin:24px auto 0;perspective:1000px;position:relative}
+@media(max-width:480px){.cube-scene{width:210px;height:210px}}
+/* soft pedestal glow under the gem */
+.cube-scene::after{content:"";position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);
+  width:66%;height:34px;border-radius:50%;background:radial-gradient(ellipse,rgba(31,120,210,.32),transparent 70%);
+  filter:blur(9px);z-index:-1}
+.cube-spin{width:100%;height:100%;transform-style:preserve-3d;animation:gemFloat 6s ease-in-out infinite}
+.cubewrap.paused .cube-spin{animation-play-state:paused}
+@keyframes gemFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* inner: stand the cube on its corner + spin around the vertical body-diagonal */
+.cube-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:gemSpin 32s linear infinite}
+.cubewrap.paused .cube-tilt{animation-play-state:paused}
+@keyframes gemSpin{
+  from{transform:rotateX(-20deg) rotateY(0deg) rotateZ(0deg)}
+  to{transform:rotateX(-20deg) rotateY(360deg) rotateZ(0deg)}
+}
+.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(35.264deg) rotateZ(45deg)}
+.cface{position:absolute;inset:0;border-radius:30px;overflow:hidden;cursor:pointer;
+  background:#0E2A63;
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 26px rgba(31,120,210,.28),0 22px 46px -16px rgba(21,53,123,.55);
+  -webkit-backface-visibility:hidden;backface-visibility:hidden}
+.cface img{width:100%;height:100%;object-fit:cover;opacity:.97}
+.cface::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,rgba(14,42,99,.6));pointer-events:none}
+/* iridescent holographic edge */
+.cface__edge{position:absolute;inset:0;border-radius:30px;pointer-events:none;
+  box-shadow:inset 0 0 30px rgba(150,205,255,.4);
+  background:linear-gradient(135deg,rgba(120,235,190,.28),rgba(120,190,255,.06) 34%,transparent 52%,rgba(196,140,255,.24))}
+.cface__pl{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,0,0,.45)}
+.cface__pl::before{content:"";border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent var(--red);margin-left:3px}
+.cface__nm{position:absolute;left:0;right:0;bottom:16px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.55);pointer-events:none}
+.cube-hint{margin-top:40px;font-size:12.5px;color:var(--mut);font-weight:600}
+@media(prefers-reduced-motion:reduce){.cube-tilt{animation:none;transform:rotateX(-20deg) rotateY(32deg)}.cube-spin{animation:none}}
+
+/* story quote */
+.squote{max-width:680px;margin:34px auto 0;text-align:center;position:relative;padding:0 20px}
+.squote::before{content:"\201C";position:absolute;left:-4px;top:-26px;font-size:72px;color:rgba(31,120,210,.18);font-family:Georgia,serif}
+.squote p{font-size:clamp(17px,2.4vw,22px);line-height:1.7;font-weight:700;color:var(--ink)}
+.squote cite{display:block;margin-top:12px;font-style:normal;font-size:13px;font-weight:700;color:var(--mut)}
+
+/* mobile sticky action bar */
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 14px calc(10px + env(safe-area-inset-bottom));gap:10px;
+  background:rgba(243,247,252,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(21,53,123,.1)}
+.mbar a{flex:1;padding:13px 10px;font-size:14px}
+.mbar .btn--wa{background:linear-gradient(180deg,#31C960,#22A94E);color:#fff;box-shadow:0 10px 24px -10px rgba(34,169,78,.55)}
+@media(max-width:700px){body.has-mbar .mbar{display:flex}body.has-mbar{padding-bottom:74px}}
+
+/* proof link card */
+.proof{display:flex;align-items:center;gap:18px;padding:22px 26px;margin-top:22px;transition:.3s}
+.proof:hover{transform:translateY(-3px)}
+.proof__ic{font-size:28px;flex:none}
+.proof b{font-size:15.5px}
+.proof p{font-size:13px;color:var(--ink2);line-height:1.6;margin-top:4px}
+.proof__go{margin-left:auto;flex:none;font-size:13.5px;font-weight:800;color:var(--blue);white-space:nowrap}
+@media(max-width:640px){.proof{flex-wrap:wrap}.proof__go{margin-left:56px}}
+
+/* teachers */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:36px}
+.tcard{padding:26px 20px;text-align:center;transition:.3s}
+.tcard:hover{transform:translateY(-5px)}
+.tcard__av{width:78px;height:78px;border-radius:50%;margin:0 auto 14px;overflow:hidden;background:radial-gradient(circle at 32% 28%,#fff,#DCE9F8);border:1.5px solid rgba(255,255,255,.95);box-shadow:0 10px 24px -10px rgba(21,53,123,.35);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:var(--blue)}
+.tcard__av img{width:100%;height:100%;object-fit:cover}
+.tcard b{font-size:15.5px;display:block}
+.tcard i{display:block;font-style:normal;font-size:12px;color:var(--mut);font-weight:600;margin:5px 0 10px;line-height:1.45}
+.tcard__rt{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:800;color:#9a7420;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.28);border-radius:999px;padding:5px 13px}
+.tcard__rt em{font-style:normal;font-weight:600;font-size:11px;color:var(--mut)}
+.tgrid__note{text-align:center;margin-top:18px;font-size:13px;color:var(--mut)}
+
+/* locations */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.lcard{display:block;padding:22px;transition:.3s}
+a.lcard:hover{transform:translateY(-4px)}
+.lcard b{font-size:15.5px}
+.lcard i{font-style:normal;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--blue);margin-left:8px}
+.lcard p{font-size:12.5px;color:var(--ink2);line-height:1.55;margin-top:8px;min-height:38px}
+.lcard__go{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:800;color:var(--blue)}
+
+/* ease */
+.ease{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.ecard{padding:30px 28px}
+.ecard__tag{display:inline-flex;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--blue);background:rgba(31,120,210,.08);border:1px solid rgba(31,120,210,.18);border-radius:999px;padding:5px 13px;margin-bottom:14px}
+.ecard b{font-size:17.5px;display:block;margin-bottom:10px}
+.ecard p{font-size:13.5px;color:var(--ink2);line-height:1.75}
+@media(max-width:760px){.ease{grid-template-columns:1fr}}
+
+/* enrol steps */
+.steps{display:flex;align-items:stretch;gap:10px;margin-top:38px}
+.step{flex:1;background:rgba(255,255,255,.6);border:1px solid rgba(21,53,123,.1);border-radius:18px;padding:18px 18px;box-shadow:0 8px 22px -14px rgba(21,53,123,.25)}
+.step__n{display:inline-flex;width:26px;height:26px;border-radius:50%;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;background:linear-gradient(160deg,#2B9BEA,#1F78D2);margin-bottom:10px}
+.step b{display:block;font-size:14px;margin-bottom:5px}
+.step p{font-size:12px;color:var(--ink2);line-height:1.55}
+.step__arr{align-self:center;color:var(--mut);font-weight:800;flex:none}
+@media(max-width:760px){.steps{flex-direction:column}.step__arr{transform:rotate(90deg);align-self:center}}
+
+/* grant banner */
+.grant{display:flex;gap:18px;align-items:flex-start;padding:26px 28px;margin-top:38px;border:1.5px solid rgba(210,162,60,.4);background:linear-gradient(150deg,rgba(255,251,240,.85),rgba(255,255,255,.6))}
+.grant__ic{font-size:30px;flex:none;margin-top:2px}
+.grant__t b{font-size:16px;display:block;margin-bottom:8px;color:#7a5a12}
+.grant__t p{font-size:13.5px;color:var(--ink2);line-height:1.75}
+
+/* advisor card */
+.advcard{position:relative;display:flex;align-items:center;gap:16px;max-width:460px;margin:26px auto 6px;padding:16px 20px;background:rgba(255,255,255,.75);border:1px solid rgba(21,53,123,.12);border-radius:20px;box-shadow:0 12px 30px -14px rgba(21,53,123,.28);text-align:left}
+.advcard__av{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#DCE9F8);display:flex;align-items:center;justify-content:center;font-size:21px;flex:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 6px 14px -6px rgba(21,53,123,.3)}
+.advcard__t{flex:1}
+.advcard__t b{display:block;font-size:15px}
+.advcard__t span{font-size:12px;color:var(--mut);font-weight:600}
+.advcard__wa{padding:10px 18px;font-size:13px}
+
+/* mobile journey: vertical timeline */
+.jvert{display:none;position:relative;margin-top:36px;padding-left:34px}
+.jvert::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:3px;border-radius:3px;background:rgba(21,53,123,.12)}
+.jvert__fill{position:absolute;left:11px;top:8px;width:3px;border-radius:3px;height:0;background:linear-gradient(180deg,#1F78D2,#E0303B);box-shadow:0 0 8px rgba(31,120,210,.5);transition:height .2s linear}
+.jv{position:relative;padding:0 0 26px}
+.jv:last-child{padding-bottom:0}
+.jv__dot{position:absolute;left:-30px;top:2px;width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid rgba(21,53,123,.22);transition:.4s}
+.jv.lit .jv__dot{border-color:var(--blue);box-shadow:0 0 0 4px rgba(31,120,210,.12),0 0 14px rgba(31,120,210,.5)}
+.jv.lit.fin .jv__dot{border-color:var(--red);box-shadow:0 0 0 4px rgba(224,48,59,.12),0 0 14px rgba(224,48,59,.5)}
+.jv b{display:block;font-size:14.5px;line-height:1.3}
+.jv span{display:block;font-size:12px;color:var(--mut);font-weight:600;margin-top:2px}
+.jv.lit b{color:var(--blue)}
+.jv.lit.fin b{color:var(--red)}
+@media(max-width:700px){
+  .jour__stage{display:none}
+  .jvert{display:block}
+}
+
+/* ================= FIT ================= */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.fitcol{padding:30px 28px}
+.fitcol h3{font-size:18px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.fitcol ul{list-style:none;display:grid;gap:12px}
+.fitcol li{font-size:14px;line-height:1.65;color:var(--ink2);padding-left:26px;position:relative}
+.fitcol.no li::before{content:"✕";position:absolute;left:0;color:#b6bfd4;font-weight:800}
+.fitcol.yes{border:1.5px solid rgba(31,120,210,.35)}
+.fitcol.yes li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
+.fitcol.yes li b{color:var(--ink)}
+
+/* ================= PRICING ================= */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:44px;align-items:stretch}
+.plan{padding:32px 28px;display:flex;flex-direction:column;position:relative;transition:.3s}
+.plan:hover{transform:translateY(-6px)}
+.plan--best{border:1.5px solid rgba(224,48,59,.4);box-shadow:0 26px 60px -18px rgba(224,48,59,.28),var(--sh)}
+.plan__rib{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#F04A54,#DC2430);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:6px 16px;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(224,48,59,.6)}
+.plan__n{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--mut)}
+.plan__l{font-size:40px;font-weight:800;letter-spacing:-.03em;margin-top:6px}
+.plan__l small{font-size:14px;font-weight:700;color:var(--mut);letter-spacing:.08em}
+.plan__tag{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.5;min-height:38px}
+.plan__price{margin:18px 0 4px}
+.plan__price s{font-size:14px;color:var(--mut)}
+.plan__price b{display:block;font-size:30px;letter-spacing:-.01em}
+.plan__save{display:inline-flex;margin-top:8px;font-size:12px;font-weight:800;color:#7a5a12;background:rgba(210,162,60,.14);border:1px solid rgba(210,162,60,.3);border-radius:999px;padding:5px 12px}
+.plan__misc{display:block;margin-top:8px;font-size:11.5px;color:var(--mut);font-weight:600}
+.plan__hr{font-size:11.5px;font-weight:700;color:#9a7420;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.3);display:inline-flex;border-radius:999px;padding:5px 12px;margin:8px 0 16px;align-self:flex-start}
+.plan ul{list-style:none;display:grid;gap:10px;margin-bottom:24px}
+.plan li{font-size:13.5px;color:var(--ink2);line-height:1.55;padding-left:24px;position:relative}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
+.plan .btn{margin-top:auto;width:100%}
+.plans__note{text-align:center;margin-top:22px;font-size:13px;color:var(--mut);line-height:1.7}
+
+/* ================= COMPARE ================= */
+.cmpwrap{margin-top:40px;overflow-x:auto;border-radius:var(--rad)}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;min-width:640px;background:var(--glass);backdrop-filter:blur(14px);border-radius:var(--rad);overflow:hidden;border:1px solid var(--gbrd)}
+.cmp th,.cmp td{padding:16px 18px;font-size:13.5px;text-align:left;border-bottom:1px solid rgba(21,53,123,.08);line-height:1.55}
+.cmp thead th{font-size:13px;font-weight:800;background:rgba(21,53,123,.05)}
+.cmp thead th.hi{background:rgba(31,120,210,.10);color:var(--blue)}
+.cmp td.hi{background:rgba(31,120,210,.06);font-weight:700;color:var(--ink)}
+.cmp td{color:var(--ink2)}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp td:first-child,.cmp th:first-child{font-weight:800;color:var(--ink);white-space:nowrap}
+
+/* ================= FAQ ================= */
+.faq{max-width:760px;margin:40px auto 0;display:grid;gap:12px}
+.qa{overflow:hidden}
+.qa__q{width:100%;background:none;border:none;text-align:left;padding:20px 22px;font-size:15.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;gap:14px;align-items:center}
+.qa__q::after{content:"+";font-size:22px;color:var(--blue);transition:.3s;flex:none}
+.qa.open .qa__q::after{transform:rotate(45deg)}
+.qa__a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.qa__a p{padding:0 22px 20px;font-size:14px;color:var(--ink2);line-height:1.75}
+
+/* ================= FINAL ================= */
+.final{padding:100px 0 90px;text-align:center}
+.final .card{padding:clamp(40px,6vw,70px) clamp(24px,5vw,60px);position:relative;overflow:hidden}
+.final .card::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 70% at 50% 0%,rgba(31,120,210,.10),transparent 70%)}
+.final h2{position:relative}
+.final .sub{position:relative}
+.final .hero__cta{position:relative}
+.wa{margin-top:22px;font-size:14px;color:var(--ink2)}
+.wa a{color:var(--blue);font-weight:800}
+footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:860px){
+  section{padding:64px 0}
+  .exp{grid-template-columns:1fr}
+  .fit{grid-template-columns:1fr}
+  .tb__t span{display:none}
+  .tb__cta{display:none}
+  .eco-ring .eco-stage{padding:22px 8px 30px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="amb"></div>
+
+<!-- TOPBAR -->
+<div class="topbar"><div class="topbar__in">
+  <div class="logo-disc"><img src="assets/logo/touch.png" alt="TOUCH" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<b>T</b>')"></div>
+  <div class="tb__t"><b>TOUCH English</b><span>makes you visible</span></div>
+  <div class="tb__sp"></div>
+  <button class="langbtn" id="langBtn">EN</button>
+  <a class="btn btn--red tb__cta" href="#price"><span class="zh">我的学习方案</span><span class="en">My Learning Plan</span></a>
+</div></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <p class="hero__kick rv">TOUCH ENGLISH · SINCE 2010</p>
+    <h1 class="rv d1">
+      <span class="zh">英文不只是考试，<br>而是让你在职场和生活中 <span class="vis">被看见<i></i></span></span>
+      <span class="en">English is not only for exams.<br>It makes you <span class="vis">visible<i></i></span>.</span>
+    </h1>
+    <p class="hero__sub rv d2">
+      <span class="zh">你不需要「完美的英文」。你需要的是：开会敢讲、见客户敢开口、机会来的时候接得住。<b>16 年，我们只做一件事——带你从不敢开口，到被看见。</b></span>
+      <span class="en">You don't need "perfect English." You need to speak up in meetings, talk to clients with confidence, and be ready when opportunity comes. <b>For 16 years we've done one thing — take you from silent to seen.</b></span>
+    </p>
+    <div class="hero__cta rv d3">
+      <a class="btn btn--red" href="#price"><span class="zh">查看学习方案 →</span><span class="en">View my plan →</span></a>
+      <a class="btn btn--ghost" href="#stories"><span class="zh">看学员真实改变</span><span class="en">See Real Learner Stories</span></a>
+    </div>
+    <p class="hero__note rv d3"><span class="zh">MOE 认可 · HRDC Claimable · 小班 9–12 人</span><span class="en">MOE recognised · HRDC claimable · Small class 9–12</span></p>
+    <div class="stats rv d4">
+      <div class="stat card"><b><em>16</em>+</b><span class="zh">年教学经验</span><span class="en">Years of experience</span></div>
+      <div class="stat card"><b><em>16,397</em>+</b><span class="zh">位学员</span><span class="en">Learners trained</span></div>
+      <div class="stat card"><b><em>97.5</em>%</b><span class="zh">学员进步率</span><span class="en">Improvement rate</span></div>
+      <div class="stat card"><b><em>9–12</em></b><span class="zh">人小班教学</span><span class="en">Learners per class</span></div>
+    </div>
+    <div class="trustline rv d4">
+      <span class="tchip"><s></s><span class="zh">MOE 教育部认可中心</span><span class="en">MOE recognised centre</span></span>
+      <span class="tchip"><s></s><span class="zh">HRDC 企业可报销</span><span class="en">HRDC claimable</span></span>
+      <span class="tchip"><s></s><span class="zh">柔佛多间分行</span><span class="en">Multiple branches in Johor</span></span>
+      <span class="tchip"><s></s><span class="zh">成人职场英文专注</span><span class="en">Focused on workplace English</span></span>
+    </div>
+  </div>
+</header>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow r"><span class="zh">你是不是也这样</span><span class="en">Sound familiar?</span></span>
+      <h2><span class="zh">学了十几年英文，<br>为什么开会还是不敢讲？</span><span class="en">You studied English for years.<br>Why are you still silent in meetings?</span></h2>
+    </div>
+    <div class="pains">
+      <div class="pain card rv"><span class="pain__ic">💬</span><div><b><span class="zh">听得懂，说不出</span><span class="en">Understand, but can't speak</span></b><p><span class="zh">脑子里有想法，一开口就卡住，最后只讲一句 "yes, okay"。</span><span class="en">The ideas are there — but the words won't come. You end up saying "yes, okay."</span></p></div></div>
+      <div class="pain card rv d1"><span class="pain__ic">🧑‍💼</span><div><b><span class="zh">开会插不上话</span><span class="en">Invisible in meetings</span></b><p><span class="zh">明明你的方案更好，却因为不敢用英文表达，功劳被别人拿走。</span><span class="en">Your idea was better — but someone else said theirs in English, and got the credit.</span></p></div></div>
+      <div class="pain card rv d2"><span class="pain__ic">📱</span><div><b><span class="zh">见客户先心虚</span><span class="en">Nervous with clients</span></b><p><span class="zh">客户一讲英文你就紧张，只能一直点头，专业形象大打折扣。</span><span class="en">The moment a client switches to English, you freeze and just nod along.</span></p></div></div>
+      <div class="pain card rv d3"><span class="pain__ic">🚪</span><div><b><span class="zh">机会来了接不住</span><span class="en">Missing opportunities</span></b><p><span class="zh">升职、外派、面试——好机会都要英文，你只能眼睁睁看它溜走。</span><span class="en">Promotions, postings, interviews — they all need English. And they keep slipping away.</span></p></div></div>
+    </div>
+    <div class="blame rv">
+      <h3><span class="zh">这不是你的问题。</span><span class="en">This is not your fault.</span></h3>
+      <p><span class="zh">你从小学的是<b>考试英文</b>——背单词、抓语法、求及格。可是职场要的从来不是及格，而是<b>敢开口、讲得清楚、让人记住你</b>。没有人教过你「被看见的英文」，直到现在。</span><span class="en">You were taught <b>exam English</b> — memorise words, drill grammar, pass the paper. But the workplace never asked for a pass. It asks you to <b>speak up, speak clearly, and be remembered</b>. Nobody taught you the English that makes you visible — until now.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- VISIBLE CONVERGENCE -->
+<section id="visible" class="conv">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">我们的核心理念</span><span class="en">Our core belief</span></span>
+      <h2><span class="zh">我们做的每一件事，<br>都汇向同一个目标：<mark>让你被看见</mark></span><span class="en">Everything we do flows<br>into one goal: <mark>making you visible</mark></span></h2>
+    </div>
+    <div class="eco-ring"><div class="eco-stage glass-stage"><span class="glow" style="background:var(--p1);left:9%;top:42%"></span><span class="glow" style="background:var(--l3);left:16%;bottom:22%"></span><span class="glow" style="background:var(--l4);left:47%;bottom:2%;opacity:.3"></span><span class="glow" style="background:var(--l2);right:9%;top:40%"></span><span class="glow" style="background:var(--l1);right:16%;bottom:22%"></span><svg viewBox="0 0 920 920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TOUCH English ecosystem activating around the learner"><defs><radialGradient id="ecoOrb" cx="36%" cy="30%" r="80%"><stop offset="0%" stop-color="#f9fcfe"/><stop offset="48%" stop-color="#eef4fa"/><stop offset="100%" stop-color="#e7eef6"/></radialGradient><radialGradient id="ecoCoreGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/><stop offset="60%" stop-color="#eef5fb" stop-opacity="0.45"/><stop offset="100%" stop-color="#eef5fb" stop-opacity="0"/></radialGradient><filter id="ecoLift" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="#16243f" flood-opacity="0.06"/></filter></defs><circle class="eco-disc" cx="460" cy="460" r="452" fill="rgba(255,255,255,0.34)" filter="url(#ecoLift)" style="animation-delay:6.84s"/><circle class="eco-disc" cx="460" cy="460" r="360" fill="rgba(255,255,255,0.4)" filter="url(#ecoLift)" style="animation-delay:4.91s"/><circle class="eco-disc" cx="460" cy="460" r="268" fill="rgba(255,255,255,0.46)" filter="url(#ecoLift)" style="animation-delay:2.98s"/><circle class="eco-disc" cx="460" cy="460" r="176" fill="rgba(255,255,255,0.54)" filter="url(#ecoLift)" style="animation-delay:1.05s"/><path id="ecoBot406" d="M54,460 A406,406 0 0 0 866,460" fill="none"/><text class="eco-lab eco-name eco-name--tag" font-size="21" text-anchor="middle" style="animation-delay:7.04s"><textPath href="#ecoBot406" startOffset="50%">TOUCH ENGLISH MAKES YOU VISIBLE</textPath></text><path id="ecoIt406_0" d="M54.05,466.49 A406,406 0 0 1 71.57,341.87" fill="none"/><text class="eco-lab eco-item" font-size="17" text-anchor="middle" style="animation-delay:7.54s"><textPath href="#ecoIt406_0" startOffset="50%">COURSES</textPath></text><path id="ecoIt406_1" d="M138.06,212.63 A406,406 0 0 1 259.85,106.77" fill="none"/><text class="eco-lab eco-item" font-size="17" text-anchor="middle" style="animation-delay:7.71s"><textPath href="#ecoIt406_1" startOffset="50%">WORKSHOPS</textPath></text><path id="ecoIt406_2" d="M397.08,58.91 A406,406 0 0 1 522.92,58.91" fill="none"/><text class="eco-lab eco-item" font-size="17" text-anchor="middle" style="animation-delay:7.88s"><textPath href="#ecoIt406_2" startOffset="50%">REVIEWS</textPath></text><path id="ecoIt406_3" d="M611.4,83.29 A406,406 0 0 1 811.98,257.64" fill="none"/><text class="eco-lab eco-item" font-size="17" text-anchor="middle" style="animation-delay:8.05s"><textPath href="#ecoIt406_3" startOffset="50%">SUCCESS STORIES</textPath></text><path id="ecoIt406_4" d="M829.28,291.27 A406,406 0 0 1 861.48,520.41" fill="none"/><text class="eco-lab eco-item" font-size="17" text-anchor="middle" style="animation-delay:8.22s"><textPath href="#ecoIt406_4" startOffset="50%">CAREER GROWTH</textPath></text><path id="ecoBot314" d="M146,460 A314,314 0 0 0 774,460" fill="none"/><text class="eco-lab eco-name" font-size="19" text-anchor="middle" style="animation-delay:5.11s"><textPath href="#ecoBot314" startOffset="50%">SUPPORT TEAM ECOSYSTEM</textPath></text><path id="ecoIt314_0" d="M146.94,484.23 A314,314 0 0 1 165.74,350.41" fill="none"/><text class="eco-lab eco-item" font-size="16" text-anchor="middle" style="animation-delay:5.61s"><textPath href="#ecoIt314_0" startOffset="50%">TEACHERS</textPath></text><path id="ecoIt314_1" d="M207.83,272.9 A314,314 0 0 1 309.82,184.24" fill="none"/><text class="eco-lab eco-item" font-size="16" text-anchor="middle" style="animation-delay:5.78s"><textPath href="#ecoIt314_1" startOffset="50%">ADVISORS</textPath></text><path id="ecoIt314_2" d="M375.91,157.47 A314,314 0 0 1 544.09,157.47" fill="none"/><text class="eco-lab eco-item" font-size="16" text-anchor="middle" style="animation-delay:5.95s"><textPath href="#ecoIt314_2" startOffset="50%">AI SUPPORT</textPath></text><path id="ecoIt314_3" d="M595.02,176.51 A314,314 0 0 1 721.94,286.84" fill="none"/><text class="eco-lab eco-item" font-size="16" text-anchor="middle" style="animation-delay:6.12s"><textPath href="#ecoIt314_3" startOffset="50%">MANAGEMENT</textPath></text><path id="ecoIt314_4" d="M751.18,342.48 A314,314 0 0 1 772.29,492.71" fill="none"/><text class="eco-lab eco-item" font-size="16" text-anchor="middle" style="animation-delay:6.29s"><textPath href="#ecoIt314_4" startOffset="50%">COMMUNITY</textPath></text><path id="ecoBot222" d="M238,460 A222,222 0 0 0 682,460" fill="none"/><text class="eco-lab eco-name" font-size="19" text-anchor="middle" style="animation-delay:3.18s"><textPath href="#ecoBot222" startOffset="50%">5C COMMUNICATION FRAMEWORK</textPath></text><path id="ecoIt222_0" d="M238,461 A222,222 0 0 1 246.88,397.85" fill="none"/><text class="eco-lab eco-item" font-size="15" text-anchor="middle" style="animation-delay:3.68s"><textPath href="#ecoIt222_0" startOffset="50%">COPY</textPath></text><path id="ecoIt222_1" d="M268.56,347.6 A222,222 0 0 1 375.34,254.78" fill="none"/><text class="eco-lab eco-item" font-size="15" text-anchor="middle" style="animation-delay:3.85s"><textPath href="#ecoIt222_1" startOffset="50%">CONSTRUCT</textPath></text><path id="ecoIt222_2" d="M412.37,243.17 A222,222 0 0 1 507.63,243.17" fill="none"/><text class="eco-lab eco-item" font-size="15" text-anchor="middle" style="animation-delay:4.02s"><textPath href="#ecoIt222_2" startOffset="50%">CONVEY</textPath></text><path id="ecoIt222_3" d="M552,257.96 A222,222 0 0 1 647.27,340.78" fill="none"/><text class="eco-lab eco-item" font-size="15" text-anchor="middle" style="animation-delay:4.19s"><textPath href="#ecoIt222_3" startOffset="50%">CONVINCE</textPath></text><path id="ecoIt222_4" d="M658.53,360.66 A222,222 0 0 1 678.22,500.77" fill="none"/><text class="eco-lab eco-item" font-size="15" text-anchor="middle" style="animation-delay:4.36s"><textPath href="#ecoIt222_4" startOffset="50%">CAPTIVATE</textPath></text><g class="eco-lab eco-node-ic" transform="translate(444.4,312.4) scale(1.3)" style="animation-delay:1.75s"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="3.4"/></g><g class="eco-lab eco-node-ic" transform="translate(318.86,403.61) scale(1.3)" style="animation-delay:1.92s"><path d="M12 3.4a5.6 5.6 0 0 0-3.5 10c.6.5 1 1.2 1 2v.3h5v-.3c0-.8.4-1.5 1-2a5.6 5.6 0 0 0-3.5-10z"/><path d="M9.9 18.6h4.2"/><path d="M10.6 20.7h2.8"/></g><g class="eco-lab eco-node-ic" transform="translate(366.81,551.19) scale(1.3)" style="animation-delay:2.09s"><path d="M20 11.4a6.6 6.6 0 0 1-6.6 6.6c-1 0-2-.2-2.9-.6L5 19l1.2-3.3A6.6 6.6 0 1 1 20 11.4z"/></g><g class="eco-lab eco-node-ic" transform="translate(521.99,551.19) scale(1.3)" style="animation-delay:2.26s"><path d="M4 15.6l4.6-4.6 3 3 6.4-6.4"/><path d="M15 7.6h4v4"/></g><g class="eco-lab eco-node-ic" transform="translate(569.94,403.61) scale(1.3)" style="animation-delay:2.43s"><path d="M12 3.4l1.7 4.9 4.9 1.7-4.9 1.7L12 16.6l-1.7-4.9L5.4 11l4.9-1.7z"/></g><circle class="eco-core-glow" cx="460" cy="460" r="118" fill="url(#ecoCoreGlow)"/><g class="eco-core"><circle cx="460" cy="460" r="88" fill="url(#ecoOrb)" filter="url(#ecoLift)" stroke="rgba(255,255,255,.92)" stroke-width="1.5"/><g class="eco-person" transform="translate(460,460)"><circle cx="0" cy="-16" r="18"/><path d="M-30 40 a30 30 0 0 1 60 0 z"/></g></g></svg></div></div>
+    <p class="conv__cap rv"><span class="zh">听、说、读、写、自信——在 TOUCH，每一项技能的训练都不是为了考试，<b>而是汇入同一条河：让你在职场和生活中被看见、被听见、被记住。</b></span><span class="en">Listening, speaking, reading, writing, confidence — at TOUCH, every skill flows into one river: <b>being seen, heard, and remembered at work and in life.</b></span></p>
+  </div>
+</section>
+
+<!-- 5C -->
+<section id="fivec">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">怎么做到？</span><span class="en">How?</span></span>
+      <h2><span class="zh">5C 学习系统：<br>一步一步，把你带到台前</span><span class="en">The 5C System:<br>step by step, into the spotlight</span></h2>
+      <p class="sub"><span class="zh">不是零散的课，而是一套完整路径。每一个 C，对应一个 Level，解决一个真实的表达问题。</span><span class="en">Not scattered lessons — one complete path. Each C matches a level and solves one real communication problem.</span></p>
+    </div>
+    <div class="cgrid">
+      <div class="ccard card rv" style="--cc:#2B9BEA"><span class="ccard__n">C1</span><b>Copy</b><i><span class="zh">模仿 · 打基础</span><span class="en">Imitate · Foundation</span></i><p><span class="zh">从正确的发音和句型开始，先能跟着说，告别「不敢出声」。</span><span class="en">Start with sounds and patterns. Speak along first — stop being silent.</span></p></div>
+      <div class="ccard card rv d1" style="--cc:#1F78D2"><span class="ccard__n">C2</span><b>Construct</b><i><span class="zh">组句 · 讲完整</span><span class="en">Build · Full sentences</span></i><p><span class="zh">把单词组成完整句子，日常对话不再东拼西凑。</span><span class="en">Turn words into full sentences — no more piecing things together.</span></p></div>
+      <div class="ccard card rv d2" style="--cc:#7A5CDB"><span class="ccard__n">C3</span><b>Convey</b><i><span class="zh">表达 · 讲清楚</span><span class="en">Express · Be clear</span></i><p><span class="zh">把想法讲清楚：报告、汇报、说明，让人一次听懂。</span><span class="en">Make your point clearly — reports, updates, explanations people get first time.</span></p></div>
+      <div class="ccard card rv d3" style="--cc:#E0303B"><span class="ccard__n">C4</span><b>Convince</b><i><span class="zh">说服 · 有分量</span><span class="en">Persuade · Carry weight</span></i><p><span class="zh">在会议和谈判里表达立场、争取资源，你的话开始有分量。</span><span class="en">Hold your ground in meetings and negotiations. Your words start to carry weight.</span></p></div>
+      <div class="ccard card rv d4" style="--cc:#D2A23C"><span class="ccard__n">C5</span><b>Captivate</b><i><span class="zh">感染 · 被记住</span><span class="en">Captivate · Be remembered</span></i><p><span class="zh">Presentation、演讲、带团队——让人愿意听你讲，并记住你。</span><span class="en">Presentations, speeches, leading teams — people listen, and remember you.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="jour">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">你的学习旅程</span><span class="en">Your journey</span></span>
+      <h2><span class="zh">从 A 到 Z，每一步都看得见</span><span class="en">From A to Z — every step, visible</span></h2>
+      <p class="sub"><span class="zh">不用猜自己在哪里。免费定位测试告诉你起点，之后每个 Level 都有清楚的目标和毕业考核，进度全程可视化。</span><span class="en">No guessing where you stand. A free placement test finds your starting point; every level has clear goals and an exam — your progress stays visible.</span></p>
+    </div>
+    <div class="jour__stage rv" id="jrStage">
+      <svg class="jr-svg" viewBox="0 0 1000 260" aria-hidden="true">
+        <defs>
+          <linearGradient id="jrGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#1F78D2"/><stop offset="1" stop-color="#E0303B"/>
+          </linearGradient>
+        </defs>
+        <path id="jrBase" class="jr-base" d="M40,190 C160,60 240,60 340,150 C430,230 520,230 610,150 C700,70 790,70 880,140 C915,168 940,175 960,175"/>
+        <path id="jrLit" class="jr-lit" d="M40,190 C160,60 240,60 340,150 C430,230 520,230 610,150 C700,70 790,70 880,140 C915,168 940,175 960,175"/>
+        <circle id="jrComet" class="jr-comet" r="7" fill="#fff" stroke="#1F78D2" stroke-width="3"/>
+      </svg>
+      <div class="jnodes" id="jrNodes"></div>
+    </div>
+    <div class="jvert" id="jvert"><span class="jvert__fill" id="jvFill"></span></div>
+    <p class="jour__cap rv"><span class="zh">往下滑，看你的旅程被点亮</span><span class="en">Scroll — watch your journey light up</span></p>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section id="stories">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow g"><span class="zh">真实证据</span><span class="en">Real proof</span></span>
+      <h2><span class="zh">他们曾经也不敢开口</span><span class="en">They were once afraid to speak, too</span></h2>
+      <p class="sub"><span class="zh">不讲理论，看真人。以下都是 TOUCH 学员亲口分享的改变——点开听他们自己讲。</span><span class="en">No theory — real people. These are TOUCH learners telling their own story. Tap and hear it from them.</span></p>
+    </div>
+    <div class="cubewrap rv" id="cubewrap">
+      <div class="cube-scene">
+        <div class="cube-spin">
+          <div class="cube-tilt">
+            <div class="cube" id="cube"></div>
+          </div>
+        </div>
+      </div>
+      <p class="cube-hint"><span class="zh">自动播放中 · 点任一面看他的故事 · 移上暂停</span><span class="en">Auto-playing · tap a face to watch · hover to pause</span></p>
+    </div>
+    <div class="splayer card" id="splayer"><div class="splayer__vid" id="spVid"></div><div class="splayer__sum" id="spSum"></div></div>
+    <div class="sgrid" id="sgrid"></div>
+    <blockquote class="squote rv" id="squote" hidden>
+      <p class="squote__zh zh"></p><p class="squote__en en"></p>
+      <cite id="squoteBy"></cite>
+    </blockquote>
+    <a class="proof card rv" href="https://touchenglish.edu.my/en/proven#cert" target="_blank" rel="noopener">
+      <span class="proof__ic">🏅</span>
+      <div><b><span class="zh">IELTS & Cambridge 真实成绩</span><span class="en">Real IELTS &amp; Cambridge results</span></b>
+      <p><span class="zh">学员的官方考试成绩与英文能力证明，全部公开可查。</span><span class="en">Official exam results and proficiency achievements — all public, all verifiable.</span></p></div>
+      <span class="proof__go"><span class="zh">查看成绩 →</span><span class="en">View results →</span></span>
+    </a>
+    <div class="adv-note-row"><button class="adv-note" id="storyAdvBtn">Advisor Note</button></div>
+  </div>
+</section>
+
+<!-- CLASS EXPERIENCE -->
+<section id="class">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">课堂长什么样</span><span class="en">Inside the classroom</span></span>
+      <h2><span class="zh">不是坐着抄笔记，<br>是站起来开口讲</span><span class="en">Not sitting and copying notes —<br>standing up and speaking</span></h2>
+    </div>
+    <div class="exp">
+      <div class="exp__pts">
+        <div class="ept card rv"><span class="ept__ic">👥</span><div><b><span class="zh">9–12 人小班</span><span class="en">9–12 per class</span></b><p><span class="zh">人数刚好：每个人每堂课都有开口的机会，老师看得见每一个学生。</span><span class="en">Small enough that everyone speaks every class — and the teacher sees every learner.</span></p></div></div>
+        <div class="ept card rv d1"><span class="ept__ic">⏱</span><div><b><span class="zh">90 分钟实战课</span><span class="en">90-minute practical lessons</span></b><p><span class="zh">Role-play、职场情境、真实对话——课堂就是你的排练场。</span><span class="en">Role-plays, workplace scenarios, real conversations — the classroom is your rehearsal room.</span></p></div></div>
+        <div class="ept card rv d2"><span class="ept__ic">🗺</span><div><b><span class="zh">进度全程可视化</span><span class="en">Progress you can see</span></b><p><span class="zh">每个学生都有自己的学习报告：强项、弱项、下一步，白纸黑字看得见。</span><span class="en">Every learner gets a progress report: strengths, gaps, next steps — in black and white.</span></p></div></div>
+        <div class="ept card rv d3"><span class="ept__ic">📍</span><div><b><span class="zh">5 间实体分行 + Online Live Class</span><span class="en">5 physical centres + Online Live Class</span></b><p><span class="zh">同一个 Level 一周有多堂课任你选——这周二晚、下周六早都行，跟着你的生活走，不是你迁就课表。报名后你会拿到一份明确的时间表。</span><span class="en">Your level runs multiple classes every week — Tuesday night this week, Saturday morning the next. The timetable follows your life, not the other way round. You get a clear schedule after enrolling.</span></p></div></div>
+      </div>
+      <div class="photos rv d2">
+        <div class="ph tall"><em>📷</em><span class="zh">课堂照片位</span><span class="en">Class photo</span></div>
+        <div class="ph"><em>📷</em><span class="zh">学员合照位</span><span class="en">Group photo</span></div>
+        <div class="ph"><em>📷</em><span class="zh">分行环境照片位</span><span class="en">Branch photo</span></div>
+      </div>
+    </div>
+
+    <!-- teachers -->
+    <div class="center rv" style="margin-top:70px">
+      <span class="eyebrow"><span class="zh">教你的人</span><span class="en">The people teaching you</span></span>
+      <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">每一位老师，都看得见你</span><span class="en">Teachers who actually see you</span></h2>
+    </div>
+    <div class="tgrid">
+      <div class="tcard card rv"><div class="tcard__av"><img loading="lazy" src="assets/team/tiera.png" alt="Tiera" onerror="this.replaceWith('T')"></div><b>Ms Tiera</b><i><span class="zh">教学发展主管 · 师训</span><span class="en">Head of Professional Development</span></i><span class="tcard__rt">★ 4.96 <em><span class="zh">学员评分</span><span class="en">learner rating</span></em></span></div>
+      <div class="tcard card rv d1"><div class="tcard__av"><img loading="lazy" src="assets/team/lala.png" alt="Lala" onerror="this.replaceWith('L')"></div><b>Ms Lala</b><i><span class="zh">资深老师 · 成人英文沟通</span><span class="en">Senior Teacher · Adult Communication</span></i><span class="tcard__rt">★ 4.90 <em><span class="zh">学员评分</span><span class="en">learner rating</span></em></span></div>
+      <div class="tcard card rv d2"><div class="tcard__av"><img loading="lazy" src="assets/team/kuna.png" alt="Kuna" onerror="this.replaceWith('K')"></div><b>Ms Kuna</b><i><span class="zh">资深老师 · 成人英文沟通</span><span class="en">Senior Teacher · Adult Communication</span></i><span class="tcard__rt">★ 4.94 <em><span class="zh">学员评分</span><span class="en">learner rating</span></em></span></div>
+      <div class="tcard card rv d3"><div class="tcard__av"><img loading="lazy" src="assets/team/mima.png" alt="Mima" onerror="this.replaceWith('M')"></div><b>Ms Mima</b><i><span class="zh">老师 · 成人英文沟通</span><span class="en">Teacher · Adult Communication</span></i><span class="tcard__rt">★ 4.95 <em><span class="zh">学员评分</span><span class="en">learner rating</span></em></span></div>
+    </div>
+    <p class="tgrid__note rv"><span class="zh">以及完整的教学与顾问团队——上课前你会先认识带你的老师。</span><span class="en">…and the full teaching &amp; advisory team. You'll meet your teacher before classes begin.</span></p>
+
+    <!-- locations -->
+    <div class="center rv" style="margin-top:70px">
+      <span class="eyebrow"><span class="zh">离你近吗？</span><span class="en">Near you?</span></span>
+      <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">5 间分行 + Online，总有一个方便你</span><span class="en">5 centres + Online — one will fit you</span></h2>
+    </div>
+    <div class="lgrid">
+      <a class="lcard card rv" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><b>Mount Austin</b><i>Johor Bahru</i><p>7-02, Jalan Mutiara Emas 2A, Taman Mount Austin</p><span class="lcard__go">Google Maps →</span></a>
+      <a class="lcard card rv d1" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><b>Sutera Utama</b><i>Skudai</i><p>90B, Jalan Sutera Tanjung 8/4, Taman Sutera Utama</p><span class="lcard__go">Google Maps →</span></a>
+      <a class="lcard card rv d2" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><b>Bukit Indah</b><i>Iskandar Puteri</i><p>6A, Jalan Indah 15/1, Taman Bukit Indah</p><span class="lcard__go">Google Maps →</span></a>
+      <a class="lcard card rv d3" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><b>Kulai</b><i>Indahpura</i><p>205A, Jalan Kenanga 29/2, Indahpura</p><span class="lcard__go">Google Maps →</span></a>
+      <a class="lcard card rv d4" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><b>Setia Alam</b><i>Selangor</i><p>10-3-1, Jalan Setia Prima P U13/P, Setia Alam</p><span class="lcard__go">Google Maps →</span></a>
+      <div class="lcard card rv d4"><b>Online Live Class</b><i><span class="zh">线上直播课</span><span class="en">Live online</span></i><p><span class="zh">真人老师实时互动，不是录播——在家也能开口练。</span><span class="en">Live, interactive lessons with a real teacher — not recordings.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EASE: placement + personality -->
+<section id="ease">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">安心开始</span><span class="en">Start with ease</span></span>
+      <h2><span class="zh">担心自己程度太差？<br>我们先了解你，再开始</span><span class="en">Worried your English is "too weak"?<br>We get to know you first.</span></h2>
+    </div>
+    <div class="ease">
+      <div class="ecard card rv">
+        <span class="ecard__tag"><span class="zh">第一步 · 免费</span><span class="en">Step 1 · Free</span></span>
+        <b><span class="zh">定位测试——不是考试</span><span class="en">Placement test — not an exam</span></b>
+        <p><span class="zh">60 题 · 60 分钟 · <b>没有及格线，没有对错评判</b>。它只做一件事：找到你现在的位置，让你从「刚刚好」的 Level 开始——不会太难跟不上，也不会太简单浪费钱。</span><span class="en">60 questions · 60 minutes · <b>no pass mark, no judgement</b>. It does one thing: find where you are, so you start at the level that's just right — never too hard to follow, never too easy to be worth paying for.</span></p>
+      </div>
+      <div class="ecard card rv d1">
+        <span class="ecard__tag"><span class="zh">第二步 · 报名后</span><span class="en">Step 2 · After enrolment</span></span>
+        <b><span class="zh">学习性格报告——了解你怎么学</span><span class="en">Personality report — how you learn</span></b>
+        <p><span class="zh">每位学员都会有一份 MBTI 式的学习性格报告：你是哪种学习者、什么方式最适合你、压力大时怎么调整。老师照着它带你——<b>因为「被看见」，从第一天就开始。</b></span><span class="en">Every learner gets an MBTI-style learning personality report: what kind of learner you are, what works best for you, and how you respond under pressure. Your teacher teaches to it — <b>because being seen starts on day one.</b></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section id="fit">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow r"><span class="zh">先说清楚</span><span class="en">Let's be honest</span></span>
+      <h2><span class="zh">这个课程适合谁？</span><span class="en">Who is this for?</span></h2>
+    </div>
+    <div class="fit">
+      <div class="fitcol card no rv">
+        <h3>✕ <span class="zh">这不适合你，如果你……</span><span class="en">Not for you, if you…</span></h3>
+        <ul>
+          <li><span class="zh">只想找「7 天流利英文」的速成捷径</span><span class="en">want a "fluent in 7 days" shortcut</span></li>
+          <li><span class="zh">只要考试分数，不在乎能不能开口</span><span class="en">only care about exam scores, not speaking</span></li>
+          <li><span class="zh">希望不用练习、光听课就变好</span><span class="en">expect results without practising</span></li>
+          <li><span class="zh">没有真实的使用场景和目标</span><span class="en">have no real goal or situation to use English</span></li>
+        </ul>
+      </div>
+      <div class="fitcol card yes rv d1">
+        <h3>✓ <span class="zh">这是给你的，如果你……</span><span class="en">This is for you, if you…</span></h3>
+        <ul>
+          <li><b><span class="zh">在职场上真的需要英文</span><span class="en">genuinely need English at work</span></b><span class="zh">——开会、客户、汇报、面试</span><span class="en"> — meetings, clients, reports, interviews</span></li>
+          <li><span class="zh">有基础但<b>不敢讲、讲不顺</b>，或想从零开始打好底</span><span class="en">have some foundation but <b>freeze when speaking</b> — or want to build from zero, properly</span></li>
+          <li><span class="zh">愿意每周固定上课、在课堂上开口练</span><span class="en">will show up weekly and actually speak in class</span></li>
+          <li><span class="zh">想要看得见的进步，而不是感觉良好</span><span class="en">want progress you can see — not just good vibes</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="price">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow r"><span class="zh">你的投资</span><span class="en">Your investment</span></span>
+      <h2><span class="zh">选一条路，开始被看见</span><span class="en">Pick your path. Start being seen.</span></h2>
+      <p class="sub"><span class="zh">一堂 90 分钟实战课 + 小班 + 学习报告 + 毕业考核。</span><span class="en">90-minute practical lessons, small class, progress reports and a completion exam.</span></p>
+    </div>
+    <div class="steps rv">
+      <div class="step"><span class="step__n">1</span><b><span class="zh">免费定位测试</span><span class="en">Free placement test</span></b><p><span class="zh">60 题找到你的起点——先来了解、之后再测也可以</span><span class="en">60 questions to find your level — or visit first, test later</span></p></div>
+      <span class="step__arr">→</span>
+      <div class="step"><span class="step__n">2</span><b><span class="zh">顾问按程度建议方案</span><span class="en">Advisor recommends your plan</span></b><p><span class="zh">该读哪个 Level、选几堂课，按你的结果来，不硬推</span><span class="en">Which level, how many lessons — based on your result, no hard selling</span></p></div>
+      <span class="step__arr">→</span>
+      <div class="step"><span class="step__n">3</span><b><span class="zh">确认了才报名</span><span class="en">Enrol only when you're sure</span></b><p><span class="zh">时间表、老师、分行都确认清楚，再决定</span><span class="en">Timetable, teacher and branch all confirmed before you decide</span></p></div>
+    </div>
+    <div class="grant card rv">
+      <span class="grant__ic">🎓</span>
+      <div class="grant__t">
+        <b><span class="zh">HRD Corp 津贴 → 个人助学金</span><span class="en">HRD Corp grant → personal study grant</span></b>
+        <p><span class="zh">因为我们长期为企业提供 HRD Corp 认证培训，中心获得了政府的培训津贴。我们把这份津贴转化为<b>助学金</b>，用来补贴个人报名的学员——这也是为什么现在的学费低于原价。助学金按批次发放，<b>每一批的名额视津贴余额而定</b>；你今天看到的价格，是本批助学金还在的价格。</span><span class="en">Through our long-term HRD Corp certified corporate training, the centre receives a government training grant. We channel it into a <b>study grant</b> that subsidises individual learners — which is why today’s fee is below the original price. The grant is released in batches, and <b>each batch lasts only while the funds do</b>. The price you see today reflects this batch’s grant.</span></p>
+      </div>
+    </div>
+    <div class="plans" id="plans"></div>
+    <p class="plans__note rv"><span class="zh">报名前可先做免费定位测试确认级别 · 想确认本批助学金是否仍可申请，直接问你的顾问就好</span><span class="en">A free placement test confirms your level before you enrol. To check if this batch’s study grant still applies, just ask your advisor.</span></p>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">同样想学好英文</span><span class="en">Your options, compared</span></span>
+      <h2><span class="zh">为什么是 TOUCH？</span><span class="en">Why TOUCH?</span></h2>
+    </div>
+    <div class="cmpwrap rv">
+      <table class="cmp">
+        <thead><tr>
+          <th></th>
+          <th class="hi">TOUCH English</th>
+          <th><span class="zh">自学 App</span><span class="en">Self-study apps</span></th>
+          <th><span class="zh">线上录播课</span><span class="en">Recorded online courses</span></th>
+          <th><span class="zh">一般补习班</span><span class="en">Typical tuition</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td><span class="zh">开口机会</span><span class="en">Speaking practice</span></td><td class="hi"><span class="zh">每堂课都开口，9–12 人真人对练</span><span class="en">Speak every class, live with 9–12 peers</span></td><td><span class="zh">对着手机念</span><span class="en">Talking to a phone</span></td><td><span class="zh">几乎没有</span><span class="en">Almost none</span></td><td><span class="zh">以听讲为主</span><span class="en">Mostly listening</span></td></tr>
+          <tr><td><span class="zh">有人看见你</span><span class="en">Someone sees you</span></td><td class="hi"><span class="zh">老师每堂课给你个人反馈</span><span class="en">Teacher feedback, every class</span></td><td><span class="zh">没有人</span><span class="en">Nobody</span></td><td><span class="zh">没有人</span><span class="en">Nobody</span></td><td><span class="zh">大班顾不到你</span><span class="en">Too big to notice you</span></td></tr>
+          <tr><td><span class="zh">路径与进度</span><span class="en">Path &amp; progress</span></td><td class="hi"><span class="zh">定位测试 + Level 路线 + 学习报告</span><span class="en">Placement + level path + reports</span></td><td><span class="zh">打卡天数</span><span class="en">Streak counters</span></td><td><span class="zh">看完就算</span><span class="en">"Watched" = done</span></td><td><span class="zh">跟着课本走</span><span class="en">Follows the textbook</span></td></tr>
+          <tr><td><span class="zh">坚持下来的概率</span><span class="en">Odds you'll stick with it</span></td><td class="hi"><span class="zh">固定班表 + 同班同学 + 老师督促</span><span class="en">Fixed schedule, classmates, a teacher who notices</span></td><td><span class="zh">三分钟热度</span><span class="en">Fades in weeks</span></td><td><span class="zh">看完第 2 课就停</span><span class="en">Stops at lesson 2</span></td><td><span class="zh">看个人</span><span class="en">Depends on you</span></td></tr>
+          <tr><td><span class="zh">一年后你拥有</span><span class="en">After one year</span></td><td class="hi"><span class="zh">敢开口的自己 + 看得见的级别证明</span><span class="en">A voice you trust + a level you can prove</span></td><td><span class="zh">一堆勋章</span><span class="en">A pile of badges</span></td><td><span class="zh">一堆没看完的视频</span><span class="en">Unfinished videos</span></td><td><span class="zh">又一年补习费</span><span class="en">Another year of fees</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faqsec">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow"><span class="zh">常见问题</span><span class="en">FAQ</span></span>
+      <h2><span class="zh">你可能想问</span><span class="en">You might be wondering</span></h2>
+    </div>
+    <div class="faq">
+      <div class="qa card"><button class="qa__q"><span class="zh">我基础很差 / 完全零基础，跟得上吗？</span><span class="en">My English is very weak — can I keep up?</span></button><div class="qa__a"><p><span class="zh">可以。报名前先做免费定位测试（60 题 · 60 分钟，不是及格考，只是了解你现在的程度），我们从 Level P1 开始就有零基础班，从发音和最基本的句型带起。你永远和程度相近的同学一班，不会被丢进听不懂的教室。</span><span class="en">Yes. Before enrolling, you take a free placement test (60 questions, 60 minutes — not pass/fail, just to find your level). Our path starts at Level P1 for complete beginners, from pronunciation and basic patterns. You'll always be with learners at your level — never dropped into a class you can't follow.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">我工作很忙，时间排得进吗？</span><span class="en">I'm busy with work — will the schedule fit?</span></button><div class="qa__a"><p><span class="zh">排得进——因为你不是被绑死在某一堂课。同一个 Level 每周都有多堂课供你选择，这周忙就换下一个时段，时间完全自由。报名后你会拿到明确的时间表，顾问也会和你一起挑最顺的节奏。多数学员本来就是上班族。</span><span class="en">Yes — because you're not locked into one fixed slot. Your level runs multiple classes every week, so if this week is busy, simply pick another session. You'll receive a clear timetable after enrolling, and your advisor helps you find the rhythm that fits. Most of our learners are working adults.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">多久能看到效果？</span><span class="en">How soon will I see results?</span></button><div class="qa__a"><p><span class="zh">语言不是七天速成，但你不用等一年：多数学员在头 1–2 个月就明显更敢开口，因为每堂课都必须讲。每个 Level 结束有考核和学习报告，进步是白纸黑字看得见的——这也是我们 97.5% 学员进步率的来源。</span><span class="en">Language isn't a 7-day fix — but you won't wait a year either. Most learners speak noticeably more confidently within the first 1–2 months, because every class makes you speak. Each level ends with an assessment and a written report, so progress is visible in black and white — that's where our 97.5% improvement rate comes from.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">公司可以帮我出钱吗？（HRDC）</span><span class="en">Can my company pay for this? (HRDC)</span></button><div class="qa__a"><p><span class="zh">两种方式。① 公司报销：TOUCH English 是 HRD Corp 认证培训机构，如果你的公司有缴 HRD Corp，培训费用可由公司申请报销，顾问会协助你和 HR 走流程。② 个人助学金：即使公司不出钱，我们也把长期企业培训获得的 HRD Corp 津贴转化为助学金，补贴个人学员——你的顾问可以帮你确认本批助学金是否还能申请。</span><span class="en">Two ways. ① Company claim: TOUCH English is an HRD Corp certified training provider — if your company contributes to HRD Corp, the fee can be claimed, with your advisor guiding you and HR through it. ② Personal study grant: even if your company is not paying, we channel the HRD Corp grant from our corporate training into a study grant for individual learners — your advisor can check whether this batch is still available for you.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">48 / 96 / 144 堂，我该选哪个？</span><span class="en">48 / 96 / 144 lessons — which should I pick?</span></button><div class="qa__a"><p><span class="zh">看你的起点和目标。想先跑通一个 Level，48 堂是干净的起步；多数学员选 96 堂——多 8 张工作坊门票、20+ 额外视频和 4 张 IPA 发音课门票，性价比最高；目标是跨多个 Level、彻底改变的，选 144+。定位测试后顾问会按你的程度给建议，不会硬推。</span><span class="en">It depends on your starting point and goal. 48 lessons is a clean start for one level. Most learners choose 96 — it adds 8 workshop tickets, 20+ extra videos and 4 IPA pronunciation tickets, the best value. If you're aiming to cross multiple levels, go 144+. After your placement test, your advisor will recommend based on your level — no hard selling.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">我怎么确定这适合我，不会白花钱？</span><span class="en">How do I know this is right for me before paying?</span></button><div class="qa__a"><p><span class="zh">因为付费是整个流程的最后一步，不是第一步。在那之前：免费定位测试先确认你的真实程度；顾问按结果建议 Level 和堂数（而不是按最贵的推）；时间表、上课分行、带你的老师都先讲清楚；你也可以先到分行走一趟、看看真实的课堂环境。所有疑问都问完、都确认了，才需要做决定——我们希望你是想清楚才开始的，因为想清楚才开始的学员，才走得完。</span><span class="en">Because paying is the last step of the process, not the first. Before that: a free placement test confirms your real level; your advisor recommends the level and lesson count based on your result (not the most expensive option); the timetable, branch and teacher are all made clear upfront; and you're welcome to visit a centre and see a real class environment first. Only when every question is answered do you decide — we want you to start with clarity, because learners who start with clarity are the ones who finish.</span></p></div></div>
+      <div class="qa card"><button class="qa__q"><span class="zh">报名后什么时候开课？</span><span class="en">When do classes start after I enrol?</span></button><div class="qa__a"><p><span class="zh">完成定位测试和报名后，顾问会为你安排最近一期符合你 Level 的班次，并在开课前和你确认时间表。如果你在意学费，可以顺便问一下本批 HRD Corp 助学金的情况——津贴有余额时报名，是最划算的时间点。</span><span class="en">Once your placement test and enrolment are done, your advisor places you in the next intake for your level and confirms the timetable before classes begin. If the fee matters to you, ask about the current HRD Corp study grant batch — enrolling while the grant lasts is the best-value moment.</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="card rv">
+      <h2><span class="zh">你今天听到的，<br>都在这里</span><span class="en">Everything you heard today<br>is right here</span></h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto"><span class="zh">慢慢看，不急。想清楚了、或者有任何疑问，随时找你的顾问——16,397 位学员的第一步，也都是从一个问题开始的。</span><span class="en">Take your time. When you’re ready — or if anything is unclear — just reach out to your advisor. For 16,397 learners, the first step also started with a question.</span></p>
+      <div class="advcard rv" id="advCard" hidden>
+        <span class="advcard__av">👤</span>
+        <div class="advcard__t"><b id="advName"></b><span><span class="zh">今天为你讲解的顾问</span><span class="en">Your advisor today</span></span></div>
+        <a class="btn btn--red advcard__wa" id="advWaBtn" target="_blank" rel="noopener"><span class="zh">WhatsApp 顾问</span><span class="en">WhatsApp advisor</span></a>
+      </div>
+      <div class="hero__cta">
+        <a class="btn btn--red" id="finalEnroll" href="#price"><span class="zh">回顾我的学习方案 →</span><span class="en">Review my plan →</span></a>
+        <a class="btn btn--ghost" href="#stories"><span class="zh">再看看学员故事</span><span class="en">Watch learner stories</span></a>
+      </div>
+      <p class="wa"><span class="zh">或直接联系中心：</span><span class="en">Or contact the centre: </span><a href="tel:1700816893">1700-81-6893</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="mbar" id="mbar">
+  <a class="btn btn--wa" id="mbarWa" href="tel:1700816893"><span class="zh">问顾问</span><span class="en">Ask advisor</span></a>
+  <a class="btn btn--red" href="#price"><span class="zh">我的方案</span><span class="en">My plan</span></a>
+</div>
+<footer>
+  TOUCH English · makes you visible · © <span id="yr"></span>
+</footer>
+
+<script>
+/* ============ CONFIG（改这里）============ */
+var CONFIG={
+  ENROLL_URL:"#price",          /* 顶部/结尾按钮去向；有付款链接就换成付款页 */
+  ADVISOR_NAME:"",              /* 今天讲解的顾问名字，如 "Advisor Joyce" */
+  ADVISOR_WA:"",                /* 顾问 WhatsApp 号码，如 60123456789 */
+  PAY_48:"#", PAY_96:"#", PAY_144:"#",   /* 三个方案的付款链接 */
+  PRICE_48:{was:3300, now:2397},
+  PRICE_96:{was:6600, now:4197},
+  PRICE_144:{was:9900, now:5897},
+  MISC_FEE:300,                 /* 报名 + 系统费 */
+  STORY_QUOTE:{zh:"",en:"",by:""}   /* 学员原话引言（填了才显示），by 如 "Sally · Level 3" */
+};
+
+/* ============ language toggle ============ */
+(function(){
+  var btn=document.getElementById('langBtn');
+  var saved=localStorage.getItem('te_sales_lang');
+  if(saved==='en'){document.body.classList.add('te-en');btn.textContent='中文';document.documentElement.lang='en';}
+  btn.addEventListener('click',function(){
+    var en=document.body.classList.toggle('te-en');
+    btn.textContent=en?'中文':'EN';
+    document.documentElement.lang=en?'en':'zh';
+    localStorage.setItem('te_sales_lang',en?'en':'zh');
+  });
+})();
+
+/* ============ reveal on scroll ============ */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+
+/* ============ VISIBLE eco-ring trigger (replay on re-enter) ============ */
+(function(){var er=document.querySelector('.eco-ring');if(!er)return;
+if(!('IntersectionObserver'in window)){er.classList.add('is-on');return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+ if(e.isIntersecting){er.classList.remove('is-on');void er.getBoundingClientRect();er.classList.add('is-on');}
+ else{er.classList.remove('is-on');}});},{threshold:.3});
+io.observe(er);})();
+
+/* ============ Journey: scroll-linked light path ============ */
+(function(){
+  var stage=document.getElementById('jrStage');
+  var lit=document.getElementById('jrLit'), comet=document.getElementById('jrComet');
+  var L=lit.getTotalLength();
+  lit.style.strokeDasharray=L; lit.style.strokeDashoffset=L;
+  var NODES=[
+    {t:.02, en:'Placement Test', zh:'免费定位测试'},
+    {t:.16, en:'Level P1',       zh:'零基础起步'},
+    {t:.31, en:'Level 1 · Copy', zh:'模仿打底'},
+    {t:.46, en:'Level 2 · Construct', zh:'组句成段'},
+    {t:.61, en:'Level 3 · Convey', zh:'清楚表达'},
+    {t:.76, en:'Level 4 · Convince', zh:'有说服力'},
+    {t:.89, en:'Exam & Report', zh:'考核与报告'},
+    {t:.995,en:'VISIBLE',       zh:'被看见', fin:1}
+  ];
+  var box=document.getElementById('jrNodes');
+  var vb={w:1000,h:260};
+  NODES.forEach(function(n){
+    var pt=lit.getPointAtLength(L*n.t);
+    var d=document.createElement('div');
+    d.className='jn'+(n.fin?' fin':'');
+    d.style.left=(pt.x/vb.w*100)+'%';
+    d.style.top=(pt.y/vb.h*100)+'%';
+    d.innerHTML='<span class="jn__dot"></span><b>'+n.en+'</b><span>'+n.zh+'</span>';
+    d.dataset.t=n.t;
+    box.appendChild(d);
+  });
+  var nodes=[].slice.call(box.children);
+  /* mobile vertical timeline from same data */
+  var jvert=document.getElementById('jvert'), jvFill=document.getElementById('jvFill');
+  NODES.forEach(function(nd){
+    var d=document.createElement('div');
+    d.className='jv'+(nd.fin?' fin':'');
+    d.dataset.t=nd.t;
+    d.innerHTML='<span class="jv__dot"></span><b>'+nd.en+'</b><span>'+nd.zh+'</span>';
+    jvert.appendChild(d);
+  });
+  var vnodes=[].slice.call(jvert.querySelectorAll('.jv'));
+  function updVert(p){
+    jvFill.style.height=(p*100)+'%';
+    vnodes.forEach(function(nd){nd.classList.toggle('lit',p>=parseFloat(nd.dataset.t)-0.01);});
+  }
+  function upd(){
+    var host=(window.innerWidth<=700)?jvert:stage;
+    var r=host.getBoundingClientRect();
+    var vh=window.innerHeight;
+    /* progress: 0 when stage enters bottom, 1 when its center passes 35% viewport */
+    var p=(vh*0.9-r.top)/(vh*0.75+r.height*0.4);
+    p=Math.max(0,Math.min(1,p));
+    var off=L*(1-p);
+    lit.style.strokeDashoffset=off;
+    var pt=lit.getPointAtLength(L*p);
+    comet.setAttribute('cx',pt.x);comet.setAttribute('cy',pt.y);
+    comet.style.opacity=(p>0.005&&p<0.995)?1:(p>=0.995?1:0);
+    nodes.forEach(function(nd){nd.classList.toggle('lit',p>=parseFloat(nd.dataset.t)-0.01);});
+    updVert(p);
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
+
+/* ============ Stories (YouTube standard: grid + play + advisor panel) ============ */
+(function(){
+  var DEFAULTS=[
+    {id:'dW0WfzzcQJY', name:'Vivi',        job:{en:'Swimming Coach · Pre-Level 1',zh:'游泳教练 · Pre-Level 1'}, desc:{en:'From basic English to speaking more confidently in real-life situations.',zh:'从最基础的英文，到在真实生活场景中更有信心地开口。'}},
+    {id:'BSom6KeM69E', name:'Lim Yoke Fen', job:{en:'Level 4 Learner',zh:'Level 4 学员'}, desc:{en:'Improved higher-level communication and presentation confidence.',zh:'高阶沟通与 presentation 信心显著提升。'}},
+    {id:'_Na5XJUTZYE', name:'Xiao Ting',   job:{en:'SPM Student · Level 1',zh:'SPM 学生 · Level 1'}, desc:{en:'Built a stronger foundation and became more confident to speak.',zh:'打好基础，变得更敢开口。'}},
+    {id:'BbB0WMARIw8', name:'Sally',       job:{en:'Quantity Surveyor · Level 3',zh:'工料测量师 · Level 3'}, desc:{en:'Strengthened workplace communication and professional expression.',zh:'职场沟通与专业表达明显加强。'}},
+    {id:'qhlJQ8baMIE', name:'Mark',        job:{en:'Programmer · Level 3',zh:'程序员 · Level 3'}, desc:{en:'Improved speaking confidence for work and daily communication.',zh:'工作与日常沟通的开口信心提升。'}},
+    {id:'tMJCH5m2H9g', name:'Kai Xin',     job:{en:'Conveying Skill · Level 2',zh:'表达技能 · Level 2'}, desc:{en:'Learned to express ideas more clearly and confidently.',zh:'学会更清楚、更有信心地表达想法。'}}
+  ];
+  var KEY='te_sales_stories_v1';
+  function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(v)&&v.length)return v;}catch(e){}return JSON.parse(JSON.stringify(DEFAULTS));}
+  var STORIES=load();
+  var grid=document.getElementById('sgrid'), player=document.getElementById('splayer'), pv=document.getElementById('spVid'), ps=document.getElementById('spSum');
+
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+  function bi(o){return '<span class="zh">'+esc(o.zh)+'</span><span class="en">'+esc(o.en)+'</span>';}
+  function playStory(s){
+    if(!s)return;
+    pv.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+esc(s.id)+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    ps.innerHTML='<b>'+esc(s.name)+' · '+bi(s.job)+'</b><p>'+bi(s.desc)+'</p>';
+    player.classList.add('open');
+    player.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  /* rotating cube: 6 faces mapped to first 6 stories */
+  var cube=document.getElementById('cube'), cubewrap=document.getElementById('cubewrap');
+  var FACE_TF=['rotateY(0deg)','rotateY(90deg)','rotateY(180deg)','rotateY(-90deg)','rotateX(90deg)','rotateX(-90deg)'];
+  function buildCube(){
+    var scene=document.querySelector('.cube-scene');
+    var half=Math.round((scene?scene.clientWidth:240)/2);
+    var items=STORIES.slice(0,6);
+    while(items.length<6&&STORIES.length){items=items.concat(STORIES.slice(0,6-items.length));}
+    cube.innerHTML=items.map(function(s,i){
+      return '<button class="cface" data-id="'+esc(s.id)+'" style="transform:'+FACE_TF[i]+' translateZ('+half+'px)" aria-label="'+esc(s.name)+'">'+
+        '<img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="'+esc(s.name)+'">'+
+        '<span class="cface__edge"></span><span class="cface__pl"></span><span class="cface__nm">'+esc(s.name)+'</span></button>';
+    }).join('');
+  }
+  function render(){
+    grid.innerHTML=STORIES.map(function(s,i){
+      return '<div class="story card" data-i="'+i+'">'+
+        '<div class="story__th"><img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="'+esc(s.name)+'"><span class="story__pl"></span></div>'+
+        '<div class="story__meta"><b>'+esc(s.name)+'</b><i>'+bi(s.job)+'</i><p>'+bi(s.desc)+'</p></div></div>';
+    }).join('');
+    buildCube();
+  }
+  render();
+  grid.addEventListener('click',function(e){
+    var card=e.target.closest('.story'); if(!card)return;
+    playStory(STORIES[+card.dataset.i]);
+  });
+  /* cube interaction: pause on hover/touch, click face -> play */
+  cube.addEventListener('click',function(e){
+    var f=e.target.closest('.cface'); if(!f)return;
+    var s=STORIES.filter(function(x){return x.id===f.dataset.id;})[0]||STORIES[0];
+    playStory(s);
+  });
+  var enter=function(){cubewrap.classList.add('paused');}, leave=function(){cubewrap.classList.remove('paused');};
+  cubewrap.addEventListener('mouseenter',enter); cubewrap.addEventListener('mouseleave',leave);
+  cubewrap.addEventListener('touchstart',function(){enter();},{passive:true});
+  cubewrap.addEventListener('touchend',function(){setTimeout(leave,1600);},{passive:true});
+  window.addEventListener('resize',(function(){var t;return function(){clearTimeout(t);t=setTimeout(buildCube,200);};})());
+
+  /* Advisor panel */
+  function ytid(v){v=String(v||'').trim();var m=v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:(/^[\w-]{11}$/.test(v)?v:'');}
+  document.getElementById('storyAdvBtn').addEventListener('click',function(){
+    var m=document.createElement('div');m.className='advm';m.id='storyAdvM';
+    function cardHtml(s,i){
+      return '<div class="stcard" data-i="'+i+'"><div class="stcard__t"><b>Story '+(i+1)+' · '+esc(s.name)+'</b><button class="stcard__del" data-del>删除 Delete</button></div>'+
+        '<label class="stf"><span>YouTube Link / ID（粘贴完整网址自动提取）</span><input data-k="id" value="'+esc(s.id)+'"></label>'+
+        '<label class="stf"><span>Name 姓名</span><input data-k="name" value="'+esc(s.name)+'"></label>'+
+        '<label class="stf"><span>Role 中文（职业 · Level）</span><input data-k="jobzh" value="'+esc(s.job.zh)+'"></label>'+
+        '<label class="stf"><span>Role English</span><input data-k="joben" value="'+esc(s.job.en)+'"></label>'+
+        '<label class="stf"><span>简介 中文</span><textarea data-k="desczh">'+esc(s.desc.zh)+'</textarea></label>'+
+        '<label class="stf"><span>Summary English</span><textarea data-k="descen">'+esc(s.desc.en)+'</textarea></label></div>';
+    }
+    m.innerHTML='<div class="advm__card"><h3>学员故事管理 · Advisor Note</h3>'+
+      '<p class="advm__hint">在这里新增 / 删除 / 修改学员视频。最新学员视频可在这里找：<a href="https://linktr.ee/TouchEnglish_CN" target="_blank" rel="noopener">linktr.ee/TouchEnglish_CN</a>。保存后仅存于本浏览器（localStorage）。</p>'+
+      '<div id="stList">'+STORIES.map(cardHtml).join('')+'</div>'+
+      '<div class="advm__btns"><button class="abtn abtn--add" data-add>＋ 新增视频 Add</button><button class="abtn" data-reset>恢复默认 Reset</button><button class="abtn" data-close>取消 Cancel</button><button class="abtn abtn--save" data-save>保存 Save</button></div></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click',function(e){
+      if(e.target===m||e.target.hasAttribute('data-close')){m.remove();return;}
+      if(e.target.hasAttribute('data-del')){e.target.closest('.stcard').remove();return;}
+      if(e.target.hasAttribute('data-add')){
+        var i=m.querySelectorAll('.stcard').length;
+        m.querySelector('#stList').insertAdjacentHTML('beforeend',cardHtml({id:'',name:'',job:{zh:'',en:''},desc:{zh:'',en:''}},i));return;
+      }
+      if(e.target.hasAttribute('data-reset')){
+        localStorage.removeItem(KEY);STORIES=JSON.parse(JSON.stringify(DEFAULTS));render();m.remove();return;
+      }
+      if(e.target.hasAttribute('data-save')){
+        var out=[];
+        m.querySelectorAll('.stcard').forEach(function(c){
+          var g=function(k){var el=c.querySelector('[data-k="'+k+'"]');return el?el.value.trim():'';};
+          var id=ytid(g('id')); if(!id)return;
+          out.push({id:id,name:g('name')||'Learner',job:{zh:g('jobzh'),en:g('joben')},desc:{zh:g('desczh'),en:g('descen')}});
+        });
+        if(out.length){STORIES=out;localStorage.setItem(KEY,JSON.stringify(out));render();}
+        m.remove();
+      }
+    });
+  });
+})();
+
+/* ============ Pricing render ============ */
+(function(){
+  function fmt(x){return 'RM '+(x||0).toLocaleString('en-US');}
+  function priceHtml(p){
+    var save=p.was-p.now;
+    return '<s>'+fmt(p.was)+'</s><b>'+fmt(p.now)+'</b>'+
+      '<span class="plan__save"><span class="zh">本批助学金为你省下 '+fmt(save)+'</span><span class="en">This grant batch saves you '+fmt(save)+'</span></span>'+
+      '<span class="plan__misc">+ '+fmt(CONFIG.MISC_FEE)+' <span class="zh">报名＋系统费</span><span class="en">registration + system fee</span></span>';
+  }
+  var el=document.getElementById('plans');
+  el.innerHTML=
+  '<div class="plan card rv"><span class="plan__n">STARTER</span><div class="plan__l">48 <small>LESSONS</small></div>'+
+    '<p class="plan__tag"><span class="zh"><b>1 个 Level</b> · 干净的起步：先跑通一个 Level，建立开口习惯。</span><span class="en"><b>1 level</b> · A clean start: complete one level and build the habit of speaking.</span></p>'+
+    '<div class="plan__price">'+priceHtml(CONFIG.PRICE_48)+'</div><span class="plan__hr"><span class="zh">HRD Corp 助学金适用</span><span class="en">HRD Corp study grant applies</span></span>'+
+    '<ul><li><span class="zh">48 堂 90 分钟实战课</span><span class="en">48 × 90-minute practical lessons</span></li>'+
+    '<li><span class="zh">9–12 人小班 + 老师个人反馈</span><span class="en">9–12 class size with personal feedback</span></li>'+
+    '<li><span class="zh">课程重播视频，随时复习</span><span class="en">Lesson replay videos for revision</span></li>'+
+    '<li><span class="zh">Level 学习报告 + 毕业证书</span><span class="en">Progress report + certificate of completion</span></li></ul>'+
+    '<a class="btn btn--red" href="'+CONFIG.PAY_48+'"><span class="zh">报名 48 堂</span><span class="en">Enrol · 48</span></a></div>'+
+
+  '<div class="plan card plan--best rv d1"><span class="plan__rib">★ <span class="zh">最多人选</span><span class="en">Most popular</span></span><span class="plan__n">GROWTH</span><div class="plan__l">96 <small>LESSONS</small></div>'+
+    '<p class="plan__tag"><span class="zh"><b>2 个 Level</b> · 更多价值、更多成长——多数学员的选择。</span><span class="en"><b>2 levels</b> · More value, more growth — what most learners choose.</span></p>'+
+    '<div class="plan__price">'+priceHtml(CONFIG.PRICE_96)+'</div><span class="plan__hr"><span class="zh">HRD Corp 助学金适用</span><span class="en">HRD Corp study grant applies</span></span>'+
+    '<ul><li><b><span class="zh">48 堂方案全部内容，再加：</span><span class="en">Everything in 48, plus:</span></b></li>'+
+    '<li><span class="zh">8 张实战技能工作坊门票</span><span class="en">8 extra workshop tickets</span></li>'+
+    '<li><span class="zh">20+ 额外课程视频</span><span class="en">20+ extra lesson videos</span></li>'+
+    '<li><span class="zh">4 张 IPA 国际音标发音课门票</span><span class="en">4 IPA pronunciation course tickets</span></li></ul>'+
+    '<a class="btn btn--red" href="'+CONFIG.PAY_96+'"><span class="zh">报名 96 堂</span><span class="en">Enrol · 96</span></a></div>'+
+
+  '<div class="plan card rv d2"><span class="plan__n">MASTERY</span><div class="plan__l">144+ <small>LESSONS</small></div>'+
+    '<p class="plan__tag"><span class="zh"><b>3 个 Level</b> · 最多时间、最大自信：完整走完一段蜕变。</span><span class="en"><b>3 levels</b> · Maximum time, maximum confidence — a complete transformation arc.</span></p>'+
+    '<div class="plan__price">'+priceHtml(CONFIG.PRICE_144)+'</div><span class="plan__hr"><span class="zh">HRD Corp 助学金适用</span><span class="en">HRD Corp study grant applies</span></span>'+
+    '<ul><li><b><span class="zh">96 堂方案全部内容，再加：</span><span class="en">Everything in 96, plus:</span></b></li>'+
+    '<li><span class="zh">升级到 144+ 堂，深入练习</span><span class="en">Upgrade to 144+ lessons for deeper practice</span></li>'+
+    '<li><span class="zh">把英文带到下一个层次</span><span class="en">Take your English to the next level</span></li>'+
+    '<li><span class="zh">随时灵活加课</span><span class="en">Flexible top-up anytime</span></li></ul>'+
+    '<a class="btn btn--red" href="'+CONFIG.PAY_144+'"><span class="zh">报名 144+ 堂</span><span class="en">Enrol · 144+</span></a></div>';
+  /* attach reveal to newly rendered */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.15});
+  el.querySelectorAll('.rv').forEach(function(x){io.observe(x);});
+})();
+
+/* ============ FAQ accordion ============ */
+document.querySelectorAll('.qa__q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var qa=q.parentNode, a=qa.querySelector('.qa__a');
+    var open=qa.classList.toggle('open');
+    a.style.maxHeight=open?(a.scrollHeight+'px'):0;
+  });
+});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* advisor card from CONFIG */
+(function(){
+  if(!CONFIG.ADVISOR_NAME&&!CONFIG.ADVISOR_WA)return;
+  var c=document.getElementById('advCard');c.hidden=false;
+  document.getElementById('advName').textContent=CONFIG.ADVISOR_NAME||'Your Advisor';
+  var b=document.getElementById('advWaBtn');
+  if(CONFIG.ADVISOR_WA){b.href='https://wa.me/'+CONFIG.ADVISOR_WA;}else{b.style.display='none';}
+})();
+
+/* learner quote from CONFIG */
+(function(){
+  var q=CONFIG.STORY_QUOTE||{};
+  if(!q.zh&&!q.en)return;
+  var el=document.getElementById('squote');el.hidden=false;
+  el.querySelector('.squote__zh').textContent=q.zh||q.en;
+  el.querySelector('.squote__en').textContent=q.en||q.zh;
+  document.getElementById('squoteBy').textContent=q.by?('— '+q.by):'';
+})();
+
+/* mobile sticky bar: appears after hero, advisor WA if configured */
+(function(){
+  if(CONFIG.ADVISOR_WA){document.getElementById('mbarWa').href='https://wa.me/'+CONFIG.ADVISOR_WA;}
+  var hero=document.querySelector('.hero');
+  function chk(){document.body.classList.toggle('has-mbar',window.scrollY>hero.offsetHeight*0.7);}
+  window.addEventListener('scroll',chk,{passive:true});chk();
+})();
+</script>
+</body>
+</html>
