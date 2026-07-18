@@ -367,6 +367,8 @@ a.lcard:hover{transform:translateY(-4px)}
 
 /* ease */
 .ease{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.ease--3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.ease--3{grid-template-columns:1fr}}
 .ecard{padding:30px 28px}
 .ecard__tag{display:inline-flex;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--blue);background:rgba(31,120,210,.08);border:1px solid rgba(31,120,210,.18);border-radius:999px;padding:5px 13px;margin-bottom:14px}
 .ecard b{font-size:17.5px;display:block;margin-bottom:10px}
@@ -422,6 +424,12 @@ a.lcard:hover{transform:translateY(-4px)}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mut);font-size:12.5px;font-weight:700;
   border-bottom:1px solid rgba(21,53,123,.08)}
 .pcard__ph em{font-style:normal;font-size:30px;opacity:.7}
+.pcard__ph--video{cursor:pointer;background:#0E2A63}
+.pcard__ph--video::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(14,42,99,.32))}
+.pcard__ph--video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pcard__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:.25s}
+.pcard__ph--video:hover .pcard__play{transform:translate(-50%,-50%) scale(1.08)}
+.pcard__play::before{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--red);margin-left:3px}
 .pcard__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pcard__b{padding:20px 22px 24px}
 .pcard__b b{font-size:17px;display:block;margin-bottom:7px}
@@ -700,19 +708,19 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
     </div>
     <div class="pcards">
       <div class="pcard card rv">
-        <div class="pcard__ph"><em>📷</em><span class="zh">小班上课照片</span><span class="en">Small-class photo</span></div>
+        <div class="pcard__ph pcard__ph--video" data-yt="UEVXUXii09U"><img loading="lazy" src="https://i.ytimg.com/vi/UEVXUXii09U/hqdefault.jpg" alt=""><span class="pcard__play"></span></div>
         <div class="pcard__b"><b><span class="zh">9–12 人小班</span><span class="en">9–12 per class</span></b><p><span class="zh">每个人每堂都有开口机会，老师看得见你。</span><span class="en">Everyone speaks, every class. The teacher sees you.</span></p></div>
       </div>
       <div class="pcard card rv d1">
-        <div class="pcard__ph"><em>📷</em><span class="zh">课堂互动照片</span><span class="en">Role-play photo</span></div>
+        <div class="pcard__ph pcard__ph--video" data-yt="BngQV_xe0B4"><img loading="lazy" src="https://i.ytimg.com/vi/BngQV_xe0B4/hqdefault.jpg" alt=""><span class="pcard__play"></span></div>
         <div class="pcard__b"><b><span class="zh">90 分钟实战课</span><span class="en">90-minute practical lessons</span></b><p><span class="zh">Role-play、职场情境——课堂就是排练场。</span><span class="en">Role-plays and real scenarios — your rehearsal room.</span></p></div>
       </div>
       <div class="pcard card rv d2">
-        <div class="pcard__ph"><em>📷</em><span class="zh">学习报告照片</span><span class="en">Progress report photo</span></div>
+        <div class="pcard__ph"><img loading="lazy" src="assets/class/result.png" alt="进度报告" onerror="this.remove()"><em>📷</em><span class="zh">学习报告照片</span><span class="en">Progress report photo</span></div>
         <div class="pcard__b"><b><span class="zh">进度全程可视化</span><span class="en">Progress you can see</span></b><p><span class="zh">强项、弱项、下一步，白纸黑字看得见。</span><span class="en">Strengths, gaps, next steps — in black and white.</span></p></div>
       </div>
       <div class="pcard card rv d3">
-        <div class="pcard__ph"><em>📷</em><span class="zh">分行环境照片</span><span class="en">Branch photo</span></div>
+        <div class="pcard__ph"><img loading="lazy" src="assets/class/time.png" alt="时间表" onerror="this.remove()"><em>📷</em><span class="zh">时间表照片</span><span class="en">Timetable photo</span></div>
         <div class="pcard__b"><b><span class="zh">时间自由 · 一周多堂任选</span><span class="en">Free timetable · many classes weekly</span></b><p><span class="zh">这周二晚、下周六早都行，跟着你的生活走。</span><span class="en">Tuesday night or Saturday morning — it follows your life.</span></p></div>
       </div>
     </div>
@@ -737,19 +745,25 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 <section id="ease">
   <div class="wrap">
     <div class="center rv">
-      <span class="eyebrow"><span class="zh">安心开始</span><span class="en">Start with ease</span></span>
-      <h2><span class="zh">担心自己程度太差？<br>我们先了解你，再开始</span><span class="en">Worried your English is "too weak"?<br>We get to know you first.</span></h2>
+      <span class="eyebrow"><span class="zh">从这里开始</span><span class="en">Where it begins</span></span>
+      <h2><span class="zh">先认识自己，<br>再设定你的目标</span><span class="en">First know yourself,<br>then set your goal.</span></h2>
+      <p class="sub"><span class="zh">你已经了解我们的课程了。真正的第一步，不是急着测程度，而是先认识自己怎么学、想在哪里被看见——目标清楚了，路自然就清楚了。</span><span class="en">You already know our course. The real first step isn't rushing to test your level — it's understanding how you learn and where you want to be seen. Once the goal is clear, the path becomes clear.</span></p>
     </div>
-    <div class="ease">
+    <div class="ease ease--3">
       <div class="ecard card rv">
-        <span class="ecard__tag"><span class="zh">第一步 · 免费</span><span class="en">Step 1 · Free</span></span>
-        <b><span class="zh">定位测试——不是考试</span><span class="en">Placement test — not an exam</span></b>
-        <p><span class="zh">60 题 · 60 分钟 · <b>没有及格线，没有对错评判</b>。它只做一件事：找到你现在的位置，让你从「刚刚好」的 Level 开始——不会太难跟不上，也不会太简单浪费钱。</span><span class="en">60 questions · 60 minutes · <b>no pass mark, no judgement</b>. It does one thing: find where you are, so you start at the level that's just right — never too hard to follow, never too easy to be worth paying for.</span></p>
+        <span class="ecard__tag"><span class="zh">第一步</span><span class="en">Step 1</span></span>
+        <b><span class="zh">性格测试——认识自己</span><span class="en">Personality test — know yourself</span></b>
+        <p><span class="zh">一份 MBTI 式的学习性格测试：你是哪种学习者、什么方式最适合你、压力大时怎么调整。<b>没有对错，只有更懂自己。</b>这也是你学习旅程的真正起点。</span><span class="en">An MBTI-style learning-personality test: what kind of learner you are, what works best for you, how you respond under pressure. <b>No right or wrong — just knowing yourself better.</b> This is the real start of your journey.</span></p>
       </div>
       <div class="ecard card rv d1">
-        <span class="ecard__tag"><span class="zh">第二步 · 报名后</span><span class="en">Step 2 · After enrolment</span></span>
-        <b><span class="zh">学习性格报告——了解你怎么学</span><span class="en">Personality report — how you learn</span></b>
-        <p><span class="zh">每位学员都会有一份 MBTI 式的学习性格报告：你是哪种学习者、什么方式最适合你、压力大时怎么调整。老师照着它带你——<b>因为「被看见」，从第一天就开始。</b></span><span class="en">Every learner gets an MBTI-style learning personality report: what kind of learner you are, what works best for you, and how you respond under pressure. Your teacher teaches to it — <b>because being seen starts on day one.</b></span></p>
+        <span class="ecard__tag"><span class="zh">第二步</span><span class="en">Step 2</span></span>
+        <b><span class="zh">设定你的目标——想在哪里被看见</span><span class="en">Set your goal — where you want to be seen</span></b>
+        <p><span class="zh">开会敢发言？见客户不再心虚？还是升职、外派接得住？把你真正想达到的画面说出来，顾问会陪你把它拆成一步步可走的目标。</span><span class="en">Speaking up in meetings? Facing clients with confidence? Ready for a promotion or posting? Name the picture you truly want — your advisor helps you break it into steps you can actually walk.</span></p>
+      </div>
+      <div class="ecard card rv d2">
+        <span class="ecard__tag"><span class="zh">第三步 · 免费</span><span class="en">Step 3 · Free</span></span>
+        <b><span class="zh">定位测试——找到起点</span><span class="en">Placement test — find your start</span></b>
+        <p><span class="zh">准备好了，才做定位测试。60 题 · <b>没有及格线、没有评判</b>，只为找到「刚刚好」的 Level，让你从对的地方出发——不会太难跟不上，也不会太简单浪费时间。</span><span class="en">When you're ready, take the placement test. 60 questions · <b>no pass mark, no judgement</b> — just to find the level that's right, so you start where it fits: never too hard to follow, never too easy to waste time.</span></p>
       </div>
     </div>
   </div>
@@ -1084,6 +1098,16 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   el.querySelector('.squote__zh').textContent=q.zh||q.en;
   el.querySelector('.squote__en').textContent=q.en||q.zh;
   document.getElementById('squoteBy').textContent=q.by?('— '+q.by):'';
+})();
+
+/* class photo-card videos (facade -> iframe) */
+(function(){
+  document.querySelectorAll('.pcard__ph--video').forEach(function(el){
+    el.addEventListener('click',function(){
+      var id=el.getAttribute('data-yt'); if(!id)return;
+      el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    },{once:true});
+  });
 })();
 
 /* principal video in phone (facade: poster -> iframe on click) */
