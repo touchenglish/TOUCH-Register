@@ -116,7 +116,13 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .phone__btn--power{right:-3px;top:30%;width:3.5px;height:64px;box-shadow:0 1px 1px rgba(255,255,255,.25) inset,1px 0 2px rgba(0,0,0,.4)}
 .phone__island{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:78px;height:21px;border-radius:11px;background:#000;z-index:3;box-shadow:0 0 0 1px rgba(0,0,0,.6)}
 .phone__screen{position:relative;width:100%;height:100%;border-radius:47px;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center}
-.phone__screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.phone__screen iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:100%;width:auto;aspect-ratio:9/16;min-width:100%;min-height:100%;border:0}
+.phone__sound{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:5;display:inline-flex;align-items:center;gap:6px;
+  border:none;cursor:pointer;font-size:12px;font-weight:800;color:#fff;letter-spacing:.02em;
+  background:rgba(14,42,99,.72);backdrop-filter:blur(6px);border-radius:999px;padding:8px 15px;
+  box-shadow:0 10px 24px -8px rgba(0,0,0,.55);animation:soundPulse 2.4s ease-in-out infinite}
+.phone__sound:hover{background:rgba(14,42,99,.9)}
+@keyframes soundPulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}}
 .phone__ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:#cfe0f7;font-size:12.5px;font-weight:700;line-height:1.5;padding:20px;
   background:radial-gradient(circle at 50% 34%,rgba(31,120,210,.32),transparent 70%)}
 .phone__ph em{font-style:normal;font-size:34px}
@@ -136,13 +142,36 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
   .hero__media{order:2;margin-top:6px}
 }
 
-/* trusted-by logo strip */
-.trustlogos{padding:36px 0 6px;text-align:center}
-.trustlogos__lab{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:20px}
-.logorow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
-.logobox{width:132px;height:56px;border-radius:14px;background:rgba(255,255,255,.6);border:1px dashed rgba(21,53,123,.22);
-  display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:11px;font-weight:700;box-shadow:0 8px 20px -14px rgba(21,53,123,.3)}
-.logobox img{max-width:78%;max-height:64%;object-fit:contain}
+/* scrolling learner-case marquee (dark highlight band, 3 rows) */
+.vmarquee{padding:44px 0 8px}
+.vmband{position:relative;background:linear-gradient(160deg,#102a5e,#07142f);border-radius:26px;padding:26px 0 30px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 34px 70px -34px rgba(14,42,99,.6)}
+.vmband::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 0%,rgba(31,120,210,.22),transparent 70%)}
+.vmarquee__lab{position:relative;text-align:center;font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:20px;padding:0 20px}
+.vmq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.vmq+.vmq{margin-top:12px}
+.vmq__track{display:flex;gap:12px;width:max-content;will-change:transform;animation:vmqScroll 60s linear infinite}
+.vmq__track--right{animation-direction:reverse}
+.vmband:hover .vmq__track{animation-play-state:paused}
+@keyframes vmqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.vmq__track{animation:none}.vmq{overflow-x:auto}}
+.vcard{flex:none;width:150px;border-radius:12px;overflow:hidden;cursor:pointer;background:#0b1f47;border:1px solid rgba(255,255,255,.1);transition:.22s}
+.vcard:hover{transform:translateY(-3px);border-color:rgba(120,190,255,.5);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.vcard__th{position:relative;aspect-ratio:16/9;background:#0E2A63}
+.vcard__th img{width:100%;height:100%;object-fit:cover}
+.vcard__th::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35))}
+.vcard__pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);transition:.22s}
+.vcard:hover .vcard__pl{transform:translate(-50%,-50%) scale(1.1)}
+.vcard__pl::before{content:"";border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--red);margin-left:2px}
+
+/* video lightbox */
+.vlb{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,18,46,.78);backdrop-filter:blur(8px)}
+.vlb[hidden]{display:none}
+.vlb__box{position:relative;width:min(880px,100%)}
+.vlb__vid{aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+.vlb__vid iframe{width:100%;height:100%;border:0}
+.vlb__x{position:absolute;top:-16px;right:-8px;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:#fff;color:var(--ink);font-size:22px;font-weight:700;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+@media(max-width:560px){.vlb__x{top:-52px;right:0}}
 .hero__note{margin-top:14px;font-size:13px;color:var(--mut)}
 .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px}
 .stat{padding:18px 26px;border-radius:20px;min-width:150px}
@@ -639,17 +668,14 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
   </div>
 </header>
 
-<!-- TRUSTED BY (logo strip placeholder) -->
-<section class="trustlogos" aria-label="trusted by">
+<!-- SCROLLING LEARNER CASES (marquee) -->
+<section class="vmarquee" aria-label="learner cases">
   <div class="wrap">
-    <p class="trustlogos__lab"><span class="zh">受企业与学员信任</span><span class="en">Trusted by teams &amp; learners</span></p>
-    <div class="logorow">
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
-      <div class="logobox"><span class="zh">logo 位</span><span class="en">logo</span></div>
+    <div class="vmband">
+      <p class="vmarquee__lab"><span class="zh">真实学员案例 · 点开听他们说</span><span class="en">Real learner stories · tap any to watch</span></p>
+      <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackA"></div></div>
+      <div class="vmq"><div class="vmq__track" id="vmqTrackB"></div></div>
+      <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackC"></div></div>
     </div>
   </div>
 </section>
@@ -981,6 +1007,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
   <a class="btn btn--wa" id="mbarWa" href="tel:1700816893"><span class="zh">问顾问</span><span class="en">Ask advisor</span></a>
   <a class="btn btn--red" href="#price"><span class="zh">我的方案</span><span class="en">My plan</span></a>
 </div>
+<div class="vlb" id="vlb" hidden><div class="vlb__box"><button class="vlb__x" id="vlbX" aria-label="close">&times;</button><div class="vlb__vid" id="vlbVid"></div></div></div>
 <footer>
   TOUCH English · makes you visible · © <span id="yr"></span>
 </footer>
@@ -990,6 +1017,10 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 var CONFIG={
   ENROLL_URL:"#price",          /* 顶部/结尾按钮去向；有付款链接就换成付款页 */
   PRINCIPAL_VIDEO:"4NUqY0Z2Iy0",  /* 院长视频（YouTube Short）：粘贴 YouTube 链接或 11 位 ID */
+  /* 顶部滚动学员案例视频带：把大量 YouTube 链接或 ID 放进这个数组（越多越好） */
+  CASE_VIDEOS:[
+    "dW0WfzzcQJY","BSom6KeM69E","_Na5XJUTZYE","BbB0WMARIw8","qhlJQ8baMIE","tMJCH5m2H9g","UEVXUXii09U","BngQV_xe0B4"
+  ],
   ADVISOR_NAME:"",              /* 今天讲解的顾问名字，如 "Advisor Joyce" */
   ADVISOR_WA:"",                /* 顾问 WhatsApp 号码，如 60123456789 */
   PAY_48:"#", PAY_96:"#", PAY_144:"#",   /* 三个方案的付款链接 */
@@ -1196,15 +1227,51 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   });
 })();
 
-/* principal video in phone (facade: poster -> iframe on click) */
+/* scrolling learner-case marquee + lightbox */
+(function(){
+  function ytid(v){v=String(v||'').trim();var m=v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:(/^[\w-]{11}$/.test(v)?v:'');}
+  var ids=(CONFIG.CASE_VIDEOS||[]).map(ytid).filter(Boolean);
+  var sec=document.querySelector('.vmarquee');
+  var tA=document.getElementById('vmqTrackA'),tB=document.getElementById('vmqTrackB'),tC=document.getElementById('vmqTrackC');
+  if(!tA||!ids.length){if(sec)sec.style.display='none';return;}
+  function card(id){
+    return '<button class="vcard" data-yt="'+id+'" aria-label="play video">'+
+      '<div class="vcard__th"><img loading="lazy" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt=""><span class="vcard__pl"></span></div></button>';
+  }
+  function rot(arr,k){k=((k%arr.length)+arr.length)%arr.length;return arr.slice(k).concat(arr.slice(0,k));}
+  function fill(el,list,dur){var h=list.map(card).join('');el.innerHTML=h+h;el.style.animationDuration=dur+'s';}
+  var n=ids.length, base=Math.max(26,n*7);
+  fill(tA, ids,                base);          /* row 1 -> right */
+  fill(tB, rot(ids,Math.floor(n/3)),  base+9); /* row 2 -> left  */
+  fill(tC, rot(ids,Math.floor(2*n/3)),base+4); /* row 3 -> right */
+  var track=tA; /* for lightbox click delegation below, we attach to all tracks */
+
+  // lightbox
+  var lb=document.getElementById('vlb'), lbVid=document.getElementById('vlbVid'), lbX=document.getElementById('vlbX');
+  function open(id){
+    lbVid.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    lb.hidden=false;
+  }
+  function close(){lb.hidden=true;lbVid.innerHTML='';}
+[tA,tB,tC].forEach(function(t){t.addEventListener('click',function(e){var c=e.target.closest('.vcard');if(c)open(c.getAttribute('data-yt'));});});
+  lbX.addEventListener('click',close);
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close();});
+})();
+
+/* principal video: autoplay muted loop, cover-fill, tap for sound */
 (function(){
   function ytid(v){v=String(v||'').trim();var m=v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:(/^[\w-]{11}$/.test(v)?v:'');}
   var id=ytid(CONFIG.PRINCIPAL_VIDEO);
   var screen=document.getElementById('principalScreen');
   if(!screen||!id)return;
-  screen.innerHTML='<div class="phone__poster" role="button" aria-label="play"><img src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="Principal video"><span class="phone__play"></span></div>';
-  screen.querySelector('.phone__poster').addEventListener('click',function(){
-    screen.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  function embed(mute,controls){return 'https://www.youtube.com/embed/'+id+'?autoplay=1&mute='+mute+'&loop=1&playlist='+id+'&controls='+controls+'&modestbranding=1&playsinline=1&rel=0&fs=0';}
+  screen.innerHTML='<iframe src="'+embed(1,0)+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'+
+    '<button class="phone__sound" aria-label="sound">\uD83D\uDD07 <span class="zh">点击听声音</span><span class="en">Tap for sound</span></button>';
+  var btn=screen.querySelector('.phone__sound');
+  btn.addEventListener('click',function(){
+    screen.querySelector('iframe').src=embed(0,1);
+    btn.remove();
   });
 })();
 
