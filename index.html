@@ -1022,8 +1022,14 @@ var CONFIG={
   CASE_VIDEOS:[
     "dW0WfzzcQJY","BSom6KeM69E","_Na5XJUTZYE","BbB0WMARIw8","qhlJQ8baMIE","tMJCH5m2H9g","UEVXUXii09U","BngQV_xe0B4"
   ],
-  ADVISOR_NAME:"",              /* 今天讲解的顾问名字，如 "Advisor Joyce" */
-  ADVISOR_WA:"",                /* 顾问 WhatsApp 号码，如 60123456789 */
+  /* 顾问名单：链接尾巴加 ?adv=键名 即显示对应顾问，如 sales.html?adv=joyce
+     每行一位：键名: { name:"显示名字", wa:"WhatsApp号码(国际格式,不带+)" } */
+  ADVISORS:{
+    joyce:{name:"Advisor Joyce", wa:""},
+    kelly:{name:"Advisor Kelly", wa:""}
+  },
+  ADVISOR_NAME:"",              /* 不用链接参数时的默认顾问（可留空） */
+  ADVISOR_WA:"",                /* 默认顾问 WhatsApp，如 60123456789 */
   PAY_48:"#", PAY_96:"#", PAY_144:"#",   /* 三个方案的付款链接 */
   PRICE_48:{was:3300, now:2397},
   PRICE_96:{was:6600, now:4197},
@@ -1126,9 +1132,9 @@ io.observe(er);})();
 (function(){
   var DEFAULTS=[
     {id:'fynOoEpUtEQ'},{id:'hEju5LBQ6v4'},{id:'iuqZKTf44bQ'},{id:'qYAzzpC083Y'},
-    {id:'8AsA0yF385s'},{id:'GmtQmlFOioo'},{id:'qhlJQ8baMIE'},{id:'xRy5iqK9VI0'}
+    {id:'8AsA0yF385s'},{id:'GmtQmlFOioo'},{id:'qhlJQ8baMIE'}
   ];
-  var KEY='te_sales_stories_v2';
+  var KEY='te_sales_stories_v3';
   function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(v)&&v.length)return v;}catch(e){}return JSON.parse(JSON.stringify(DEFAULTS));}
   var STORIES=load();
   var grid=document.getElementById('sgrid'), player=document.getElementById('splayer'), pv=document.getElementById('spVid'), ps=document.getElementById('spSum');
@@ -1194,13 +1200,23 @@ document.querySelectorAll('.qa__q').forEach(function(q){
 
 document.getElementById('yr').textContent=new Date().getFullYear();
 
-/* advisor card from CONFIG */
+/* advisor resolution: ?adv=slug -> CONFIG.ADVISORS, else CONFIG defaults */
+var ADV=(function(){
+  var slug='';
+  try{slug=(new URLSearchParams(location.search).get('adv')||'').toLowerCase().trim();}catch(e){}
+  var a=slug&&CONFIG.ADVISORS&&CONFIG.ADVISORS[slug];
+  if(a&&(a.name||a.wa))return {name:a.name||'Your Advisor', wa:a.wa||''};
+  if(CONFIG.ADVISOR_NAME||CONFIG.ADVISOR_WA)return {name:CONFIG.ADVISOR_NAME||'Your Advisor', wa:CONFIG.ADVISOR_WA||''};
+  return null;
+})();
+
+/* advisor card */
 (function(){
-  if(!CONFIG.ADVISOR_NAME&&!CONFIG.ADVISOR_WA)return;
+  if(!ADV)return;
   var c=document.getElementById('advCard');c.hidden=false;
-  document.getElementById('advName').textContent=CONFIG.ADVISOR_NAME||'Your Advisor';
+  document.getElementById('advName').textContent=ADV.name;
   var b=document.getElementById('advWaBtn');
-  if(CONFIG.ADVISOR_WA){b.href='https://wa.me/'+CONFIG.ADVISOR_WA;}else{b.style.display='none';}
+  if(ADV.wa){b.href='https://wa.me/'+ADV.wa;}else{b.style.display='none';}
 })();
 
 /* learner quote from CONFIG */
@@ -1273,7 +1289,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 /* mobile sticky bar: appears after hero, advisor WA if configured */
 (function(){
-  if(CONFIG.ADVISOR_WA){document.getElementById('mbarWa').href='https://wa.me/'+CONFIG.ADVISOR_WA;}
+  if(ADV&&ADV.wa){document.getElementById('mbarWa').href='https://wa.me/'+ADV.wa;}
   var hero=document.querySelector('.hero');
   function chk(){document.body.classList.toggle('has-mbar',window.scrollY>hero.offsetHeight*0.7);}
   window.addEventListener('scroll',chk,{passive:true});chk();
