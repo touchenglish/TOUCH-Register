@@ -484,14 +484,15 @@ a.lcard:hover{transform:translateY(-4px)}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mut);font-size:12.5px;font-weight:700;
   border-bottom:1px solid rgba(21,53,123,.08)}
 .pcard__ph{overflow:hidden}
-.pcard__ph>em,.pcard__ph>span{position:relative;z-index:0}
+.pcard__ph>em,.pcard__ph>.zh,.pcard__ph>.en{position:relative;z-index:0}
 .pcard__ph em{font-style:normal;font-size:30px;opacity:.7}
 .pcard__ph--video{cursor:pointer;background:#0E2A63}
 .pcard__ph--video::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(14,42,99,.32))}
 .pcard__ph--video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.pcard__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:.25s}
+.pcard__play{position:absolute!important;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.5),0 0 0 6px rgba(255,255,255,.18);transition:.25s}
 .pcard__ph--video:hover .pcard__play{transform:translate(-50%,-50%) scale(1.08)}
-.pcard__play::before{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--red);margin-left:3px}
+.pcard__play::before{content:"";border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent var(--red);margin-left:4px}
+.pcard__watch{position:absolute;left:12px;bottom:12px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;color:#fff;background:rgba(224,48,59,.92);border-radius:999px;padding:5px 12px;box-shadow:0 8px 18px -8px rgba(0,0,0,.5);letter-spacing:.02em}
 .pcard__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .pcard__ph--video iframe{z-index:4}
 .pcard__b{padding:20px 22px 24px}
@@ -771,11 +772,11 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
     </div>
     <div class="pcards">
       <div class="pcard card rv">
-        <div class="pcard__ph pcard__ph--video" data-yt="UEVXUXii09U"><img loading="lazy" src="https://i.ytimg.com/vi/UEVXUXii09U/hqdefault.jpg" alt=""><span class="pcard__play"></span></div>
+        <div class="pcard__ph pcard__ph--video" data-yt="UEVXUXii09U"><img loading="lazy" src="https://i.ytimg.com/vi/UEVXUXii09U/hqdefault.jpg" alt=""><span class="pcard__play"></span><span class="pcard__watch">▶ <span class="zh">点击播放</span><span class="en">Watch</span></span></div>
         <div class="pcard__b"><b><span class="zh">9–12 人小班</span><span class="en">9–12 per class</span></b><p><span class="zh">每个人每堂都有开口机会，老师看得见你。</span><span class="en">Everyone speaks, every class. The teacher sees you.</span></p></div>
       </div>
       <div class="pcard card rv d1">
-        <div class="pcard__ph pcard__ph--video" data-yt="BngQV_xe0B4"><img loading="lazy" src="https://i.ytimg.com/vi/BngQV_xe0B4/hqdefault.jpg" alt=""><span class="pcard__play"></span></div>
+        <div class="pcard__ph pcard__ph--video" data-yt="BngQV_xe0B4"><img loading="lazy" src="https://i.ytimg.com/vi/BngQV_xe0B4/hqdefault.jpg" alt=""><span class="pcard__play"></span><span class="pcard__watch">▶ <span class="zh">点击播放</span><span class="en">Watch</span></span></div>
         <div class="pcard__b"><b><span class="zh">90 分钟实战课</span><span class="en">90-minute practical lessons</span></b><p><span class="zh">Role-play、职场情境——课堂就是排练场。</span><span class="en">Role-plays and real scenarios — your rehearsal room.</span></p></div>
       </div>
       <div class="pcard card rv d2">
@@ -988,7 +989,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 /* ============ CONFIG（改这里）============ */
 var CONFIG={
   ENROLL_URL:"#price",          /* 顶部/结尾按钮去向；有付款链接就换成付款页 */
-  PRINCIPAL_VIDEO:"",           /* 院长视频：粘贴 YouTube 链接或 11 位 ID */
+  PRINCIPAL_VIDEO:"4NUqY0Z2Iy0",  /* 院长视频（YouTube Short）：粘贴 YouTube 链接或 11 位 ID */
   ADVISOR_NAME:"",              /* 今天讲解的顾问名字，如 "Advisor Joyce" */
   ADVISOR_WA:"",                /* 顾问 WhatsApp 号码，如 60123456789 */
   PAY_48:"#", PAY_96:"#", PAY_144:"#",   /* 三个方案的付款链接 */
