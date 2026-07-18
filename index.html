@@ -322,29 +322,32 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .cubewrap.paused .cube-spin{animation-play-state:paused}
 @keyframes gemFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 /* inner: stand the cube on its corner + spin around the vertical body-diagonal */
-.cube-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:gemSpin 32s linear infinite}
+.cube-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:gemSpin 32s linear infinite;will-change:transform}
 .cubewrap.paused .cube-tilt{animation-play-state:paused}
 @keyframes gemSpin{
-  from{transform:rotateX(-20deg) rotateY(0deg) rotateZ(0deg)}
-  to{transform:rotateX(-20deg) rotateY(360deg) rotateZ(0deg)}
+  from{transform:rotateX(-7deg) rotateY(0deg)}
+  to{transform:rotateX(-7deg) rotateY(360deg)}
 }
-.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(35.264deg) rotateZ(45deg)}
-.cface{position:absolute;inset:0;border-radius:30px;overflow:hidden;cursor:pointer;
-  background:#0E2A63;
-  box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 26px rgba(31,120,210,.28),0 22px 46px -16px rgba(21,53,123,.55);
-  -webkit-backface-visibility:hidden;backface-visibility:hidden}
-.cface img{width:100%;height:100%;object-fit:cover;opacity:.97}
-.cface::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,rgba(14,42,99,.6));pointer-events:none}
-/* iridescent holographic edge */
-.cface__edge{position:absolute;inset:0;border-radius:30px;pointer-events:none;
-  box-shadow:inset 0 0 30px rgba(150,205,255,.4);
-  background:linear-gradient(135deg,rgba(120,235,190,.28),rgba(120,190,255,.06) 34%,transparent 52%,rgba(196,140,255,.24))}
-.cface__pl{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;
-  background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,0,0,.45)}
-.cface__pl::before{content:"";border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent var(--red);margin-left:3px}
-.cface__nm{position:absolute;left:0;right:0;bottom:16px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.55);pointer-events:none}
+.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.cface{position:absolute;left:50%;top:50%;width:54%;height:54%;margin-left:-27%;margin-top:-27%;
+  border:none;padding:0;background:transparent;cursor:pointer;transform-origin:center;
+  -webkit-backface-visibility:visible;backface-visibility:visible;
+  filter:drop-shadow(0 0 2px rgba(150,205,255,.85)) drop-shadow(0 10px 18px rgba(14,42,99,.5))}
+/* triangular faces (apex up / down), inset from full triangle to leave see-through gaps */
+.cface.up{-webkit-clip-path:polygon(50% 4%,4% 92%,96% 92%);clip-path:polygon(50% 4%,4% 92%,96% 92%)}
+.cface.down{-webkit-clip-path:polygon(4% 8%,96% 8%,50% 96%);clip-path:polygon(4% 8%,96% 8%,50% 96%)}
+.cface img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0E2A63}
+.cface::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(120,235,190,.14),transparent 45%,rgba(196,140,255,.12))}
+.cface__pl{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
+.cface__pl::before{content:"";border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent var(--red);margin-left:2px}
 .cube-hint{margin-top:40px;font-size:12.5px;color:var(--mut);font-weight:600}
-@media(prefers-reduced-motion:reduce){.cube-tilt{animation:none;transform:rotateX(-20deg) rotateY(32deg)}.cube-spin{animation:none}}
+@media(prefers-reduced-motion:reduce){.cube-tilt{animation:none;transform:rotateX(-7deg) rotateY(22deg)}.cube-spin{animation:none}}
+
+.story--v .story__meta{display:none}
+.story--v .story__th{border-radius:16px}
+.story__watch{position:absolute;left:10px;bottom:10px;z-index:3;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;color:#fff;background:rgba(224,48,59,.92);border-radius:999px;padding:4px 10px;box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 
 /* story quote */
 .squote{max-width:680px;margin:34px auto 0;text-align:center;position:relative;padding:0 20px}
@@ -612,7 +615,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 
 <!-- TOPBAR -->
 <div class="topbar"><div class="topbar__in">
-  <div class="logo-disc"><img src="assets/logo/touch.png" alt="TOUCH" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<b>T</b>')"></div>
+  <div class="logo-disc"><img src="assets/logo.png" alt="TOUCH English" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<b>T</b>')"></div>
   <div class="tb__t"><b>TOUCH English</b><span>makes you visible</span></div>
   <div class="tb__sp"></div>
   <button class="langbtn" id="langBtn">EN</button>
@@ -1122,14 +1125,10 @@ io.observe(er);})();
 /* ============ Stories (YouTube standard: grid + play + advisor panel) ============ */
 (function(){
   var DEFAULTS=[
-    {id:'dW0WfzzcQJY', name:'Vivi',        job:{en:'Swimming Coach · Pre-Level 1',zh:'游泳教练 · Pre-Level 1'}, desc:{en:'From basic English to speaking more confidently in real-life situations.',zh:'从最基础的英文，到在真实生活场景中更有信心地开口。'}},
-    {id:'BSom6KeM69E', name:'Lim Yoke Fen', job:{en:'Level 4 Learner',zh:'Level 4 学员'}, desc:{en:'Improved higher-level communication and presentation confidence.',zh:'高阶沟通与 presentation 信心显著提升。'}},
-    {id:'_Na5XJUTZYE', name:'Xiao Ting',   job:{en:'SPM Student · Level 1',zh:'SPM 学生 · Level 1'}, desc:{en:'Built a stronger foundation and became more confident to speak.',zh:'打好基础，变得更敢开口。'}},
-    {id:'BbB0WMARIw8', name:'Sally',       job:{en:'Quantity Surveyor · Level 3',zh:'工料测量师 · Level 3'}, desc:{en:'Strengthened workplace communication and professional expression.',zh:'职场沟通与专业表达明显加强。'}},
-    {id:'qhlJQ8baMIE', name:'Mark',        job:{en:'Programmer · Level 3',zh:'程序员 · Level 3'}, desc:{en:'Improved speaking confidence for work and daily communication.',zh:'工作与日常沟通的开口信心提升。'}},
-    {id:'tMJCH5m2H9g', name:'Kai Xin',     job:{en:'Conveying Skill · Level 2',zh:'表达技能 · Level 2'}, desc:{en:'Learned to express ideas more clearly and confidently.',zh:'学会更清楚、更有信心地表达想法。'}}
+    {id:'fynOoEpUtEQ'},{id:'hEju5LBQ6v4'},{id:'iuqZKTf44bQ'},{id:'qYAzzpC083Y'},
+    {id:'8AsA0yF385s'},{id:'GmtQmlFOioo'},{id:'qhlJQ8baMIE'},{id:'xRy5iqK9VI0'}
   ];
-  var KEY='te_sales_stories_v1';
+  var KEY='te_sales_stories_v2';
   function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(v)&&v.length)return v;}catch(e){}return JSON.parse(JSON.stringify(DEFAULTS));}
   var STORIES=load();
   var grid=document.getElementById('sgrid'), player=document.getElementById('splayer'), pv=document.getElementById('spVid'), ps=document.getElementById('spSum');
@@ -1139,29 +1138,40 @@ io.observe(er);})();
   function playStory(s){
     if(!s)return;
     pv.innerHTML='<iframe src="https://www.youtube.com/embed/'+esc(s.id)+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    ps.innerHTML='<b>'+esc(s.name)+' · '+bi(s.job)+'</b><p>'+bi(s.desc)+'</p>';
+    ps.innerHTML='<b><span class="zh">真实学员分享</span><span class="en">A real learner\'s story</span></b><p><span class="zh">听他们怎么从不敢开口，到被看见。</span><span class="en">From afraid to speak, to being seen.</span></p>';
     player.classList.add('open');
     player.scrollIntoView({behavior:'smooth',block:'center'});
   }
-  /* rotating cube: 6 faces mapped to first 6 stories */
+  /* rotating octahedron: 8 triangular faces, separated (see-through gaps) */
   var cube=document.getElementById('cube'), cubewrap=document.getElementById('cubewrap');
-  var FACE_TF=['rotateY(0deg)','rotateY(90deg)','rotateY(180deg)','rotateY(-90deg)','rotateX(90deg)','rotateX(-90deg)'];
+  var OCTA=[
+    {tf:'rotateY(45deg) rotateX(-35.264deg)',  up:1},
+    {tf:'rotateY(135deg) rotateX(-35.264deg)', up:1},
+    {tf:'rotateY(225deg) rotateX(-35.264deg)', up:1},
+    {tf:'rotateY(315deg) rotateX(-35.264deg)', up:1},
+    {tf:'rotateY(45deg) rotateX(35.264deg)',   up:0},
+    {tf:'rotateY(135deg) rotateX(35.264deg)',  up:0},
+    {tf:'rotateY(225deg) rotateX(35.264deg)',  up:0},
+    {tf:'rotateY(315deg) rotateX(35.264deg)',  up:0}
+  ];
   function buildCube(){
     var scene=document.querySelector('.cube-scene');
-    var half=Math.round((scene?scene.clientWidth:240)/2);
-    var items=STORIES.slice(0,6);
-    while(items.length<6&&STORIES.length){items=items.concat(STORIES.slice(0,6-items.length));}
+    var W=(scene?scene.clientWidth:240);
+    var D=Math.round(W*0.33);   /* push each face out along its normal */
+    var items=STORIES.slice(0,8);
+    while(items.length&&items.length<8){items=items.concat(STORIES.slice(0,8-items.length));}
     cube.innerHTML=items.map(function(s,i){
-      return '<button class="cface" data-id="'+esc(s.id)+'" style="transform:'+FACE_TF[i]+' translateZ('+half+'px)" aria-label="'+esc(s.name)+'">'+
-        '<img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="'+esc(s.name)+'">'+
-        '<span class="cface__edge"></span><span class="cface__pl"></span><span class="cface__nm">'+esc(s.name)+'</span></button>';
+      var f=OCTA[i%8];
+      return '<button class="cface'+(f.up?' up':' down')+'" data-id="'+esc(s.id)+'" style="transform:'+f.tf+' translateZ('+D+'px)">'+
+        '<img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="">'+
+        '<span class="cface__pl"></span></button>';
     }).join('');
   }
   function render(){
     grid.innerHTML=STORIES.map(function(s,i){
-      return '<div class="story card" data-i="'+i+'">'+
-        '<div class="story__th"><img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="'+esc(s.name)+'"><span class="story__pl"></span></div>'+
-        '<div class="story__meta"><b>'+esc(s.name)+'</b><i>'+bi(s.job)+'</i><p>'+bi(s.desc)+'</p></div></div>';
+      return '<div class="story card story--v" data-i="'+i+'">'+
+        '<div class="story__th"><img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt=""><span class="story__pl"></span>'+
+        '<span class="story__watch">\u25B6 <span class="zh">点击观看</span><span class="en">Watch</span></span></div></div>';
     }).join('');
     buildCube();
   }
@@ -1176,10 +1186,9 @@ io.observe(er);})();
     var s=STORIES.filter(function(x){return x.id===f.dataset.id;})[0]||STORIES[0];
     playStory(s);
   });
-  var enter=function(){cubewrap.classList.add('paused');}, leave=function(){cubewrap.classList.remove('paused');};
-  cubewrap.addEventListener('mouseenter',enter); cubewrap.addEventListener('mouseleave',leave);
-  cubewrap.addEventListener('touchstart',function(){enter();},{passive:true});
-  cubewrap.addEventListener('touchend',function(){setTimeout(leave,1600);},{passive:true});
+  /* desktop hover pauses (to click a face); touch does NOT pause, so scrolling past never freezes it */
+  cubewrap.addEventListener('mouseenter',function(){cubewrap.classList.add('paused');});
+  cubewrap.addEventListener('mouseleave',function(){cubewrap.classList.remove('paused');});
   window.addEventListener('resize',(function(){var t;return function(){clearTimeout(t);t=setTimeout(buildCube,200);};})());
 
 })();
