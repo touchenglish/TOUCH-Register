@@ -351,6 +351,36 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .tcard__rt em{font-style:normal;font-weight:600;font-size:11px;color:var(--mut)}
 .tgrid__note{text-align:center;margin-top:18px;font-size:13px;color:var(--mut)}
 
+/* online-first hero (photo) on top + centres row below */
+.onlblk{margin-top:40px}
+.onlhero{display:grid;grid-template-columns:0.9fr 1.1fr;gap:0;overflow:hidden;align-items:stretch;border:1.5px solid rgba(31,120,210,.28)}
+@media(max-width:760px){.onlhero{grid-template-columns:1fr}}
+.onlhero__media{position:relative;min-height:250px;background:linear-gradient(150deg,#14315f,#0E2A63);overflow:hidden}
+.onlhero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.onlhero__phfb{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;font-size:52px;opacity:.8}
+.onlhero__live{position:absolute;left:16px;top:16px;z-index:2;display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;letter-spacing:.03em;color:#fff;background:rgba(224,48,59,.92);border-radius:999px;padding:6px 13px;box-shadow:0 8px 20px -8px rgba(224,48,59,.6)}
+.onlhero__live i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:livePulse 1.8s ease-out infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.onlhero__body{padding:34px 34px;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(155deg,rgba(31,120,210,.1),rgba(255,255,255,.55))}
+.onlhero__tag{align-self:flex-start;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--blue);background:rgba(31,120,210,.1);border:1px solid rgba(31,120,210,.22);border-radius:999px;padding:5px 13px;margin-bottom:14px}
+.onlhero__body b{font-size:23px;letter-spacing:-.01em}
+.onlhero__body p{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:12px}
+.onhub__badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.ohb{font-size:12px;font-weight:700;color:var(--blue);background:rgba(31,120,210,.09);border:1px solid rgba(31,120,210,.2);border-radius:999px;padding:6px 13px}
+/* centres row */
+.centrow__lab{text-align:center;margin:30px 0 16px;font-size:13px;font-weight:700;color:var(--mut)}
+.centrow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:900px){.centrow{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.centrow{grid-template-columns:repeat(2,1fr)}}
+.ccentre{display:block;overflow:hidden;transition:.3s;padding:0}
+a.ccentre:hover{transform:translateY(-4px)}
+.ccentre__ph{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:16/11;overflow:hidden;background:linear-gradient(150deg,#E7EEFA,#DCE6F5);font-size:22px;border-bottom:1px solid rgba(21,53,123,.08)}
+.ccentre__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.ccentre>b{display:block;margin:14px 16px 0;font-size:14.5px}
+.ccentre>i{display:block;font-style:normal;margin:2px 16px 0;font-size:11.5px;color:var(--mut);font-weight:600}
+.ccentre__go{display:inline-block;margin:9px 16px 16px;font-size:12px;font-weight:800;color:var(--blue)}
+
 /* online-first hub + physical centres trust */
 .onhub{display:grid;grid-template-columns:1.25fr .95fr;gap:22px;margin-top:40px;align-items:stretch}
 @media(max-width:860px){.onhub{grid-template-columns:1fr}}
@@ -764,29 +794,33 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">人在马来西亚哪里，<br>课就在哪里</span><span class="en">Wherever you are in Malaysia,<br>the class is right there</span></h2>
       <p class="sub"><span class="zh">我们主要以线上真人直播授课——无论你在 KL、槟城、东马还是任何小镇，打开电脑就能上课。而且我们不只是一个 App：<b>16 年实体办学，5 间中心遍布 Johor 与 Selangor</b>，随时欢迎你来看看。</span><span class="en">We teach mainly through live online classes — join from KL, Penang, East Malaysia or any town, just open your laptop. And we're not just an app: <b>16 years of real teaching, with 5 physical centres across Johor and Selangor</b> you're always welcome to visit.</span></p>
     </div>
-    <div class="onhub">
-      <div class="onhub__main card rv">
-        <span class="onhub__live"><i></i><span class="zh">真人直播中</span><span class="en">Live now</span></span>
-        <span class="onhub__ic">💻</span>
-        <b><span class="zh">Online Live Class · 线上直播课</span><span class="en">Online Live Class</span></b>
-        <p><span class="zh">真人老师实时互动，不是录播。全马来西亚任何角落都能加入——小班一样每堂开口练，进度一样看得见。这是大多数学员的选择。</span><span class="en">A real teacher, live and interactive — not recordings. Join from anywhere in Malaysia. Same small class, same speaking practice, same visible progress. It's how most of our learners study.</span></p>
-        <div class="onhub__badges">
-          <span class="ohb"><span class="zh">全马可上</span><span class="en">Nationwide</span></span>
-          <span class="ohb"><span class="zh">真人直播</span><span class="en">Live teacher</span></span>
-          <span class="ohb"><span class="zh">小班互动</span><span class="en">Small class</span></span>
-          <span class="ohb"><span class="zh">时间灵活</span><span class="en">Flexible times</span></span>
+    <div class="onlblk">
+      <div class="onlhero card rv">
+        <div class="onlhero__media">
+          <img loading="lazy" src="assets/locations/online.png" alt="Online Live Class" onerror="this.remove()">
+          <span class="onlhero__phfb"><em>💻</em></span>
+          <span class="onlhero__live"><i></i><span class="zh">真人直播中</span><span class="en">Live now</span></span>
+        </div>
+        <div class="onlhero__body">
+          <span class="onlhero__tag"><span class="zh">大多数学员的选择</span><span class="en">How most learners study</span></span>
+          <b><span class="zh">Online Live Class · 线上直播课</span><span class="en">Online Live Class</span></b>
+          <p><span class="zh">真人老师实时互动，不是录播。全马来西亚任何角落都能加入——小班一样每堂开口练，进度一样看得见。</span><span class="en">A real teacher, live and interactive — not recordings. Join from anywhere in Malaysia. Same small class, same speaking practice, same visible progress.</span></p>
+          <div class="onhub__badges">
+            <span class="ohb"><span class="zh">全马可上</span><span class="en">Nationwide</span></span>
+            <span class="ohb"><span class="zh">真人直播</span><span class="en">Live teacher</span></span>
+            <span class="ohb"><span class="zh">小班互动</span><span class="en">Small class</span></span>
+            <span class="ohb"><span class="zh">时间灵活</span><span class="en">Flexible times</span></span>
+          </div>
         </div>
       </div>
-      <div class="onhub__side card rv d1">
-        <p class="onhub__side-lab"><span class="zh">我们也是有实体的</span><span class="en">And we're real, in person</span></p>
-        <p class="onhub__side-sub"><span class="zh">5 间实体中心 · Johor &amp; Selangor · 欢迎预约参观</span><span class="en">5 physical centres · Johor &amp; Selangor · visits welcome</span></p>
-        <div class="cents">
-          <a class="cent" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/austin.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Mount Austin</b><i>Johor Bahru</i></span><span class="cent__go">→</span></a>
-          <a class="cent" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/sutera.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Sutera Utama</b><i>Skudai</i></span><span class="cent__go">→</span></a>
-          <a class="cent" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/bi.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Bukit Indah</b><i>Iskandar Puteri</i></span><span class="cent__go">→</span></a>
-          <a class="cent" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/kulai.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Kulai</b><i>Indahpura</i></span><span class="cent__go">→</span></a>
-          <a class="cent" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/sp.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Setia Alam</b><i>Selangor</i></span><span class="cent__go">→</span></a>
-        </div>
+
+      <p class="centrow__lab"><span class="zh">我们也是有实体的 · 5 间中心遍布 Johor &amp; Selangor · 欢迎预约参观</span><span class="en">And we're real, in person · 5 centres across Johor &amp; Selangor · visits welcome</span></p>
+      <div class="centrow">
+        <a class="ccentre card rv" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/austin.png" alt="Mount Austin" onerror="this.remove()"><em>📍</em></span><b>Mount Austin</b><i>Johor Bahru</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d1" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sutera.png" alt="Sutera Utama" onerror="this.remove()"><em>📍</em></span><b>Sutera Utama</b><i>Skudai</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d2" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/bi.png" alt="Bukit Indah" onerror="this.remove()"><em>📍</em></span><b>Bukit Indah</b><i>Iskandar Puteri</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d3" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/kulai.png" alt="Kulai" onerror="this.remove()"><em>📍</em></span><b>Kulai</b><i>Indahpura</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d4" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sp.png" alt="Setia Alam" onerror="this.remove()"><em>📍</em></span><b>Setia Alam</b><i>Selangor</i><span class="ccentre__go">Google Maps →</span></a>
       </div>
     </div>
   </div>
