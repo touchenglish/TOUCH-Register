@@ -143,16 +143,16 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 }
 
 /* scrolling learner-case marquee (dark highlight band, 3 rows) */
-.vmarquee{padding:44px 0 8px}
-.vmband{position:relative;background:linear-gradient(160deg,#102a5e,#07142f);border-radius:26px;padding:26px 0 30px;overflow:hidden;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 34px 70px -34px rgba(14,42,99,.6)}
-.vmband::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 0%,rgba(31,120,210,.22),transparent 70%)}
-.vmarquee__lab{position:relative;text-align:center;font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:20px;padding:0 20px}
+.vmarquee{position:relative;padding:34px 0 40px;overflow:hidden;
+  background:linear-gradient(160deg,#102a5e,#07142f)}
+.vmarquee::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 70% at 50% 0%,rgba(31,120,210,.22),transparent 70%)}
+.vmarquee__in{position:relative;z-index:1}
+.vmarquee__lab{text-align:center;font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:22px;padding:0 20px}
 .vmq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .vmq+.vmq{margin-top:12px}
 .vmq__track{display:flex;gap:12px;width:max-content;will-change:transform;animation:vmqScroll 60s linear infinite}
 .vmq__track--right{animation-direction:reverse}
-.vmband:hover .vmq__track{animation-play-state:paused}
+.vmarquee:hover .vmq__track{animation-play-state:paused}
 @keyframes vmqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.vmq__track{animation:none}.vmq{overflow-x:auto}}
 .vcard{flex:none;width:150px;border-radius:12px;overflow:hidden;cursor:pointer;background:#0b1f47;border:1px solid rgba(255,255,255,.1);transition:.22s}
@@ -670,13 +670,11 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 
 <!-- SCROLLING LEARNER CASES (marquee) -->
 <section class="vmarquee" aria-label="learner cases">
-  <div class="wrap">
-    <div class="vmband">
-      <p class="vmarquee__lab"><span class="zh">真实学员案例 · 点开听他们说</span><span class="en">Real learner stories · tap any to watch</span></p>
-      <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackA"></div></div>
-      <div class="vmq"><div class="vmq__track" id="vmqTrackB"></div></div>
-      <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackC"></div></div>
-    </div>
+  <div class="wrap vmarquee__in">
+    <p class="vmarquee__lab"><span class="zh">真实学员案例 · 点开听他们说</span><span class="en">Real learner stories · tap any to watch</span></p>
+    <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackA"></div></div>
+    <div class="vmq"><div class="vmq__track" id="vmqTrackB"></div></div>
+    <div class="vmq"><div class="vmq__track vmq__track--right" id="vmqTrackC"></div></div>
   </div>
 </section>
 
