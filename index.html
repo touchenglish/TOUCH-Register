@@ -484,7 +484,8 @@ a.lcard:hover{transform:translateY(-4px)}
 
 /* advisor card */
 .advcard{position:relative;display:flex;align-items:center;gap:16px;max-width:460px;margin:26px auto 6px;padding:16px 20px;background:rgba(255,255,255,.75);border:1px solid rgba(21,53,123,.12);border-radius:20px;box-shadow:0 12px 30px -14px rgba(21,53,123,.28);text-align:left}
-.advcard__av{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#DCE9F8);display:flex;align-items:center;justify-content:center;font-size:21px;flex:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 6px 14px -6px rgba(21,53,123,.3)}
+.advcard__av{position:relative;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#DCE9F8);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 6px 14px -6px rgba(21,53,123,.3);overflow:hidden}
+.advcard__av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .advcard__t{flex:1}
 .advcard__t b{display:block;font-size:15px}
 .advcard__t span{font-size:12px;color:var(--mut);font-weight:600}
@@ -991,7 +992,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       <h2><span class="zh">你今天听到的，<br>都在这里</span><span class="en">Everything you heard today<br>is right here</span></h2>
       <p class="sub" style="margin-left:auto;margin-right:auto"><span class="zh">慢慢看，不急。想清楚了、或者有任何疑问，随时找你的顾问——16,397 位学员的第一步，也都是从一个问题开始的。</span><span class="en">Take your time. When you’re ready — or if anything is unclear — just reach out to your advisor. For 16,397 learners, the first step also started with a question.</span></p>
       <div class="advcard rv" id="advCard" hidden>
-        <span class="advcard__av">👤</span>
+        <span class="advcard__av" id="advAv">👤</span>
         <div class="advcard__t"><b id="advName"></b><span><span class="zh">今天为你讲解的顾问</span><span class="en">Your advisor today</span></span></div>
         <a class="btn btn--red advcard__wa" id="advWaBtn" target="_blank" rel="noopener"><span class="zh">WhatsApp 顾问</span><span class="en">WhatsApp advisor</span></a>
       </div>
@@ -1023,10 +1024,19 @@ var CONFIG={
     "dW0WfzzcQJY","BSom6KeM69E","_Na5XJUTZYE","BbB0WMARIw8","qhlJQ8baMIE","tMJCH5m2H9g","UEVXUXii09U","BngQV_xe0B4"
   ],
   /* 顾问名单：链接尾巴加 ?adv=键名 即显示对应顾问，如 sales.html?adv=joyce
-     每行一位：键名: { name:"显示名字", wa:"WhatsApp号码(国际格式,不带+)" } */
+     每行一位：键名: { name:"显示名字", wa:"WhatsApp号码(不带+)", img:"照片路径(可省略)" }
+     照片统一放 assets/advisors/ 文件夹，文件名 = 键名.png */
   ADVISORS:{
-    joyce:{name:"Advisor Joyce", wa:""},
-    kelly:{name:"Advisor Kelly", wa:""}
+    marco:{name:"Advisor Marco", wa:"60176669917", img:"assets/advisors/marco.png"},
+    fish:{name:"Advisor Fish", wa:"60127376893", img:"assets/advisors/fish.png"},
+    sijie:{name:"Advisor Sijie", wa:"60197166893", img:"assets/advisors/sijie.png"},
+    mitzy:{name:"Advisor Mitzy", wa:"60127106893", img:"assets/advisors/mitzy.png"},
+    xinying:{name:"Advisor XinYing", wa:"60167026893", img:"assets/advisors/xinying.png"},
+    elaine:{name:"Advisor Elaine", wa:"60197706893", img:"assets/advisors/elaine.png"},
+    fabien:{name:"Advisor Fabien", wa:"60177116893", img:"assets/advisors/fabien.png"},
+    huimin:{name:"Advisor HuiMin", wa:"60167706893", img:"assets/advisors/huimin.png"},
+    alen:{name:"Advisor Alen", wa:"601110106893", img:"assets/advisors/alen.png"},
+    wesley:{name:"Advisor Wesley", wa:"60177304893", img:"assets/advisors/wesley.png"}
   },
   ADVISOR_NAME:"",              /* 不用链接参数时的默认顾问（可留空） */
   ADVISOR_WA:"",                /* 默认顾问 WhatsApp，如 60123456789 */
@@ -1205,7 +1215,7 @@ var ADV=(function(){
   var slug='';
   try{slug=(new URLSearchParams(location.search).get('adv')||'').toLowerCase().trim();}catch(e){}
   var a=slug&&CONFIG.ADVISORS&&CONFIG.ADVISORS[slug];
-  if(a&&(a.name||a.wa))return {name:a.name||'Your Advisor', wa:a.wa||''};
+  if(a&&(a.name||a.wa))return {name:a.name||'Your Advisor', wa:a.wa||'', img:a.img||''};
   if(CONFIG.ADVISOR_NAME||CONFIG.ADVISOR_WA)return {name:CONFIG.ADVISOR_NAME||'Your Advisor', wa:CONFIG.ADVISOR_WA||''};
   return null;
 })();
@@ -1215,6 +1225,13 @@ var ADV=(function(){
   if(!ADV)return;
   var c=document.getElementById('advCard');c.hidden=false;
   document.getElementById('advName').textContent=ADV.name;
+  if(ADV.img){
+    var av=document.getElementById('advAv');
+    var im=new Image();
+    im.alt=ADV.name;
+    im.onload=function(){av.textContent='';av.appendChild(im);};
+    im.src=ADV.img;
+  }
   var b=document.getElementById('advWaBtn');
   if(ADV.wa){b.href='https://wa.me/'+ADV.wa;}else{b.style.display='none';}
 })();
