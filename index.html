@@ -351,6 +351,36 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .tcard__rt em{font-style:normal;font-weight:600;font-size:11px;color:var(--mut)}
 .tgrid__note{text-align:center;margin-top:18px;font-size:13px;color:var(--mut)}
 
+/* online-first hub + physical centres trust */
+.onhub{display:grid;grid-template-columns:1.25fr .95fr;gap:22px;margin-top:40px;align-items:stretch}
+@media(max-width:860px){.onhub{grid-template-columns:1fr}}
+.onhub__main{position:relative;padding:34px 32px;display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(155deg,rgba(31,120,210,.14),rgba(255,255,255,.6) 55%),var(--glass);
+  border:1.5px solid rgba(31,120,210,.28)}
+.onhub__main::before{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,120,210,.22),transparent 70%);pointer-events:none}
+.onhub__live{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;letter-spacing:.04em;
+  color:#c0182a;background:rgba(224,48,59,.09);border:1px solid rgba(224,48,59,.22);border-radius:999px;padding:5px 12px;position:relative}
+.onhub__live i{width:8px;height:8px;border-radius:50%;background:#E0303B;box-shadow:0 0 0 0 rgba(224,48,59,.6);animation:livePulse 1.8s ease-out infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(224,48,59,.55)}70%{box-shadow:0 0 0 8px rgba(224,48,59,0)}100%{box-shadow:0 0 0 0 rgba(224,48,59,0)}}
+.onhub__ic{font-size:44px;margin:16px 0 8px;line-height:1}
+.onhub__main b{font-size:22px;letter-spacing:-.01em}
+.onhub__main p{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:12px}
+.onhub__badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.ohb{font-size:12px;font-weight:700;color:var(--blue);background:rgba(31,120,210,.09);border:1px solid rgba(31,120,210,.2);border-radius:999px;padding:6px 13px}
+.onhub__side{padding:24px 22px;display:flex;flex-direction:column}
+.onhub__side-lab{font-size:15px;font-weight:800;color:var(--ink)}
+.onhub__side-sub{font-size:12px;color:var(--mut);font-weight:600;margin:5px 0 14px;line-height:1.5}
+.cents{display:flex;flex-direction:column}
+.cent{display:flex;align-items:center;gap:13px;padding:11px 6px;border-top:1px solid rgba(21,53,123,.09);transition:.2s;border-radius:10px}
+.cent:hover{background:rgba(31,120,210,.05)}
+.cent__th{position:relative;width:46px;height:46px;flex:none;border-radius:11px;overflow:hidden;background:linear-gradient(150deg,#E7EEFA,#DCE6F5);display:flex;align-items:center;justify-content:center;font-size:16px}
+.cent__th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cent__t{flex:1;min-width:0}
+.cent__t b{display:block;font-size:14px}
+.cent__t i{font-style:normal;font-size:11.5px;color:var(--mut);font-weight:600}
+.cent__go{flex:none;color:var(--blue);font-weight:800;font-size:16px}
+
 /* locations */
 .lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
 .lcard{display:block;padding:0;overflow:hidden;transition:.3s}
@@ -423,14 +453,17 @@ a.lcard:hover{transform:translateY(-4px)}
 .pcard__ph{position:relative;aspect-ratio:4/3;background:linear-gradient(150deg,#E7EEFA,#DCE6F5);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mut);font-size:12.5px;font-weight:700;
   border-bottom:1px solid rgba(21,53,123,.08)}
+.pcard__ph{overflow:hidden}
+.pcard__ph>em,.pcard__ph>span{position:relative;z-index:0}
 .pcard__ph em{font-style:normal;font-size:30px;opacity:.7}
 .pcard__ph--video{cursor:pointer;background:#0E2A63}
-.pcard__ph--video::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(14,42,99,.32))}
+.pcard__ph--video::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(14,42,99,.32))}
 .pcard__ph--video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.pcard__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:.25s}
+.pcard__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:.25s}
 .pcard__ph--video:hover .pcard__play{transform:translate(-50%,-50%) scale(1.08)}
 .pcard__play::before{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--red);margin-left:3px}
-.pcard__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.pcard__ph--video iframe{z-index:4}
 .pcard__b{padding:20px 22px 24px}
 .pcard__b b{font-size:17px;display:block;margin-bottom:7px}
 .pcard__b p{font-size:13.5px;color:var(--ink2);line-height:1.6}
@@ -725,18 +758,36 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       </div>
     </div>
 
-    <!-- locations -->
+    <!-- online-first + physical centres as trust -->
     <div class="center rv" style="margin-top:70px">
-      <span class="eyebrow"><span class="zh">离你近吗？</span><span class="en">Near you?</span></span>
-      <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">5 间分行 + Online，总有一个方便你</span><span class="en">5 centres + Online — one will fit you</span></h2>
+      <span class="eyebrow"><span class="zh">线上为主 · 全马可上</span><span class="en">Online-first · nationwide</span></span>
+      <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">人在马来西亚哪里，<br>课就在哪里</span><span class="en">Wherever you are in Malaysia,<br>the class is right there</span></h2>
+      <p class="sub"><span class="zh">我们主要以线上真人直播授课——无论你在 KL、槟城、东马还是任何小镇，打开电脑就能上课。而且我们不只是一个 App：<b>16 年实体办学，5 间中心遍布 Johor 与 Selangor</b>，随时欢迎你来看看。</span><span class="en">We teach mainly through live online classes — join from KL, Penang, East Malaysia or any town, just open your laptop. And we're not just an app: <b>16 years of real teaching, with 5 physical centres across Johor and Selangor</b> you're always welcome to visit.</span></p>
     </div>
-    <div class="lgrid">
-      <a class="lcard card rv" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><span class="lcard__ph"><img loading="lazy" src="assets/locations/austin.png" alt="Mount Austin" onerror="this.remove()"><em>📷</em></span><b>Mount Austin</b><i>Johor Bahru</i><p>7-02, Jalan Mutiara Emas 2A, Taman Mount Austin</p><span class="lcard__go">Google Maps →</span></a>
-      <a class="lcard card rv d1" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><span class="lcard__ph"><img loading="lazy" src="assets/locations/sutera.png" alt="Sutera Utama" onerror="this.remove()"><em>📷</em></span><b>Sutera Utama</b><i>Skudai</i><p>90B, Jalan Sutera Tanjung 8/4, Taman Sutera Utama</p><span class="lcard__go">Google Maps →</span></a>
-      <a class="lcard card rv d2" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><span class="lcard__ph"><img loading="lazy" src="assets/locations/bi.png" alt="Bukit Indah" onerror="this.remove()"><em>📷</em></span><b>Bukit Indah</b><i>Iskandar Puteri</i><p>6A, Jalan Indah 15/1, Taman Bukit Indah</p><span class="lcard__go">Google Maps →</span></a>
-      <a class="lcard card rv d3" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><span class="lcard__ph"><img loading="lazy" src="assets/locations/kulai.png" alt="Kulai" onerror="this.remove()"><em>📷</em></span><b>Kulai</b><i>Indahpura</i><p>205A, Jalan Kenanga 29/2, Indahpura</p><span class="lcard__go">Google Maps →</span></a>
-      <a class="lcard card rv d4" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><span class="lcard__ph"><img loading="lazy" src="assets/locations/sp.png" alt="Setia Alam" onerror="this.remove()"><em>📷</em></span><b>Setia Alam</b><i>Selangor</i><p>10-3-1, Jalan Setia Prima P U13/P, Setia Alam</p><span class="lcard__go">Google Maps →</span></a>
-      <div class="lcard card rv d4"><span class="lcard__ph lcard__ph--on"><img loading="lazy" src="assets/locations/online.png" alt="Online Live Class" onerror="this.remove()"><em>💻</em></span><b>Online Live Class</b><i><span class="zh">线上直播课</span><span class="en">Live online</span></i><p><span class="zh">真人老师实时互动，不是录播——在家也能开口练。</span><span class="en">Live, interactive lessons with a real teacher — not recordings.</span></p></div>
+    <div class="onhub">
+      <div class="onhub__main card rv">
+        <span class="onhub__live"><i></i><span class="zh">真人直播中</span><span class="en">Live now</span></span>
+        <span class="onhub__ic">💻</span>
+        <b><span class="zh">Online Live Class · 线上直播课</span><span class="en">Online Live Class</span></b>
+        <p><span class="zh">真人老师实时互动，不是录播。全马来西亚任何角落都能加入——小班一样每堂开口练，进度一样看得见。这是大多数学员的选择。</span><span class="en">A real teacher, live and interactive — not recordings. Join from anywhere in Malaysia. Same small class, same speaking practice, same visible progress. It's how most of our learners study.</span></p>
+        <div class="onhub__badges">
+          <span class="ohb"><span class="zh">全马可上</span><span class="en">Nationwide</span></span>
+          <span class="ohb"><span class="zh">真人直播</span><span class="en">Live teacher</span></span>
+          <span class="ohb"><span class="zh">小班互动</span><span class="en">Small class</span></span>
+          <span class="ohb"><span class="zh">时间灵活</span><span class="en">Flexible times</span></span>
+        </div>
+      </div>
+      <div class="onhub__side card rv d1">
+        <p class="onhub__side-lab"><span class="zh">我们也是有实体的</span><span class="en">And we're real, in person</span></p>
+        <p class="onhub__side-sub"><span class="zh">5 间实体中心 · Johor &amp; Selangor · 欢迎预约参观</span><span class="en">5 physical centres · Johor &amp; Selangor · visits welcome</span></p>
+        <div class="cents">
+          <a class="cent" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/austin.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Mount Austin</b><i>Johor Bahru</i></span><span class="cent__go">→</span></a>
+          <a class="cent" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/sutera.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Sutera Utama</b><i>Skudai</i></span><span class="cent__go">→</span></a>
+          <a class="cent" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/bi.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Bukit Indah</b><i>Iskandar Puteri</i></span><span class="cent__go">→</span></a>
+          <a class="cent" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/kulai.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Kulai</b><i>Indahpura</i></span><span class="cent__go">→</span></a>
+          <a class="cent" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><span class="cent__th"><img loading="lazy" src="assets/locations/sp.png" alt="" onerror="this.remove()"><em>📍</em></span><span class="cent__t"><b>Setia Alam</b><i>Selangor</i></span><span class="cent__go">→</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1023,7 +1074,7 @@ io.observe(er);})();
   function bi(o){return '<span class="zh">'+esc(o.zh)+'</span><span class="en">'+esc(o.en)+'</span>';}
   function playStory(s){
     if(!s)return;
-    pv.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+esc(s.id)+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    pv.innerHTML='<iframe src="https://www.youtube.com/embed/'+esc(s.id)+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     ps.innerHTML='<b>'+esc(s.name)+' · '+bi(s.job)+'</b><p>'+bi(s.desc)+'</p>';
     player.classList.add('open');
     player.scrollIntoView({behavior:'smooth',block:'center'});
@@ -1105,7 +1156,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   document.querySelectorAll('.pcard__ph--video').forEach(function(el){
     el.addEventListener('click',function(){
       var id=el.getAttribute('data-yt'); if(!id)return;
-      el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      el.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     },{once:true});
   });
 })();
@@ -1118,7 +1169,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   if(!screen||!id)return;
   screen.innerHTML='<div class="phone__poster" role="button" aria-label="play"><img src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="Principal video"><span class="phone__play"></span></div>';
   screen.querySelector('.phone__poster').addEventListener('click',function(){
-    screen.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    screen.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
   });
 })();
 
