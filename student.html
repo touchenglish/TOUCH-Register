@@ -278,6 +278,10 @@ body.te-en .jnote__who::after{content:" says"}
 /* grant deadline line */
 .grantdue{margin-top:14px;font-size:13px;font-weight:700;color:#8a6516;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.3);border-radius:12px;padding:10px 14px;display:inline-block}
 .grantdue b{color:#6d4f0c}
+.grantdue.is-last{color:#a3200f;background:rgba(232,71,43,.12);border-color:rgba(232,71,43,.34)}
+.grantdue.is-last b{color:#8c1a0c}
+.grantdue.is-over{color:var(--ink2);background:rgba(31,120,210,.07);border-color:rgba(31,120,210,.2)}
+.grantdue.is-over b{color:var(--blue)}
 
 .jny__end{text-align:center;margin-top:30px}
 .jny__end b{display:block;font-size:clamp(19px,2.6vw,24px);color:var(--ink)}
@@ -1724,18 +1728,31 @@ var PSTU=(function(){
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mod.hidden)closeMod();});
 })();
 
-/* 6) 助学金截止日：温和的时效感 */
+/* 6) 助学金截止日：温和的时效感（过期后转成「问下一批」，不留空白） */
 (function(){
   var due=''; try{due=(new URLSearchParams(location.search).get('due')||'').trim();}catch(e){}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(due))return;
-  var d=new Date(due+'T23:59:59'); if(isNaN(d))return;
-  var days=Math.ceil((d-new Date())/86400000);
-  if(days<0)return;
   var g=document.querySelector('.grant'); if(!g)return;
   var dd=due.split('-');
-  var txt='<span class="zh">本批助学金名额申请至 <b>'+(+dd[1])+' 月 '+(+dd[2])+' 日</b>'+(days<=30?('（剩 '+days+' 天）'):'')+'</span>'+
-          '<span class="en">This grant batch closes on <b>'+due+'</b>'+(days<=30?(' ('+days+' days left)'):'')+'</span>';
-  g.insertAdjacentHTML('beforeend','<p class="grantdue">⏳ '+txt+'</p>');
+  /* 用「日历日」比较，避免时分秒造成的边界误差 */
+  var end=new Date(+dd[0],+dd[1]-1,+dd[2]); if(isNaN(end))return;
+  var now=new Date(); var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var days=Math.round((end-today)/86400000);
+  var who=(typeof ADV!=='undefined'&&ADV&&ADV.name)?ADV.name:'';
+  var cls='grantdue', ic='⏳', zh, en;
+  if(days<0){
+    cls+=' is-over'; ic='📩';
+    zh='本批助学金名额已截止。<b>下一批的开放时间与名额，问 '+(who||'你的顾问')+' 就好</b>——我们会帮你留意。';
+    en='This grant batch has closed. <b>Ask '+(who||'your advisor')+' about the next batch</b> — we\'ll keep a lookout for you.';
+  }else if(days===0){
+    cls+=' is-last'; ic='🔥';
+    zh='<b>今天是本批助学金申请的最后一天</b>（'+(+dd[1])+' 月 '+(+dd[2])+' 日）。';
+    en='<b>Today is the last day</b> to apply for this grant batch ('+due+').';
+  }else{
+    zh='本批助学金名额申请至 <b>'+(+dd[1])+' 月 '+(+dd[2])+' 日</b>'+(days<=30?('（剩 '+days+' 天）'):'');
+    en='This grant batch closes on <b>'+due+'</b>'+(days<=30?(' ('+days+' days left)'):'');
+  }
+  g.insertAdjacentHTML('beforeend','<p class="'+cls+'">'+ic+' <span class="zh">'+zh+'</span><span class="en">'+en+'</span></p>');
 })();
 
 /* principal video: autoplay muted loop, cover-fill, tap for sound */
