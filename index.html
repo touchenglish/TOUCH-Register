@@ -236,7 +236,9 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .vmq+.vmq{margin-top:12px}
 .vmq__track{display:flex;gap:12px;width:max-content;will-change:transform;animation:vmqScroll 60s linear infinite}
 .vmq__track--right{animation-direction:reverse}
-.vmarquee:hover .vmq__track{animation-play-state:paused}
+@media(hover:hover) and (pointer:fine){.vmarquee:hover .vmq__track{animation-play-state:paused}}
+/* while a video is open, park background motion (saves CPU, no fight for attention) */
+body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{animation-play-state:paused}
 @keyframes vmqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.vmq__track{animation:none}.vmq{overflow-x:auto}}
 .vcard{flex:none;width:150px;border-radius:12px;overflow:hidden;cursor:pointer;background:#0b1f47;border:1px solid rgba(255,255,255,.1);transition:.22s}
@@ -879,7 +881,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
           </div>
         </div>
       </div>
-      <p class="cube-hint"><span class="zh">自动播放中 · 点任一面看他的故事 · 移上暂停</span><span class="en">Auto-playing · tap a face to watch · hover to pause</span></p>
+      <p class="cube-hint"><span class="zh">自动播放中 · 点任一面看他的故事</span><span class="en">Auto-playing · tap a face to watch · hover to pause</span></p>
     </div>
     <div class="splayer card" id="splayer"><div class="splayer__vid" id="spVid"></div><div class="splayer__sum" id="spSum"></div></div>
     <div class="sgrid" id="sgrid"></div>
@@ -1329,8 +1331,11 @@ io.observe(er);})();
     playStory(s);
   });
   /* desktop hover pauses (to click a face); touch does NOT pause, so scrolling past never freezes it */
-  cubewrap.addEventListener('mouseenter',function(){cubewrap.classList.add('paused');});
-  cubewrap.addEventListener('mouseleave',function(){cubewrap.classList.remove('paused');});
+  var canHover=false; try{canHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;}catch(e){}
+  if(canHover){
+    cubewrap.addEventListener('mouseenter',function(){cubewrap.classList.add('paused');});
+    cubewrap.addEventListener('mouseleave',function(){cubewrap.classList.remove('paused');});
+  }
   window.addEventListener('resize',(function(){var t;return function(){clearTimeout(t);t=setTimeout(buildCube,200);};})());
 
 })();
@@ -1436,10 +1441,10 @@ var PSTU=(function(){
   var lb=document.getElementById('vlb'), lbVid=document.getElementById('vlbVid'), lbX=document.getElementById('vlbX');
   function open(id){
     lbVid.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    lb.hidden=false;
+    lb.hidden=false;document.body.classList.add('vlb-open');
   }
   window.__vlbOpen=open;
-  function close(){lb.hidden=true;lbVid.innerHTML='';}
+  function close(){lb.hidden=true;lbVid.innerHTML='';document.body.classList.remove('vlb-open');}
 [tA,tB,tC].forEach(function(t){t.addEventListener('click',function(e){var c=e.target.closest('.vcard');if(c)open(c.getAttribute('data-yt'));});});
   lbX.addEventListener('click',close);
   lb.addEventListener('click',function(e){if(e.target===lb)close();});
