@@ -236,6 +236,18 @@ body.te-en .jnote__who::after{content:" says"}
 .jlock.open .jlock__bd{max-height:640px;padding:4px 18px 18px}
 .jlock.open .jlock__hd .cta{opacity:.5}
 
+/* route summary (lessons + duration) */
+.jroute{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:9px 18px;border-radius:999px;
+  background:rgba(31,120,210,.08);border:1px solid rgba(31,120,210,.2);font-size:13.5px;font-weight:700;color:var(--ink)}
+.jroute b{color:var(--blue);font-size:16px}
+.jroute i{width:4px;height:4px;border-radius:50%;background:var(--mut);opacity:.6;display:inline-block}
+/* picked location */
+.is-picked{position:relative;outline:2px solid var(--blue);outline-offset:2px}
+.pickedtag{position:absolute;top:10px;left:10px;z-index:4;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:999px;padding:4px 11px;box-shadow:0 6px 14px -6px rgba(31,120,210,.6)}
+/* grant deadline line */
+.grantdue{margin-top:14px;font-size:13px;font-weight:700;color:#8a6516;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.3);border-radius:12px;padding:10px 14px;display:inline-block}
+.grantdue b{color:#6d4f0c}
+
 .jny__end{text-align:center;margin-top:30px}
 .jny__end b{display:block;font-size:clamp(19px,2.6vw,24px);color:var(--ink)}
 .jny__end b .g{color:var(--gcol,#E8472B)}
@@ -948,7 +960,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       <p class="sub"><span class="zh">我们主要以线上真人直播授课——无论你在 KL、槟城、东马还是任何小镇，打开电脑就能上课。而且我们不只是一个 App：<b>16 年实体办学，5 间中心遍布 Johor 与 Selangor</b>，随时欢迎你来看看。</span><span class="en">We teach mainly through live online classes — join from KL, Penang, East Malaysia or any town, just open your laptop. And we're not just an app: <b>16 years of real teaching, with 5 physical centres across Johor and Selangor</b> you're always welcome to visit.</span></p>
     </div>
     <div class="onlblk">
-      <div class="onlhero card rv">
+      <div class="onlhero card rv" data-loc="online">
         <div class="onlhero__media">
           <img loading="lazy" src="assets/locations/online.png" alt="Online Live Class" onerror="this.remove()">
           <span class="onlhero__phfb"><em>💻</em></span>
@@ -969,11 +981,11 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 
       <p class="centrow__lab"><span class="zh">我们也是有实体的 · 5 间中心遍布 Johor &amp; Selangor · 欢迎预约参观</span><span class="en">And we're real, in person · 5 centres across Johor &amp; Selangor · visits welcome</span></p>
       <div class="centrow">
-        <a class="ccentre card rv" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/austin.png" alt="Mount Austin" onerror="this.remove()"><em>📍</em></span><b>Mount Austin</b><i>Johor Bahru</i><span class="ccentre__go">Google Maps →</span></a>
-        <a class="ccentre card rv d1" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sutera.png" alt="Sutera Utama" onerror="this.remove()"><em>📍</em></span><b>Sutera Utama</b><i>Skudai</i><span class="ccentre__go">Google Maps →</span></a>
-        <a class="ccentre card rv d2" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/bi.png" alt="Bukit Indah" onerror="this.remove()"><em>📍</em></span><b>Bukit Indah</b><i>Iskandar Puteri</i><span class="ccentre__go">Google Maps →</span></a>
-        <a class="ccentre card rv d3" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/kulai.png" alt="Kulai" onerror="this.remove()"><em>📍</em></span><b>Kulai</b><i>Indahpura</i><span class="ccentre__go">Google Maps →</span></a>
-        <a class="ccentre card rv d4" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sp.png" alt="Setia Alam" onerror="this.remove()"><em>📍</em></span><b>Setia Alam</b><i>Selangor</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv" href="https://maps.app.goo.gl/odkT1HQNE7pc4PTJ9" target="_blank" rel="noopener" data-loc="austin"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/austin.png" alt="Mount Austin" onerror="this.remove()"><em>📍</em></span><b>Mount Austin</b><i>Johor Bahru</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d1" href="https://maps.app.goo.gl/F8h74Aq7bNKcJCxZ6" target="_blank" rel="noopener" data-loc="sutera"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sutera.png" alt="Sutera Utama" onerror="this.remove()"><em>📍</em></span><b>Sutera Utama</b><i>Skudai</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d2" href="https://maps.app.goo.gl/MVGCp1yj9zMym4Zo7" target="_blank" rel="noopener" data-loc="bi"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/bi.png" alt="Bukit Indah" onerror="this.remove()"><em>📍</em></span><b>Bukit Indah</b><i>Iskandar Puteri</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d3" href="https://maps.app.goo.gl/g6rKbcspsin6o1Nr7" target="_blank" rel="noopener" data-loc="kulai"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/kulai.png" alt="Kulai" onerror="this.remove()"><em>📍</em></span><b>Kulai</b><i>Indahpura</i><span class="ccentre__go">Google Maps →</span></a>
+        <a class="ccentre card rv d4" href="https://maps.app.goo.gl/BsvLzCFLFC91jNfa6" target="_blank" rel="noopener" data-loc="sp"><span class="ccentre__ph"><img loading="lazy" src="assets/locations/sp.png" alt="Setia Alam" onerror="this.remove()"><em>📍</em></span><b>Setia Alam</b><i>Selangor</i><span class="ccentre__go">Google Maps →</span></a>
       </div>
     </div>
   </div>
@@ -1162,6 +1174,7 @@ var CONFIG={
     ["Reasonable expression skills, but lacking persuasiveness","Lack of confidence in formal settings","Train of thought easily broken by complex questions or discussion","Unable to express abstract or nuanced feelings and ideas accurately"],
     ["Can express complex ideas, but the language lacks polish or appeal","Slow to respond on new or cross-domain topics","Unable to switch styles flexibly (formal / informal)","Loses the thread in fast or multi-person discussions and struggles to hold attention"]
   ],
+  LESSONS_PER_WEEK:2,   /* 估算时长用：一周上几堂（改这里会影响「约 X 个月」） */
   JOURNEY_DEFAULT_FROM:1,
   JOURNEY_DEFAULT_TO:3,
   LEVELS:[
@@ -1572,7 +1585,18 @@ var PSTU=(function(){
   stages.innerHTML=html;
 
   /* end line */
-  document.getElementById('jnyEnd').innerHTML='<b>这，就是 <span class="g" style="--gcol:'+Z.color+';color:'+Z.color+'">'+esc(Z.tag)+'</span> 的你。</b><p>准备好开始你的旅程了吗？往下和'+(advName?esc(advName):'顾问')+'聊聊 →</p>';
+  var LES=(function(){var v=parseInt((q&&q.get('les'))||'',10);return (v>0&&v<=600)?v:0;})();
+  var routeLine='';
+  if(LES){
+    var perWeek=CONFIG.LESSONS_PER_WEEK||2;
+    var months=Math.max(1,Math.round(LES/(perWeek*4.33)));
+    routeLine='<span class="jroute"><b>'+LES+'</b> <span class="zh">堂课</span><span class="en">lessons</span>'+
+      '<i></i><span class="zh">大约 <b>'+months+'</b> 个月</span><span class="en">about <b>'+months+'</b> months</span></span>';
+  }
+  document.getElementById('jnyEnd').innerHTML=
+    '<b>这，就是 <span class="g" style="--gcol:'+Z.color+';color:'+Z.color+'">'+esc(Z.tag)+'</span> 的你。</b>'+
+    routeLine+
+    '<p>准备好开始你的旅程了吗？往下和'+(advName?esc(advName):'顾问')+'聊聊 →</p>';
 
   /* interactions */
   jbar.addEventListener('click',function(e){var b=e.target.closest('.jstep');if(!b)return;var el=document.getElementById('jst-'+b.dataset.i);if(el){var lk=el.classList.contains('jlock');if(lk)el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'center'});}});
@@ -1581,6 +1605,31 @@ var PSTU=(function(){
     var v=e.target.closest('.jvid'); if(v&&window.__vlbOpen){window.__vlbOpen(v.getAttribute('data-yt'));return;}
     var m=e.target.closest('.jstage__map'); if(m){alert('完整学习地图（PPT/PDF）之后放这里');}
   });
+})();
+
+/* 5) 你选的上课方式/分行：标记 + 排最前 */
+(function(){
+  var loc=''; try{loc=(new URLSearchParams(location.search).get('loc')||'').toLowerCase().trim();}catch(e){}
+  if(!loc)return;
+  var el=document.querySelector('[data-loc="'+loc.replace(/"/g,'')+'"]');
+  if(!el)return;
+  el.classList.add('is-picked');
+  el.insertAdjacentHTML('afterbegin','<span class="pickedtag"><span class="zh">你选的</span><span class="en">Your choice</span></span>');
+  if(el.classList.contains('ccentre')){var row=el.parentNode; if(row&&row.firstChild!==el)row.insertBefore(el,row.firstChild);}
+})();
+
+/* 6) 助学金截止日：温和的时效感 */
+(function(){
+  var due=''; try{due=(new URLSearchParams(location.search).get('due')||'').trim();}catch(e){}
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(due))return;
+  var d=new Date(due+'T23:59:59'); if(isNaN(d))return;
+  var days=Math.ceil((d-new Date())/86400000);
+  if(days<0)return;
+  var g=document.querySelector('.grant'); if(!g)return;
+  var dd=due.split('-');
+  var txt='<span class="zh">本批助学金名额申请至 <b>'+(+dd[1])+' 月 '+(+dd[2])+' 日</b>'+(days<=30?('（剩 '+days+' 天）'):'')+'</span>'+
+          '<span class="en">This grant batch closes on <b>'+due+'</b>'+(days<=30?(' ('+days+' days left)'):'')+'</span>';
+  g.insertAdjacentHTML('beforeend','<p class="grantdue">⏳ '+txt+'</p>');
 })();
 
 /* principal video: autoplay muted loop, cover-fill, tap for sound */
