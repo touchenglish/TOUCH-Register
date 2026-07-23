@@ -9,6 +9,7 @@
 /* ================= TOKENS ================= */
 :root{
   --ink:#15357B; --ink2:#41537f; --mut:#7284a8;
+  --p1:#EBB12A; --l1:#2E9E50; --l2:#1F9FE6; --l3:#E8472B; --l4:#15335E;
   --blue:#1F78D2; --red:#E0303B; --gold:#D2A23C; --deep:#0E2A63;
   --bg:#F3F7FC;
   --glass:rgba(255,255,255,.62); --gbrd:rgba(255,255,255,.85);
@@ -1998,7 +1999,7 @@ function ttName(k){return TT_NAMES[k]||k;}
       });
       return h+'</div>';
     }
-    function openTimetable(name){
+    function openTimetable(name,preLv){
       var b=(CONFIG.TIMETABLES||{})[name]; if(!b)return;
       var isOnline=(name==='online');
       var legend=ttLevels(b).map(function(n){var lab=(isOnline&&n===0)?'P1':n; var ll=(isOnline&&n===0)?'Level P1':('Level '+n); return '<button type="button" class="tt-leg" data-filter="'+n+'"><span class="tt-lv tt-lv--'+n+'">'+lab+'</span>'+ll+'</button>';}).join('');
@@ -2008,16 +2009,7 @@ function ttName(k){return TT_NAMES[k]||k;}
           '<button type="button" class="tt-modal__x" data-ttx aria-label="Close">\u00d7</button>'+
           '<div class="tt-modal__head">'+
             '<div class="tt-modal__heads"><span class="tt-modal__title">'+ttName(name)+' <span class="tt-modal__title-zh">\u65f6\u95f4\u8868</span></span><span class="tt-modal__sub">Class Schedule \u00b7 \u8bfe\u7a0b\u65f6\u95f4\u8868</span></div>'+
-            '<div class="tt-ctrls">'+
-              '<div class="tt-seg" role="group" aria-label="Week">'+
-                '<button type="button" class="tt-seg__b is-on" data-ttweek="full">This week \u00b7 6d</button>'+
-                '<button type="button" class="tt-seg__b" data-ttweek="short">Next week \u00b7 4d</button>'+
-              '</div>'+
-              '<div class="tt-seg" role="group" aria-label="View">'+
-                '<button type="button" class="tt-seg__b is-on" data-ttview="simple">Simple</button>'+
-                '<button type="button" class="tt-seg__b" data-ttview="detail">Detailed</button>'+
-              '</div>'+
-            '</div>'+
+
           '</div>'+
           '<div class="tt-legend">'+legend+
             '<button type="button" class="tt-leg tt-leg--combine" data-ttcombine aria-pressed="false" title="Show more than one level at the same time">+ Combine</button>'+
@@ -2028,7 +2020,9 @@ function ttName(k){return TT_NAMES[k]||k;}
       (function(){
         var grid=m.querySelector('.tt-grid'); var legBtns=[].slice.call(m.querySelectorAll('.tt-leg[data-filter]'));
         var allBtn=m.querySelector('[data-ttall]');
-        var picked=[];                       /* multi-select: several levels can be combined */
+        var avail=ttLevels(b);
+        var picked=(preLv||[]).filter(function(n){return avail.indexOf(n)>-1;});  /* 开场先只显示他的 Level */
+        var combineSeed=picked.length>1;
         function on(n){ return picked.indexOf(n)>-1; }
         function applyFilter(){
           var none=picked.length===0;
@@ -2053,7 +2047,8 @@ function ttName(k){return TT_NAMES[k]||k;}
           });
           if(allBtn) allBtn.classList.toggle('is-shown',!none);
         }
-        var combineBtn=m.querySelector('[data-ttcombine]'), combine=false;
+        var combineBtn=m.querySelector('[data-ttcombine]'), combine=combineSeed;
+        if(combine&&combineBtn){combineBtn.classList.add('is-on');combineBtn.setAttribute('aria-pressed','true');}
         legBtns.forEach(function(btn){
           btn.addEventListener('click',function(){
             var n=+btn.getAttribute('data-filter');
@@ -2094,8 +2089,8 @@ function ttName(k){return TT_NAMES[k]||k;}
             if(saved) set(saved,false);
           }
         }
-        seg('data-ttweek','is-short','short',null);          /* week: always starts at 6 days */
-        seg('data-ttview','is-detail','detail','te_ttview_v1'); /* view: remembers simple/detailed */
+        grid.classList.remove('is-short');   /* 固定 6 天 */
+        grid.classList.add('is-detail');     /* 固定详细视图 */
       })();
       var escH; function close(){ if(escH)document.removeEventListener('keydown',escH,true); if(m){m.remove();m=null;} }
       m.querySelector('.tt-modal__bg').addEventListener('click',close);
@@ -2147,7 +2142,12 @@ window.__openTimetable=openTimetable;
   hero.insertAdjacentHTML('beforeend',html);
   /* 老师 profile 弹窗（复用 5C 弹窗容器） */
   var ttb=document.getElementById('ttOpenBtn');
-  if(ttb)ttb.addEventListener('click',function(){ if(window.__openTimetable)window.__openTimetable(loc); });
+  if(ttb)ttb.addEventListener('click',function(){
+    if(!window.__openTimetable)return;
+    var lvTo=parseInt(QP.get('to'),10); if(isNaN(lvTo))lvTo=lvFrom;
+    var mine=[]; if(lvFrom>=0){for(var i=lvFrom;i<=lvTo;i++)mine.push(i);}
+    window.__openTimetable(loc,mine);
+  });
   var btn=document.getElementById('ytBtn');
   if(btn&&T){
     btn.addEventListener('click',function(){
