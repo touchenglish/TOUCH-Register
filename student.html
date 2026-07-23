@@ -1188,6 +1188,27 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
 
 <script>
 /* ============ CONFIG（改这里）============ */
+/* ===== 短链解码：?d=xxxx 展开成完整参数（也兼容原本的长参数）===== */
+var QP=(function(){
+  var q; try{q=new URLSearchParams(location.search);}catch(e){try{q=new URLSearchParams('');}catch(e2){return null;}}
+  if(!q)return null;
+  var d=q.get('d'); if(!d)return q;
+  try{
+    var t=d.replace(/-/g,'+').replace(/_/g,'/');
+    while(t.length%4)t+='=';
+    var bin=atob(t), by=new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++)by[i]=bin.charCodeAt(i);
+    var raw=new TextDecoder('utf-8').decode(by);
+    /* 顺序：adv~name~from~to~les~loc~due(YYYYMMDD)~p~lang~note */
+    var f=raw.split('~'); var keys=['adv','name','from','to','les','loc','due','p','lang'];
+    keys.forEach(function(k,idx){ var v=(f[idx]||'').trim(); if(v)q.set(k,v); });
+    var note=f.slice(9).join('~').trim(); if(note)q.set('note',note);
+    var du=q.get('due')||'';
+    if(/^\d{8}$/.test(du))q.set('due',du.slice(0,4)+'-'+du.slice(4,6)+'-'+du.slice(6,8));
+  }catch(e){}
+  return q;
+})();
+
 var CONFIG={
   ENROLL_URL:"#price",          /* 顶部/结尾按钮去向；有付款链接就换成付款页 */
   PRINCIPAL_VIDEO:"4NUqY0Z2Iy0",  /* 院长视频（YouTube Short）：粘贴 YouTube 链接或 11 位 ID */
@@ -1273,7 +1294,7 @@ var CONFIG={
   var btn=document.getElementById('langBtn');
   var saved=localStorage.getItem('te_sales_lang');
   /* ?lang=en 由顾问链接带来，优先于本地记忆 */
-  var urlLang=''; try{urlLang=(new URLSearchParams(location.search).get('lang')||'').toLowerCase();}catch(e){}
+  var urlLang=''; try{urlLang=(QP.get('lang')||'').toLowerCase();}catch(e){}
   if(urlLang==='en'||urlLang==='zh')saved=urlLang;
   if(saved==='en'){document.body.classList.add('te-en');btn.textContent='中文';document.documentElement.lang='en';}
   btn.addEventListener('click',function(){
@@ -1439,7 +1460,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 /* advisor resolution: ?adv=slug -> CONFIG.ADVISORS, else CONFIG defaults */
 var ADV=(function(){
   var slug='';
-  try{slug=(new URLSearchParams(location.search).get('adv')||'').toLowerCase().trim();}catch(e){}
+  try{slug=(QP.get('adv')||'').toLowerCase().trim();}catch(e){}
   var a=slug&&CONFIG.ADVISORS&&CONFIG.ADVISORS[slug];
   if(a&&(a.name||a.wa))return {name:a.name||'Your Advisor', wa:a.wa||'', img:a.img||''};
   if(CONFIG.ADVISOR_NAME||CONFIG.ADVISOR_WA)return {name:CONFIG.ADVISOR_NAME||'Your Advisor', wa:CONFIG.ADVISOR_WA||''};
@@ -1449,7 +1470,7 @@ var ADV=(function(){
 /* personalized banner from ?name= & ?level= */
 var PSTU=(function(){
   try{
-    var q=new URLSearchParams(location.search);
+    var q=QP;
     var nm=(q.get('name')||'').trim().slice(0,40);
     var lv=(q.get('level')||'').trim().slice(0,20);
     return (nm||lv)?{name:nm,level:lv}:null;
@@ -1540,7 +1561,7 @@ var PSTU=(function(){
   var LV=CONFIG.LEVELS||[]; if(!LV.length)return;
   var sec=document.getElementById('journey'); if(!sec)return;
   function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-  var q; try{q=new URLSearchParams(location.search);}catch(e){q=null;}
+  var q; try{q=QP;}catch(e){q=null;}
   function num(v,d){v=parseInt(v,10);return isNaN(v)?d:v;}
   var from=num(q&&q.get('from'),CONFIG.JOURNEY_DEFAULT_FROM);
   var to=num(q&&q.get('to'),CONFIG.JOURNEY_DEFAULT_TO);
@@ -1645,7 +1666,7 @@ var PSTU=(function(){
 
 /* 5) 你选的上课方式/分行：被选中的升为大卡（hero），另一种模式降为小卡排最后 */
 (function(){
-  var loc=''; try{loc=(new URLSearchParams(location.search).get('loc')||'').toLowerCase().trim();}catch(e){}
+  var loc=''; try{loc=(QP.get('loc')||'').toLowerCase().trim();}catch(e){}
   if(!loc)return;
   loc=loc.replace(/[^a-z]/g,'');
   var hero=document.querySelector('.onlhero'), row=document.querySelector('.centrow');
@@ -1689,7 +1710,7 @@ var PSTU=(function(){
 /* 5C：按学员的 level 区间高亮 + 点击看细节 */
 (function(){
   var LV=CONFIG.LEVELS||[]; if(!LV.length)return;
-  var q; try{q=new URLSearchParams(location.search);}catch(e){q=null;}
+  var q; try{q=QP;}catch(e){q=null;}
   function num(v,d){v=parseInt(v,10);return isNaN(v)?d:v;}
   var from=num(q&&q.get('from'),-1), to=num(q&&q.get('to'),-1);
   var hasPlan=(from>=0&&to>=from);
@@ -1730,7 +1751,7 @@ var PSTU=(function(){
 
 /* 6) 助学金截止日：温和的时效感（过期后转成「问下一批」，不留空白） */
 (function(){
-  var due=''; try{due=(new URLSearchParams(location.search).get('due')||'').trim();}catch(e){}
+  var due=''; try{due=(QP.get('due')||'').trim();}catch(e){}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(due))return;
   var g=document.querySelector('.grant'); if(!g)return;
   var dd=due.split('-');
