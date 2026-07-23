@@ -160,6 +160,19 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
   .hero__media{order:2;margin-top:6px}
 }
 
+/* 每周课表 */
+.yclass__tt{margin-top:4px;padding:14px 14px 12px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(31,120,210,.18)}
+.yclass__tthd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ttwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+.tttab{border-collapse:separate;border-spacing:3px;width:100%;min-width:330px}
+.tttab th{font-size:10px;font-weight:800;color:var(--mut);letter-spacing:.04em;padding:2px 0;text-align:center}
+.tttab th.ttt{text-align:right;padding-right:7px;white-space:nowrap;font-size:10px;color:var(--ink2)}
+.tttab td{background:rgba(21,53,123,.035);border-radius:7px;height:28px;text-align:center;vertical-align:middle;padding:2px}
+.ttp{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 4px;margin:0 1px;border-radius:5px;
+  font-size:10px;font-weight:800;color:#fff;background:var(--tc);opacity:.32}
+.ttp.is-mine{opacity:1;box-shadow:0 3px 8px -3px var(--tc),0 0 0 1.5px rgba(255,255,255,.9)}
+.ttnote{margin-top:10px;font-size:11.5px;color:var(--mut);font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
 /* 你的老师 / 第一堂课 */
 .yclass{margin-top:18px;display:flex;flex-direction:column;gap:8px}
 .yclass__row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 13px;border-radius:14px;
@@ -1286,6 +1299,86 @@ var CONFIG={
     kulai:{1:"lala",2:"lala",3:"lala"},
     online:{0:"yaamini",1:"yaamini",2:"kuna",3:"darshni",4:"darshni"}
   },
+  TIMETABLES:{
+  austin:{
+  zh:"Mount Austin 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[],[],[],[1,3],[1],[2,3]],
+  [[],[],[],[2],[1],[2,3]],
+  [[2,3],[1,3],[2],[2],[2],[1]],
+  [[1],[2],[1,3],[2],[2,3],[]],
+  [[1],[2],[1],[],[],[]],
+  [[2],[1],[2],[],[],[]]
+  ]
+  },
+  sp:{
+  zh:"Setia Alam 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[1],[],[],[],[1],[2]],
+  [[2],[],[],[],[2],[1]],
+  [[1],[2],[1],[1],[2],[1]],
+  [[2],[1],[2],[2],[1],[]],
+  [[],[2],[2],[1],[],[]],
+  [[],[1],[1],[2],[],[]]
+  ]
+  },
+  sutera:{
+  zh:"Sutera Utama 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[1],[],[],[],[1],[2,3]],
+  [[2],[],[],[],[2],[2]],
+  [[2,3],[1,3],[2,3],[2],[2,3],[1]],
+  [[1],[2],[2],[2],[1,3],[]],
+  [[],[2],[1],[1],[],[]],
+  [[3],[2],[1],[2,3],[],[]]
+  ]
+  },
+  kulai:{
+  zh:"Kulai 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[],[],[],[],[1],[3]],
+  [[],[],[],[],[2],[2]],
+  [[2],[1],[2],[2],[2],[1]],
+  [[1],[2],[3],[3],[3],[]],
+  [[2],[1],[2],[1],[],[]],
+  [[1],[2],[1],[2],[],[]]
+  ]
+  },
+  bi:{
+  zh:"Bukit Indah 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[],[2],[2],[],[1],[2]],
+  [[],[1],[1],[],[2],[1]],
+  [[1],[2],[1],[1],[2],[1]],
+  [[2],[1],[2],[2],[1],[]],
+  [[2],[],[],[1],[],[]],
+  [[1],[],[],[2],[],[]]
+  ]
+  },
+  online:{
+  zh:"Online 班级时间表",
+  days:["TUE","WED","THU","FRI","SAT","SUN"],
+  times:["9:45 am","11:30 am","2:00 pm","3:45 pm","6:15 pm","8:00 pm"],
+  grid:[
+  [[2],[],[],[],[0,2,3],[1,2,3]],
+  [[2],[],[],[],[1,2,4],[0,2,3]],
+  [[1,2],[0,2,3],[1,2,4],[0,2,3],[1,2,3],[1,2,4]],
+  [[1,2,3],[1,2,4],[0,2,3],[1,2,4],[1,2,3],[]],
+  [[0,4],[1,2],[1,2,3],[0,2,4],[],[]],
+  [[1,3],[0,2,4],[0,2,3],[1,2,3],[],[]]
+  ]
+  }
+  },
   LESSONS_PER_WEEK:3,   /* 估算时长用：一周上几堂（改这里会影响「约 X 个月」） */
   JOURNEY_DEFAULT_FROM:1,
   JOURNEY_DEFAULT_TO:3,
@@ -1785,6 +1878,30 @@ var PSTU=(function(){
     html+='<div class="yclass__row"><span class="yclass__ic">🗓</span><div><span class="yclass__lb"><span class="zh">你的第一堂课</span><span class="en">Your first class</span></span><b>'+
       String(st).replace(/[&<>"]/g,'')+'</b></div></div>';
   }
+  /* 该中心的完整每周课表（资料与 console 同步） */
+  (function(){
+    var TT=(CONFIG.TIMETABLES||{})[loc]; if(!TT)return;
+    var lvTo=parseInt(QP.get('to'),10); if(isNaN(lvTo))lvTo=lvFrom;
+    function mine(nv){ return (lvFrom>=0)&&(nv>=lvFrom&&nv<=lvTo); }
+    var LC={0:'#EBB12A',1:'#2E9E50',2:'#1F9FE6',3:'#E8472B',4:'#15335E'};
+    var head='<tr><th></th>'+TT.days.map(function(d){return '<th>'+d+'</th>';}).join('')+'</tr>';
+    var rows=TT.times.map(function(tm,ri){
+      var tds=TT.days.map(function(_,ci){
+        var cell=(TT.grid[ri]&&TT.grid[ri][ci])||[];
+        if(!cell.length)return '<td></td>';
+        return '<td>'+cell.map(function(nv){
+          var lbl=(loc==='online'&&nv===0)?'P1':nv;
+          return '<span class="ttp'+(mine(nv)?' is-mine':'')+'" style="--tc:'+(LC[nv]||'#1F78D2')+'">'+lbl+'</span>';
+        }).join('')+'</td>';
+      }).join('');
+      return '<tr><th class="ttt">'+tm+'</th>'+tds+'</tr>';
+    }).join('');
+    html+='<div class="yclass__tt"><div class="yclass__tthd"><span class="yclass__ic">📅</span>'+
+      '<div><span class="yclass__lb"><span class="zh">每周课表</span><span class="en">Weekly timetable</span></span>'+
+      '<b><span class="zh">同一个 Level 一周多堂，任你选</span><span class="en">Multiple classes each week — you choose</span></b></div></div>'+
+      '<div class="ttwrap"><table class="tttab"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+
+      (lvFrom>=0?'<p class="ttnote"><span class="ttp is-mine" style="--tc:'+(LC[lvFrom]||'#1F78D2')+'">'+((loc==='online'&&lvFrom===0)?'P1':lvFrom)+'</span> <span class="zh">= 你的 Level，亮起来的就是你可以上的班</span><span class="en">= your level — highlighted slots are yours</span></p>':'');
+  })();
   if(T){
     html+='<button class="yclass__row yclass__t" id="ytBtn"><span class="yclass__av">'+(T.img?'<img loading="lazy" src="'+T.img+'" alt="" onerror="this.remove()">':'')+'<em>👩‍🏫</em></span>'+
       '<div><span class="yclass__lb"><span class="zh">你的老师</span><span class="en">Your teacher</span></span><b>'+tname(T)+'</b>'+
