@@ -184,6 +184,23 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .jstep.goal .jstep__dot{width:44px;height:44px;font-size:13px;animation:jGoalPulse 2.4s ease-in-out infinite}
 @keyframes jGoalPulse{0%,100%{box-shadow:0 0 0 4px rgba(255,255,255,.9),0 10px 22px -8px rgba(21,53,123,.5)}50%{box-shadow:0 0 0 4px rgba(255,255,255,.9),0 0 26px 2px var(--gcol,#E8472B)}}
 
+/* "你提到的卡点" — echoes what the advisor recorded */
+.jsaid{margin-top:14px;padding:13px 15px;border-radius:14px;background:rgba(224,48,59,.06);border:1px solid rgba(224,48,59,.16)}
+.jsaid__lb{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;letter-spacing:.03em;color:#c0182a;margin-bottom:8px}
+.jsaid ul{list-style:none;margin:0;display:flex;flex-direction:column;gap:7px}
+.jsaid li{position:relative;padding-left:15px;font-size:13px;font-weight:600;color:var(--ink);line-height:1.55}
+.jsaid li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--red)}
+
+/* advisor handwritten-style note */
+.jnote{position:relative;margin-top:14px;padding:16px 18px 16px 20px;border-radius:14px;
+  background:linear-gradient(160deg,rgba(255,251,235,.95),rgba(255,247,224,.85));
+  border:1px solid rgba(210,162,60,.34);box-shadow:0 10px 24px -16px rgba(120,90,20,.4)}
+.jnote::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;background:var(--gold)}
+.jnote__who{display:block;font-size:11.5px;font-weight:800;letter-spacing:.04em;color:#8a6516;margin-bottom:7px}
+.jnote__who::after{content:" 说";font-weight:700}
+body.te-en .jnote__who::after{content:" says"}
+.jnote p{font-size:14px;line-height:1.75;color:#4a3a12;font-weight:600}
+
 /* stage cards */
 .jstages{display:flex;flex-direction:column;gap:18px;margin-top:26px;max-width:680px;margin-left:auto;margin-right:auto}
 .jstage{position:relative;border-radius:24px;overflow:hidden;background:var(--glass);border:1px solid var(--gbrd);box-shadow:var(--sh);padding:26px 26px 24px}
@@ -1130,6 +1147,21 @@ var CONFIG={
   /* ===== 成长旅程 Your English Transformation =====
      from/to 用 level 序号：0=P1(Level0) 1=L1 2=L2 3=L3 4=L4
      链接：?from=1&to=3&name=Ken   不带则用默认 DEFAULT_FROM/TO */
+  /* 痛点文案（与 console 同步，按 level 分组，每级 4 条；链接 ?p=0,1 高亮对应几条） */
+  LEVEL_PAINS_ZH:[
+    ["缺乏基础词汇和简单句子的使用能力，无法表达日常与职场需求","说英语时害怕出错，缺乏开口的勇气","看到复杂的句子或词汇会感到困惑，难以理解或记住","学过的单词容易忘记，难以在对话中活用"],
+    ["可以使用基础的英语词汇和句子，但句式单一，表达不够自然","表达需求时缺乏准确性或细节，影响交流","缺乏语音连贯性，容易卡顿或重复词汇","理解稍复杂的语法时感到困难，例如时态变化"],
+    ["能表达基本意思，但句子结构简单、语气较直接，不符合职场或社交场合的表达方式","表达意见时不太会衔接思路，讲话略显突然","不太会在职场或社交场合延伸话题","对职场表达缺乏信心，容易紧张"],
+    ["有一定的表达能力，但缺乏说服力","在正式场合的表达中缺乏自信","容易被复杂的问题或讨论打断思路","无法准确表达抽象或细腻的情感或想法"],
+    ["能够用英语表达复杂想法，但语言不够自然或缺乏吸引力","面对新话题或跨领域讨论时反应慢，难以灵活应对","写作或表达时无法灵活调整语言风格（正式／非正式）","在快速讨论或多人对话中容易思路混乱，无法吸引注意"]
+  ],
+  LEVEL_PAINS_EN:[
+    ["Limited basic vocabulary and simple sentences; unable to express everyday and workplace needs","Afraid of making mistakes and lacking the courage to speak","Confused by complex sentences or vocabulary; hard to understand or remember","Words learned are quickly forgotten and hard to use in conversation"],
+    ["Can use basic vocabulary and sentences, but the patterns are repetitive and expression is not natural","Lack of accuracy or detail when expressing needs, affecting communication","Speech lacks flow \u2014 frequent pauses or repeated words","Difficulty with slightly complex grammar, e.g. tense changes"],
+    ["Can express basic meaning, but sentences are simple and the tone too direct for workplace or social settings","Ideas don\u2019t connect well, so speech feels abrupt","Unsure how to extend topics in workplace or social settings","Low confidence and nervousness in workplace expression"],
+    ["Reasonable expression skills, but lacking persuasiveness","Lack of confidence in formal settings","Train of thought easily broken by complex questions or discussion","Unable to express abstract or nuanced feelings and ideas accurately"],
+    ["Can express complex ideas, but the language lacks polish or appeal","Slow to respond on new or cross-domain topics","Unable to switch styles flexibly (formal / informal)","Loses the thread in fast or multi-person discussions and struggles to hold attention"]
+  ],
   JOURNEY_DEFAULT_FROM:1,
   JOURNEY_DEFAULT_TO:3,
   LEVELS:[
@@ -1191,6 +1223,9 @@ var CONFIG={
 (function(){
   var btn=document.getElementById('langBtn');
   var saved=localStorage.getItem('te_sales_lang');
+  /* ?lang=en 由顾问链接带来，优先于本地记忆 */
+  var urlLang=''; try{urlLang=(new URLSearchParams(location.search).get('lang')||'').toLowerCase();}catch(e){}
+  if(urlLang==='en'||urlLang==='zh')saved=urlLang;
   if(saved==='en'){document.body.classList.add('te-en');btn.textContent='中文';document.documentElement.lang='en';}
   btn.addEventListener('click',function(){
     var en=document.body.classList.toggle('te-en');
@@ -1492,11 +1527,29 @@ var PSTU=(function(){
   }
   function gainList(l){return '<ul class="jstage__gain">'+l.gain.map(function(g){return '<li>'+esc(g)+'</li>';}).join('')+'</ul>';}
   function phraseFor(i){return i===from?['📍','Today · 现在的你']:(i===to?['⭐','Your Future · 未来的你']:['💪','Next · 下一阶段的你']);}
+  /* 顾问勾选的痛点（?p=0,1）+ 顾问的话（?note=） */
+  var PICKED=(function(){var v=(q&&q.get('p'))||'';return v.split(',').map(function(x){return parseInt(x,10);}).filter(function(x){return !isNaN(x)&&x>=0&&x<4;});})();
+  var NOTE=(function(){var v=(q&&q.get('note'))||'';return v.trim().slice(0,220);})();
+  function painsFor(i){
+    var isEN=document.body.classList.contains('te-en');
+    var src=(isEN?CONFIG.LEVEL_PAINS_EN:CONFIG.LEVEL_PAINS_ZH)||[];
+    var row=src[i]||[]; if(!PICKED.length||!row.length)return '';
+    var items=PICKED.map(function(k){return row[k];}).filter(Boolean);
+    if(!items.length)return '';
+    return '<div class="jsaid"><span class="jsaid__lb">✓ <span class="zh">你提到的卡点</span><span class="en">What you told us</span></span><ul>'+
+      items.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>';
+  }
+  function noteBlock(){
+    if(!NOTE)return '';
+    return '<div class="jnote"><span class="jnote__who">'+esc(advName||'你的顾问')+'</span><p>'+esc(NOTE)+'</p></div>';
+  }
   function stageCard(i){
     var l=LV[i], ph=phraseFor(i), goal=(i===to);
     return '<div class="jstage'+(goal?' goal':'')+'" id="jst-'+i+'" style="--lc:'+l.color+';--gcol:'+l.color+';--glow:'+hex2rgba(l.color,goal?.14:.1)+'">'+
       '<span class="jstage__ph" style="background:'+l.color+'">'+ph[0]+' '+esc(ph[1])+' · '+esc(l.tag)+'</span>'+
       '<p class="jstage__now"><span class="em">现在：</span>'+esc(l.now)+'</p>'+
+      (i===from?painsFor(i):'')+
+      (i===from?noteBlock():'')+
       gainList(l)+
       '<div class="jstage__future"><b>'+(goal?'这就是未来的你 → ':'这一步之后 → ')+'</b>'+esc(l.future)+'</div>'+
       vids(l)+
