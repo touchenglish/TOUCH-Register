@@ -160,6 +160,118 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
   .hero__media{order:2;margin-top:6px}
 }
 
+/* ===== Timetable modal (ported from console) ===== */
+/* Branch timetable modal */
+.tt-modal{position:fixed;inset:0;z-index:135;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .2s ease}
+.tt-modal.is-open{opacity:1}
+.tt-modal__bg{position:absolute;inset:0;background:rgba(14,36,86,.46);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.tt-modal__card{position:relative;width:100%;max-width:760px;max-height:88vh;overflow-y:auto;border-radius:22px;padding:24px 26px 24px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);border:1px solid rgba(255,255,255,.7);border-top:5px solid var(--blue);box-shadow:var(--shadow-lg),inset 0 1px 0 rgba(255,255,255,.7);transform:scale(.97);transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.tt-modal.is-open .tt-modal__card{transform:none}
+.tt-modal__x{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;border:0;cursor:pointer;background:rgba(20,33,50,.06);color:var(--muted);font-size:18px;line-height:1;transition:.15s}
+.tt-modal__x:hover{background:rgba(20,33,50,.12);color:var(--ink)}
+.tt-modal__head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;padding-right:40px}
+.tt-modal__heads{min-width:0}
+.tt-modal__title{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink)}
+.tt-modal__title-zh{font-weight:600;font-size:14px;color:var(--muted);margin-left:6px}
+.tt-modal__sub{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.tt-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.tt-leg{display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-weight:600;font-size:12px;color:var(--ink);cursor:pointer;background:transparent;border:1px solid transparent;border-radius:999px;padding:5px 12px 5px 6px;transition:transform .15s cubic-bezier(.2,.8,.2,1),box-shadow .15s ease,background .15s ease,border-color .15s ease,opacity .15s ease}
+.tt-leg:hover{transform:translateY(-1px);background:rgba(255,255,255,.6);border-color:rgba(20,33,50,.08);box-shadow:0 6px 14px -8px rgba(20,33,50,.2)}
+.tt-leg.is-active{background:rgba(255,255,255,.9);border-color:rgba(20,33,50,.16);box-shadow:0 6px 14px -8px rgba(20,33,50,.24)}
+.tt-leg.is-dim{opacity:.4}
+.tt-leg.is-dim:hover{opacity:.75}
+.tt-leg .tt-lv{width:22px;height:22px;font-size:12px}
+.tt-scroll{overflow-x:auto}
+.tt-grid{display:grid;grid-template-columns:64px repeat(6,1fr);gap:5px;min-width:580px}
+.tt-cell{border-radius:9px;min-height:42px;display:flex;align-items:center;justify-content:center;gap:5px}
+.tt-cell--head{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.04em;color:var(--blue);background:rgba(20,33,50,.05);text-transform:uppercase;min-height:34px}
+.tt-time{font-family:var(--display);font-weight:700;font-size:11.5px;color:var(--ink);background:rgba(20,33,50,.035);justify-content:flex-start;padding-left:9px}
+.tt-slot{background:rgba(255,255,255,.5);border:1px solid rgba(20,33,50,.06)}
+.tt-slot.is-empty{background:rgba(20,33,50,.012);border-color:transparent}
+.tt-lv{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;font-family:var(--display);font-weight:800;font-size:13px;border:1px solid transparent}
+.tt-lv--1{color:var(--l1);background:color-mix(in srgb,var(--l1) 15%,#fff);border-color:color-mix(in srgb,var(--l1) 28%,#fff)}
+.tt-lv--2{color:var(--l2);background:color-mix(in srgb,var(--l2) 15%,#fff);border-color:color-mix(in srgb,var(--l2) 28%,#fff)}
+.tt-lv--3{color:var(--l3);background:color-mix(in srgb,var(--l3) 15%,#fff);border-color:color-mix(in srgb,var(--l3) 28%,#fff)}
+.tt-lv--0{color:color-mix(in srgb,var(--p1) 78%,#6b4e00);background:color-mix(in srgb,var(--p1) 17%,#fff);border-color:color-mix(in srgb,var(--p1) 32%,#fff)}
+.tt-lv--4{color:var(--l4);background:color-mix(in srgb,var(--l4) 12%,#fff);border-color:color-mix(in srgb,var(--l4) 26%,#fff)}
+a.tt-lv{cursor:pointer;text-decoration:none;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s ease,border-color .16s ease}
+a.tt-lv:hover{transform:translateY(-2px) scale(1.06);box-shadow:0 8px 16px -6px rgba(20,33,50,.26);border-color:color-mix(in srgb,currentColor 50%,#fff)}
+a.tt-lv:active{transform:translateY(-1px) scale(1.02)}
+@media(max-width:560px){.tt-modal__card{padding:20px 15px}}
+.map-modal__card{max-width:640px}
+.map-modal__name{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink)}
+.map-modal__addr{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4}
+.map-modal__frame{margin-top:4px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px -12px rgba(20,33,50,.25);aspect-ratio:16/10;background:rgba(20,33,50,.04)}
+.map-modal__iframe{width:100%;height:100%;border:0;display:block}
+.map-modal__foot{display:flex;justify-content:flex-end;margin-top:13px}
+.map-modal__open{display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-weight:700;font-size:12.5px;color:var(--blue-bright);text-decoration:none;padding:9px 14px;border-radius:10px;background:rgba(255,255,255,.62);border:1px solid color-mix(in srgb,var(--blue-bright) 24%,var(--line));-webkit-backdrop-filter:blur(8px) saturate(140%);backdrop-filter:blur(8px) saturate(140%);transition:transform .15s,box-shadow .15s,border-color .15s,background .15s}
+.map-modal__open:hover{transform:translateY(-1px);background:#fff;border-color:color-mix(in srgb,var(--blue-bright) 42%,#fff);box-shadow:0 8px 18px -10px rgba(20,33,50,.3)}
+.map-modal__open svg{width:14px;height:14px}
+@media(max-width:560px){.map-modal__frame{aspect-ratio:1/1}}
+.site-modal{position:fixed;inset:0;z-index:160;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .2s ease}
+.site-modal.is-open{opacity:1}
+.site-modal__bg{position:absolute;inset:0;background:rgba(10,18,40,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.site-modal__card{position:relative;width:90vw;max-width:960px;height:78vh;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;
+  background:linear-gradient(170deg,rgba(255,255,255,.9),rgba(255,255,255,.8));-webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 32px 80px -28px rgba(14,36,86,.55),inset 0 1px 0 rgba(255,255,255,.95);
+  transform:translateY(10px) scale(.99);transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.site-modal.is-open .site-modal__card{transform:none}
+.site-modal__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px 12px 20px;border-bottom:1px solid var(--line);flex:none}
+.site-modal__title{font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink)}
+.site-modal__title .zh{font-weight:600;font-size:12.5px;color:var(--muted)}
+.site-modal__x{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);cursor:pointer;display:grid;place-items:center;color:var(--muted);flex:none;transition:transform .15s,color .15s}
+.site-modal__x:hover{transform:scale(1.06);color:var(--ink)}
+.site-modal__x svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.site-modal__body{position:relative;flex:1;min-height:0;background:#fff}
+.site-modal__frame{width:100%;height:100%;border:0;display:block}
+.site-modal__loading{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(170deg,#fff,#F4F6FB)}
+.site-modal__loading.is-done{display:none}
+.site-modal__loading p{font-family:var(--display);font-weight:600;font-size:13px;color:var(--muted);margin:0}
+.site-modal__spin{width:30px;height:30px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--blue-bright);animation:locSpin .8s linear infinite}
+@keyframes locSpin{to{transform:rotate(360deg)}}
+.site-modal__fallback{position:absolute;inset:0;z-index:2;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;background:linear-gradient(170deg,#fff,#F4F6FB)}
+.site-modal__fallback.is-shown{display:flex}
+.site-modal__fallback p{font-family:var(--display);font-weight:700;color:var(--ink);font-size:15px;margin:0}
+.ldetail{margin-top:16px}
+.ldetail__in{border-radius:20px;padding:24px 26px;animation:rise .4s cubic-bezier(.2,.8,.2,1);
+  background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
+  border:1px solid rgba(255,255,255,.7);border-left:5px solid var(--c);box-shadow:0 16px 44px -24px color-mix(in srgb,var(--c) 50%,transparent),inset 0 1px 0 rgba(255,255,255,.85)}
+.ldetail__head{margin-bottom:18px}
+.ldetail__ph{display:inline-block;font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ci)}
+.ldetail__ph .zh{letter-spacing:0;text-transform:none;color:var(--muted);font-weight:600;margin-left:6px}
+.ldetail__purpose{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.45;color:var(--ink);margin:8px 0 0}
+.ldetail__purpose .zh{display:block;font-weight:500;font-size:14px;color:var(--muted);margin-top:5px}
+.ldetail__grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.ldetail__item{display:flex;align-items:flex-start;gap:11px;font-size:14px;font-weight:600;color:var(--ink);line-height:1.35;
+  background:rgba(255,255,255,.55);border:1px solid color-mix(in srgb,var(--c) 13%,var(--line));border-radius:13px;padding:13px 15px}
+.ldetail__item .zh{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:2px}
+.ldetail__dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--c)}
+/* ===== Timetable modal: week toggle (6/4 days) + simple/detailed view ===== */
+.tt-ctrls{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;margin:0;flex:none}
+.tt-seg{display:inline-flex;padding:2px;border-radius:999px;background:rgba(20,33,50,.055);border:1px solid var(--line)}
+.tt-seg__b{display:inline-flex;align-items:center;font-family:var(--display);font-weight:700;font-size:9.5px;letter-spacing:.01em;color:var(--faint);
+  cursor:pointer;border:none;background:none;padding:3px 8px;border-radius:999px;transition:background .18s,color .18s,box-shadow .18s;white-space:nowrap}
+.tt-seg__b:hover{color:var(--ink)}
+.tt-seg__b.is-on{color:var(--ink);background:#fff;box-shadow:0 3px 9px -4px rgba(18,34,64,.28)}
+/* cell internals */
+.tt-slot .tt-lvs{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center}
+.tt-range{display:none;font-family:var(--display);font-weight:700;font-size:10px;color:var(--muted);white-space:nowrap;letter-spacing:-.01em}
+.tt-off{display:none}
+/* --- short week (4 days): TUE (col 0) and SUN (col 5) have no class --- */
+.tt-grid.is-short .tt-col--0,.tt-grid.is-short .tt-col--5{background:rgba(20,33,50,.045)}
+.tt-grid.is-short .tt-slot.tt-col--0 .tt-lvs,.tt-grid.is-short .tt-slot.tt-col--5 .tt-lvs,
+.tt-grid.is-short .tt-slot.tt-col--0 .tt-range,.tt-grid.is-short .tt-slot.tt-col--5 .tt-range{display:none!important}
+.tt-grid.is-short .tt-cell--head.tt-col--0,.tt-grid.is-short .tt-cell--head.tt-col--5{color:var(--faint)}
+.tt-grid.is-short .tt-cell--head.tt-col--0 .tt-off,.tt-grid.is-short .tt-cell--head.tt-col--5 .tt-off{display:block;font-family:var(--display);font-weight:700;font-size:8.5px;letter-spacing:.04em;color:var(--faint);margin-top:2px;text-transform:none}
+.tt-grid.is-short .tt-cell--head.tt-col--0 .tt-off .zh,.tt-grid.is-short .tt-cell--head.tt-col--5 .tt-off .zh{display:inline;margin-left:3px}
+/* --- detailed view: badge shrinks to the top-left, time range sits under it --- */
+.tt-grid.is-detail .tt-slot{align-items:stretch;justify-content:flex-start;flex-direction:column;gap:3px;padding:6px 7px;min-height:52px}
+.tt-grid.is-detail .tt-slot .tt-lvs{justify-content:flex-start;gap:3px}
+.tt-grid.is-detail .tt-lv{width:19px;height:19px;font-size:9.5px;border-radius:6px}
+.tt-grid.is-detail .tt-slot:not(.is-empty):not(.is-nomatch) .tt-range{display:block}
+.tt-slot.is-nomatch .tt-range{display:none!important}
+
+
 /* 每周课表 */
 .yclass__tt{margin-top:4px;padding:14px 14px 12px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(31,120,210,.18)}
 .yclass__tthd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -1855,6 +1967,145 @@ var PSTU=(function(){
     '<span class="ccentre__go"><span class="zh">也可以线上上</span><span class="en">Also available online</span></span></div>');
 })();
 
+/* ===== Timetable modal (ported from console) ===== */
+var TT_NAMES={austin:'Mount Austin',sutera:'Sutera Utama',bi:'Bukit Indah',kulai:'Kulai',sp:'Setia Alam',online:'Live Class'};
+function ttName(k){return TT_NAMES[k]||k;}
+    function ttLevels(b){var set={};b.grid.forEach(function(row){row.forEach(function(cell){(cell||[]).forEach(function(n){set[n]=1;});});});return Object.keys(set).map(Number).sort(function(a,b){return a-b;});}
+    function ttEnd(start){
+      var m=/^(\d{1,2}):(\d{2})\s*(am|pm)$/i.exec(String(start).trim());
+      if(!m) return "";
+      var h=+m[1]%12, mm=+m[2], pm=/pm/i.test(m[3]);
+      var mins=(h+(pm?12:0))*60+mm+90;                 /* every class runs 90 minutes */
+      mins=((mins%1440)+1440)%1440;
+      var H=Math.floor(mins/60), M=mins%60, ap=H>=12?'pm':'am', h12=H%12; if(h12===0)h12=12;
+      return h12+':'+(M<10?'0':'')+M+' '+ap;
+    }
+    function renderTimetable(b){
+      var isOnline=(b===CONFIG.TIMETABLES['online']);
+      function lv(n){var t=(isOnline&&n===0)?'P1':n; return '<a class="tt-lv tt-lv--'+n+'" href="https://tec.touchenglish.edu.my/appointment/timetable#" target="_blank" rel="noopener noreferrer" aria-label="Open timetable system">'+t+'</a>';}
+      var h='<div class="tt-grid"><div class="tt-cell tt-cell--head">TIME</div>';
+      b.days.forEach(function(d,di){h+='<div class="tt-cell tt-cell--head tt-col--'+di+'">'+d+'<span class="tt-off">No class<span class="zh">\u4f11\u8bfe</span></span></div>';});
+      b.times.forEach(function(t,ti){
+        var range=t.replace(/\s*(am|pm)$/i,'')+' \u2013 '+ttEnd(t);
+        h+='<div class="tt-cell tt-time">'+t+'</div>';
+        b.days.forEach(function(d,di){
+          var ls=(b.grid[ti]&&b.grid[ti][di])||[];
+          h+='<div class="tt-cell tt-slot tt-col--'+di+(ls.length?'':' is-empty')+'">'+
+             '<span class="tt-lvs">'+ls.map(lv).join('')+'</span>'+
+             (ls.length?'<span class="tt-range">'+range+'</span>':'')+
+             '</div>';
+        });
+      });
+      return h+'</div>';
+    }
+    function openTimetable(name){
+      var b=(CONFIG.TIMETABLES||{})[name]; if(!b)return;
+      var isOnline=(name==='online');
+      var legend=ttLevels(b).map(function(n){var lab=(isOnline&&n===0)?'P1':n; var ll=(isOnline&&n===0)?'Level P1':('Level '+n); return '<button type="button" class="tt-leg" data-filter="'+n+'"><span class="tt-lv tt-lv--'+n+'">'+lab+'</span>'+ll+'</button>';}).join('');
+      var m=document.createElement('div'); m.className='tt-modal'; m.id='ttModal';
+      m.innerHTML='<div class="tt-modal__bg"></div>'+
+        '<div class="tt-modal__card" role="dialog" aria-modal="true" aria-label="Class schedule">'+
+          '<button type="button" class="tt-modal__x" data-ttx aria-label="Close">\u00d7</button>'+
+          '<div class="tt-modal__head">'+
+            '<div class="tt-modal__heads"><span class="tt-modal__title">'+ttName(name)+' <span class="tt-modal__title-zh">\u65f6\u95f4\u8868</span></span><span class="tt-modal__sub">Class Schedule \u00b7 \u8bfe\u7a0b\u65f6\u95f4\u8868</span></div>'+
+            '<div class="tt-ctrls">'+
+              '<div class="tt-seg" role="group" aria-label="Week">'+
+                '<button type="button" class="tt-seg__b is-on" data-ttweek="full">This week \u00b7 6d</button>'+
+                '<button type="button" class="tt-seg__b" data-ttweek="short">Next week \u00b7 4d</button>'+
+              '</div>'+
+              '<div class="tt-seg" role="group" aria-label="View">'+
+                '<button type="button" class="tt-seg__b is-on" data-ttview="simple">Simple</button>'+
+                '<button type="button" class="tt-seg__b" data-ttview="detail">Detailed</button>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="tt-legend">'+legend+
+            '<button type="button" class="tt-leg tt-leg--combine" data-ttcombine aria-pressed="false" title="Show more than one level at the same time">+ Combine</button>'+
+            '<button type="button" class="tt-leg tt-leg--all" data-ttall>\u21ba All levels</button></div>'+
+          '<div class="tt-scroll">'+renderTimetable(b)+'</div>'+
+        '</div>';
+      document.body.appendChild(m); void m.offsetWidth; m.classList.add('is-open');
+      (function(){
+        var grid=m.querySelector('.tt-grid'); var legBtns=[].slice.call(m.querySelectorAll('.tt-leg[data-filter]'));
+        var allBtn=m.querySelector('[data-ttall]');
+        var picked=[];                       /* multi-select: several levels can be combined */
+        function on(n){ return picked.indexOf(n)>-1; }
+        function applyFilter(){
+          var none=picked.length===0;
+          var chips=grid.querySelectorAll('a.tt-lv');
+          [].forEach.call(chips,function(ch){
+            var keep=none||picked.some(function(n){ return ch.classList.contains('tt-lv--'+n); });
+            ch.style.display=keep?'':'none';
+          });
+          /* a slot with no surviving level shows no time range */
+          var slots=grid.querySelectorAll('.tt-slot');
+          [].forEach.call(slots,function(s){
+            var has=none
+              ? s.querySelectorAll('a.tt-lv').length>0
+              : picked.some(function(n){ return s.querySelectorAll('a.tt-lv--'+n).length>0; });
+            s.classList.toggle('is-nomatch',!has);
+          });
+          legBtns.forEach(function(btn){
+            var n=+btn.getAttribute('data-filter');
+            btn.classList.toggle('is-active',on(n));
+            btn.classList.toggle('is-dim',!none&&!on(n));
+            btn.setAttribute('aria-pressed',on(n)?'true':'false');
+          });
+          if(allBtn) allBtn.classList.toggle('is-shown',!none);
+        }
+        var combineBtn=m.querySelector('[data-ttcombine]'), combine=false;
+        legBtns.forEach(function(btn){
+          btn.addEventListener('click',function(){
+            var n=+btn.getAttribute('data-filter');
+            var i=picked.indexOf(n);
+            if(combine){
+              /* Combine on: add / remove levels */
+              if(i>-1) picked.splice(i,1); else picked.push(n);
+            }else{
+              /* default: one level at a time — clicking another switches to it */
+              picked=(i>-1&&picked.length===1)?[]:[n];
+            }
+            applyFilter();
+          });
+        });
+        if(combineBtn) combineBtn.addEventListener('click',function(){
+          combine=!combine;
+          combineBtn.classList.toggle('is-on',combine);
+          combineBtn.setAttribute('aria-pressed',combine?'true':'false');
+          /* leaving Combine keeps only the level picked last */
+          if(!combine&&picked.length>1) picked=[picked[picked.length-1]];
+          applyFilter();
+        });
+        if(allBtn) allBtn.addEventListener('click',function(){ picked=[]; applyFilter(); });
+        applyFilter();
+        /* week + view segmented controls. key=null -> always resets to default on open. */
+        function seg(attr,cls,onVal,key){
+          var btns=[].slice.call(m.querySelectorAll('['+attr+']'));
+          function set(v,save){
+            btns.forEach(function(x){ x.classList.toggle('is-on', x.getAttribute(attr)===v); });
+            grid.classList.toggle(cls, v===onVal);
+            if(key&&save){ try{ localStorage.setItem(key,v); }catch(e){} }
+          }
+          btns.forEach(function(btn){
+            btn.addEventListener('click',function(){ set(btn.getAttribute(attr),true); });
+          });
+          if(key){
+            var saved=null; try{ saved=localStorage.getItem(key); }catch(e){}
+            if(saved) set(saved,false);
+          }
+        }
+        seg('data-ttweek','is-short','short',null);          /* week: always starts at 6 days */
+        seg('data-ttview','is-detail','detail','te_ttview_v1'); /* view: remembers simple/detailed */
+      })();
+      var escH; function close(){ if(escH)document.removeEventListener('keydown',escH,true); if(m){m.remove();m=null;} }
+      m.querySelector('.tt-modal__bg').addEventListener('click',close);
+      m.querySelector('[data-ttx]').addEventListener('click',close);
+      escH=function(e){ if(e.key==='Escape'){e.preventDefault();close();} };
+      document.addEventListener('keydown',escH,true);
+    }
+
+window.__openTimetable=openTimetable;
+
 /* 你的老师 + 你的第一堂课：挂在上课地点大卡上 */
 (function(){
   var tk='',st='',loc='',lvFrom=-1;
@@ -1878,38 +2129,25 @@ var PSTU=(function(){
     html+='<div class="yclass__row"><span class="yclass__ic">🗓</span><div><span class="yclass__lb"><span class="zh">你的第一堂课</span><span class="en">Your first class</span></span><b>'+
       String(st).replace(/[&<>"]/g,'')+'</b></div></div>';
   }
-  /* 该中心的完整每周课表（资料与 console 同步） */
-  (function(){
-    var TT=(CONFIG.TIMETABLES||{})[loc]; if(!TT)return;
-    var lvTo=parseInt(QP.get('to'),10); if(isNaN(lvTo))lvTo=lvFrom;
-    function mine(nv){ return (lvFrom>=0)&&(nv>=lvFrom&&nv<=lvTo); }
-    var LC={0:'#EBB12A',1:'#2E9E50',2:'#1F9FE6',3:'#E8472B',4:'#15335E'};
-    var head='<tr><th></th>'+TT.days.map(function(d){return '<th>'+d+'</th>';}).join('')+'</tr>';
-    var rows=TT.times.map(function(tm,ri){
-      var tds=TT.days.map(function(_,ci){
-        var cell=(TT.grid[ri]&&TT.grid[ri][ci])||[];
-        if(!cell.length)return '<td></td>';
-        return '<td>'+cell.map(function(nv){
-          var lbl=(loc==='online'&&nv===0)?'P1':nv;
-          return '<span class="ttp'+(mine(nv)?' is-mine':'')+'" style="--tc:'+(LC[nv]||'#1F78D2')+'">'+lbl+'</span>';
-        }).join('')+'</td>';
-      }).join('');
-      return '<tr><th class="ttt">'+tm+'</th>'+tds+'</tr>';
-    }).join('');
-    html+='<div class="yclass__tt"><div class="yclass__tthd"><span class="yclass__ic">📅</span>'+
-      '<div><span class="yclass__lb"><span class="zh">每周课表</span><span class="en">Weekly timetable</span></span>'+
-      '<b><span class="zh">同一个 Level 一周多堂，任你选</span><span class="en">Multiple classes each week — you choose</span></b></div></div>'+
-      '<div class="ttwrap"><table class="tttab"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+
-      (lvFrom>=0?'<p class="ttnote"><span class="ttp is-mine" style="--tc:'+(LC[lvFrom]||'#1F78D2')+'">'+((loc==='online'&&lvFrom===0)?'P1':lvFrom)+'</span> <span class="zh">= 你的 Level，亮起来的就是你可以上的班</span><span class="en">= your level — highlighted slots are yours</span></p>':'');
-  })();
   if(T){
     html+='<button class="yclass__row yclass__t" id="ytBtn"><span class="yclass__av">'+(T.img?'<img loading="lazy" src="'+T.img+'" alt="" onerror="this.remove()">':'')+'<em>👩‍🏫</em></span>'+
       '<div><span class="yclass__lb"><span class="zh">你的老师</span><span class="en">Your teacher</span></span><b>'+tname(T)+'</b>'+
       '<i>'+(T.role||'')+(T.rating?(' · ★ '+T.rating):'')+'</i></div><span class="yclass__go">›</span></button>';
   }
+  /* 时间表按钮（点开弹窗，效果同 console） */
+  var TTB=(CONFIG.TIMETABLES||{})[loc];
+  if(TTB){
+    html+='<button class="yclass__row yclass__ttbtn" id="ttOpenBtn"><span class="yclass__ic">📅</span>'+
+      '<div><span class="yclass__lb"><span class="zh">上课时间</span><span class="en">Class schedule</span></span>'+
+      '<b><span class="zh">看每周课表</span><span class="en">View weekly timetable</span></b>'+
+      '<i><span class="zh">同一个 Level 一周多堂，任你选</span><span class="en">Several classes each week — you choose</span></i></div>'+
+      '<span class="yclass__go">›</span></button>';
+  }
   html+='</div>';
   hero.insertAdjacentHTML('beforeend',html);
   /* 老师 profile 弹窗（复用 5C 弹窗容器） */
+  var ttb=document.getElementById('ttOpenBtn');
+  if(ttb)ttb.addEventListener('click',function(){ if(window.__openTimetable)window.__openTimetable(loc); });
   var btn=document.getElementById('ytBtn');
   if(btn&&T){
     btn.addEventListener('click',function(){
