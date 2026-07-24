@@ -161,6 +161,130 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
   .hero__media{order:2;margin-top:6px}
 }
 
+/* ===== 5C framework (ported from console) ===== */
+.fx{position:relative;display:inline-flex;cursor:help;outline:none;vertical-align:middle}
+.fx-tip{position:absolute;top:calc(100% + 10px);left:50%;z-index:60;width:296px;max-width:84vw;text-align:left;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);border:1px solid rgba(255,255,255,.82);box-shadow:0 22px 46px -18px rgba(20,33,50,.42),0 2px 6px rgba(20,33,50,.08),inset 0 1px 0 rgba(255,255,255,.85);opacity:0;visibility:hidden;transform:translate(-50%,-4px);transition:opacity .16s ease,transform .16s ease,visibility .16s;pointer-events:none}
+.fx .fx-tip{display:none}
+.fx-tip__t{display:block;font-family:inherit;font-weight:800;font-size:12.5px;color:var(--ink);letter-spacing:.01em}
+.fx-tip__s{display:block;font-size:10.5px;color:var(--ink2);margin:3px 0 10px;line-height:1.45}
+.fx-tip__row{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;line-height:1.4;margin-top:6px}
+.fx-tip__row i{flex:none;width:19px;height:19px;border-radius:6px;display:inline-grid;place-items:center;font-family:inherit;font-weight:800;font-size:10px;font-style:normal;color:#fff;background:linear-gradient(157deg,color-mix(in srgb,var(--fxc,#2B9BEA) 45%,#fff),var(--fxc,#2B9BEA) 62%,color-mix(in srgb,var(--fxc,#2B9BEA) 80%,#0a1a2a));box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 7px -3px rgba(21,53,123,.5)}
+.fx-tip__row b{color:var(--ink);font-weight:700}
+.fx-tip__row em{color:var(--ink2);font-style:normal}
+.fivec{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:6px}
+.cc{text-align:left;background:rgba(255,255,255,.72);border:1.5px solid rgba(21,53,123,.12);border-radius:18px;
+  padding:20px 16px;transition:.18s;position:relative;overflow:hidden}
+.cc::before{content:attr(data-step);position:absolute;top:12px;right:14px;font-family:inherit;
+  font-weight:800;font-size:30px;color:rgba(21,53,123,.12);transition:.18s}
+.cc:hover{transform:translateY(-3px);box-shadow:0 18px 50px -18px rgba(21,53,123,.22);border-color:#2B9BEA}
+.cc.is-active{border-color:var(--red);background:#fff;box-shadow:0 26px 60px -22px rgba(21,53,123,.3)}
+.cc.is-active::before{color:rgba(224,48,59,.3)}
+.cc .c-en{font-family:inherit;font-weight:800;font-size:19px;color:var(--blue);letter-spacing:-.01em}
+.cc.is-active .c-en{color:var(--red)}
+.cc .c-zh{font-size:14px;color:var(--ink2);font-weight:600;margin-top:2px}
+.cc .c-mini{font-size:12px;color:var(--mut);margin-top:10px}
+.cc-detail{margin-top:18px;background:linear-gradient(160deg,var(--blue),#0E2A63);color:#fff;
+  border-radius:22px;padding:28px;box-shadow:0 26px 60px -22px rgba(21,53,123,.3);animation:rise .35s ease}
+.cc-detail__top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.cc-detail__c{font-family:inherit;font-weight:800;font-size:32px}
+.cc-detail__zh{font-size:18px;color:rgba(255,255,255,.8)}
+.cc-detail__formula{margin-left:auto;background:var(--red);font-family:inherit;font-weight:700;
+  font-size:13px;padding:7px 14px;border-radius:9px;letter-spacing:.05em}
+.cc-detail__body{margin-top:16px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.92);max-width:62ch}
+.cc-detail__lvl{margin-top:16px;font-size:13px;color:rgba(255,255,255,.62);display:flex;gap:8px;align-items:center}
+.cc-detail__lvl .lv{background:rgba(255,255,255,.14);padding:4px 10px;border-radius:7px;font-weight:600;color:#fff}
+.cc-modal{position:relative}
+.cc-modal__kicker{font-family:inherit;font-weight:700;font-size:14px;color:var(--ci);display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:4px}
+.cc-modal__c{font-size:18px;font-weight:800}
+.cc-modal__formula{margin-left:auto;background:var(--c);color:var(--txt);font-size:11px;font-weight:700;padding:4px 11px;border-radius:8px;letter-spacing:.04em}
+.cc-modal__meta{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.cc-modal__meta span{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--ink2);background:rgba(255,255,255,.6);border:1px solid rgba(21,53,123,.12);padding:6px 12px;border-radius:20px}
+.cc-modal__meta span svg{width:15px;height:15px;flex:none;stroke:#2B9BEA;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cc-intro{display:flex;gap:14px;align-items:flex-start;margin:16px 0 4px;padding:18px;border-radius:16px;
+  background:color-mix(in srgb, var(--c) 11%, #fff);border:1px solid color-mix(in srgb, var(--c) 24%, #fff)}
+.cc-intro__ic{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ci);box-shadow:0 3px 10px rgba(20,33,50,.08)}
+.cc-intro__ic svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cc-intro__tx{font-size:14px;line-height:1.6;color:var(--ink)}
+.cc-intro__tx strong{color:var(--ink)}
+.cc-intro__tx .zh{display:block;margin-top:8px;color:var(--ink2);font-size:13.5px}
+.cc-modal__sec{margin-top:20px}
+.cc-modal__sec h4{font-family:inherit;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.cc-modal__sec h4 .zh{font-weight:500;font-size:12.5px;color:var(--mut)}
+.sec-ic{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center}
+.sec-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sec-ic--learn{background:#7C5CFF1f;color:#7C5CFF}
+.sec-ic--gain{background:#E6A81E22;color:#D98A00}
+.cc-learn-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.cc-learn-list li{display:flex;gap:13px;align-items:center;font-size:14px;color:var(--ink);line-height:1.4}
+.cc-learn-list li .zh{color:var(--ink2)}
+.ll-ic{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.ll-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+.cc-divider{height:1px;border-top:1px dashed rgba(21,53,123,.24);margin:20px 0 4px}
+.cc-gain{display:flex;flex-direction:column;gap:9px}
+.cc-gain__row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:13px;background:rgba(255,255,255,.92);border:1px solid rgba(21,53,123,.12)}
+.gr-ic{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+.gr-ic svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.gr-en{font-size:13.5px;font-weight:600;color:var(--ink)}
+.gr-zh{margin-left:auto;font-size:12.5px;color:var(--ink2);white-space:nowrap;padding-left:8px}
+.cc-deco{position:absolute;right:8px;top:6px;width:84px;opacity:.95;pointer-events:none;z-index:1}
+.cc-deco svg{width:100%;height:auto;display:block}
+.cc-gain__row,.cc-learn-list li{position:relative;z-index:1}
+.cc-modal__sec,.cc-intro,.cc-modal__meta,.cc-modal__kicker{position:relative;z-index:1}
+.cc-summary__core{font-family:inherit;font-weight:700;font-size:clamp(17px,2vw,21px);line-height:1.3;color:var(--ink);margin-top:14px}
+.cc-summary__desc{font-size:14.5px;line-height:1.6;color:var(--ink2);margin-top:10px;max-width:60ch}
+.cc-learn{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:20px;
+  padding:13px 20px;border-radius:13px;background:var(--c);color:var(--txt);transition:transform .14s,box-shadow .18s;
+  box-shadow:0 8px 22px -8px var(--c)}
+.cc-learn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px var(--c)}
+.cc-learn:active{transform:translateY(0)}
+.cc-learn__lv{font-family:inherit;font-weight:800;font-size:15.5px;letter-spacing:-.01em}
+.cc-learn__more{font-size:11.5px;font-weight:600;opacity:.85}
+.cc-learn__more .zh{opacity:.9}
+.fivec .cc{background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);
+  border:1.5px solid rgba(255,255,255,.72);box-shadow:0 10px 30px rgba(20,33,50,.1)}
+.fivec .cc::before{color:rgba(255,255,255,.6)}
+.fivec .cc .c-en{color:var(--ci)}
+.fivec .cc:hover{border-color:var(--c);transform:translateY(-4px)}
+.fivec .cc.is-active{border-color:var(--c);background:rgba(255,255,255,.74);
+  box-shadow:0 0 0 3px rgba(255,255,255,.8),0 18px 42px -10px var(--c)}
+.fivec .cc.is-active::before{color:var(--c);opacity:.22}
+.fivec .cc.is-active .c-en{color:var(--ci)}
+.fivec .cc__chip{display:inline-block;margin-top:10px;font-family:inherit;font-weight:800;font-size:10.5px;
+  letter-spacing:.04em;padding:3px 9px;border-radius:7px;background:var(--c);color:var(--txt)}
+#ccDetail .cc-detail{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
+  border:1px solid rgba(255,255,255,.7);border-left:5px solid var(--c);color:var(--ink);
+  box-shadow:0 16px 46px rgba(20,33,50,.14),inset 0 1px 0 rgba(255,255,255,.7)}
+#ccDetail .cc-detail__c{color:var(--ci)}
+#ccDetail .cc-detail__zh{color:var(--ink2)}
+#ccDetail .cc-detail__body{color:var(--ink)}
+#ccDetail .cc-detail__formula{background:var(--c);color:var(--txt)}
+#ccDetail .cc-detail__lvl{color:var(--ink2)}
+#ccDetail .cc-detail__lvl .lv{background:var(--c);color:var(--txt)}
+.svg-ic{display:block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cc:hover .cc__ic{color:var(--ci)}
+.cc.is-active .cc__ic{background:var(--c);color:var(--txt);border-color:transparent}
+.lvmore .cc-learn{width:100%}
+.lvcc.cc-detail{position:relative;margin-top:14px;background:rgba(255,255,255,.32);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);border:none;border-top:2px solid color-mix(in srgb,var(--c) 42%,transparent);border-radius:16px;box-shadow:none;color:var(--ink)}
+.lvcc .cc-detail__c{color:var(--ci)}
+.lvcc .cc-detail__zh{color:var(--ink2)}
+.lvcc .cc-detail__top{padding-right:36px}
+.lvcc .cc-learn__lv i{font-style:normal;font-weight:500;opacity:.82;margin-left:6px;font-family:var(--cjk)}
+.lvcc .cc-detail__top .lvtag--cefr{margin-left:auto}
+.lvactions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
+.lvactions .cc-learn{margin-top:0}
+#sysFocus .lessons .lc5 .fivec{margin-top:0}
+/* 5C full-content modal shell + plan badge */
+.ccmodal{position:fixed;inset:0;z-index:220;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(6,18,46,.72);backdrop-filter:blur(8px)}
+.ccmodal[hidden]{display:none}
+.ccmodal__card{position:relative;width:min(680px,100%);max-height:88vh;overflow:auto;border-radius:24px;padding:26px 26px 30px;background:linear-gradient(160deg,rgba(255,255,255,.97),rgba(244,248,254,.97));box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
+.ccmodal__x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;background:rgba(21,53,123,.07);color:var(--ink);font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:3}
+.ccmodal__title{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--mut);text-transform:uppercase;padding-right:40px;margin-bottom:6px}
+.cc{cursor:pointer}
+.cc__plan{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.03em;color:#fff;background:var(--ci);border-radius:999px;padding:3px 9px;margin-bottom:9px}
+.cc.is-plan{border-color:var(--c);box-shadow:0 14px 34px -18px var(--c)}
+@media(max-width:860px){.fivec{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.fivec{grid-template-columns:1fr}}
+
 /* ===== Timetable modal (ported from console) ===== */
 /* Branch timetable modal */
 .tt-modal{position:fixed;inset:0;z-index:135;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .2s ease}
@@ -1038,12 +1162,8 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       <h2><span class="zh">5C 学习系统：<br>一步一步，把你带到台前</span><span class="en">The 5C System:<br>step by step, into the spotlight</span></h2>
       <p class="sub"><span class="zh">不是零散的课，而是一套完整路径。每一个 C，对应一个 Level，解决一个真实的表达问题。</span><span class="en">Not scattered lessons — one complete path. Each C matches a level and solves one real communication problem.</span></p>
     </div>
-    <div class="cgrid">
-      <div class="ccard card rv" data-lv="0" style="--cc:#EBB12A"><span class="ccard__n">C1 · P1</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Copy</b><i><span class="zh">模仿 · 打基础</span><span class="en">Imitate · Foundation</span></i><p><span class="zh">从正确的发音和句型开始，先能跟着说，告别「不敢出声」。</span><span class="en">Start with sounds and patterns. Speak along first — stop being silent.</span></p></div>
-      <div class="ccard card rv d1" data-lv="1" style="--cc:#2E9E50"><span class="ccard__n">C2 · L1</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Construct</b><i><span class="zh">组句 · 讲完整</span><span class="en">Build · Full sentences</span></i><p><span class="zh">把单词组成完整句子，日常对话不再东拼西凑。</span><span class="en">Turn words into full sentences — no more piecing things together.</span></p></div>
-      <div class="ccard card rv d2" data-lv="2" style="--cc:#1F9FE6"><span class="ccard__n">C3 · L2</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Convey</b><i><span class="zh">表达 · 讲清楚</span><span class="en">Express · Be clear</span></i><p><span class="zh">把想法讲清楚：报告、汇报、说明，让人一次听懂。</span><span class="en">Make your point clearly — reports, updates, explanations people get first time.</span></p></div>
-      <div class="ccard card rv d3" data-lv="3" style="--cc:#E8472B"><span class="ccard__n">C4 · L3</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Convince</b><i><span class="zh">说服 · 有分量</span><span class="en">Persuade · Carry weight</span></i><p><span class="zh">在会议和谈判里表达立场、争取资源，你的话开始有分量。</span><span class="en">Hold your ground in meetings and negotiations. Your words start to carry weight.</span></p></div>
-      <div class="ccard card rv d4" data-lv="4" style="--cc:#15335E"><span class="ccard__n">C5 · L4</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Captivate</b><i><span class="zh">感染 · 被记住</span><span class="en">Captivate · Be remembered</span></i><p><span class="zh">Presentation、演讲、带团队——让人愿意听你讲，并记住你。</span><span class="en">Presentations, speeches, leading teams — people listen, and remember you.</span></p></div>
+    <div class="fivec" id="fivecGrid"><!-- cards injected --></div>
+    <div id="ccDetail"></div>
     </div>
   </div>
 </section>
@@ -1325,6 +1445,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
   <a class="btn btn--wa" id="mbarWa" href="tel:1700816893"><span class="zh">问顾问</span><span class="en">Ask advisor</span></a>
   <a class="btn btn--red" href="#price"><span class="zh">我的方案</span><span class="en">My plan</span></a>
 </div>
+<div class="ccmodal" id="ccModalBg" hidden><div class="ccmodal__card"><button class="ccmodal__x" id="ccModalX" aria-label="close">&times;</button><div class="ccmodal__title" id="ccModalTitle"></div><div class="ccmodal__body" id="ccModalBody"></div></div></div>
 <div class="cmod" id="cmod" hidden><div class="cmod__box"><button class="cmod__x" id="cmodX" aria-label="close">&times;</button><div id="cmodBody"></div></div></div>
 <div class="vlb" id="vlb" hidden><div class="vlb__box"><button class="vlb__x" id="vlbX" aria-label="close">&times;</button><div class="vlb__vid" id="vlbVid"></div></div></div>
 <footer>
@@ -2011,9 +2132,7 @@ function ttName(k){return TT_NAMES[k]||k;}
             '<div class="tt-modal__heads"><span class="tt-modal__title">'+ttName(name)+' <span class="tt-modal__title-zh">\u65f6\u95f4\u8868</span></span><span class="tt-modal__sub">Class Schedule \u00b7 \u8bfe\u7a0b\u65f6\u95f4\u8868</span></div>'+
 
           '</div>'+
-          '<div class="tt-legend">'+legend+
-            '<button type="button" class="tt-leg tt-leg--combine" data-ttcombine aria-pressed="false" title="Show more than one level at the same time">+ Combine</button>'+
-            '<button type="button" class="tt-leg tt-leg--all" data-ttall>\u21ba All levels</button></div>'+
+          '<div class="tt-legend">'+legend+'</div>'+
           '<div class="tt-scroll">'+renderTimetable(b)+'</div>'+
         '</div>';
       document.body.appendChild(m); void m.offsetWidth; m.classList.add('is-open');
@@ -2021,8 +2140,8 @@ function ttName(k){return TT_NAMES[k]||k;}
         var grid=m.querySelector('.tt-grid'); var legBtns=[].slice.call(m.querySelectorAll('.tt-leg[data-filter]'));
         var allBtn=m.querySelector('[data-ttall]');
         var avail=ttLevels(b);
-        var picked=(preLv||[]).filter(function(n){return avail.indexOf(n)>-1;});  /* 开场先只显示他的 Level */
-        var combineSeed=picked.length>1;
+        /* 开场只显示他的起始 Level */
+        var picked=(preLv||[]).slice(0,1).filter(function(n){return avail.indexOf(n)>-1;});
         function on(n){ return picked.indexOf(n)>-1; }
         function applyFilter(){
           var none=picked.length===0;
@@ -2047,8 +2166,7 @@ function ttName(k){return TT_NAMES[k]||k;}
           });
           if(allBtn) allBtn.classList.toggle('is-shown',!none);
         }
-        var combineBtn=m.querySelector('[data-ttcombine]'), combine=combineSeed;
-        if(combine&&combineBtn){combineBtn.classList.add('is-on');combineBtn.setAttribute('aria-pressed','true');}
+        var combineBtn=null, combine=false;
         legBtns.forEach(function(btn){
           btn.addEventListener('click',function(){
             var n=+btn.getAttribute('data-filter');
@@ -2167,46 +2285,169 @@ window.__openTimetable=openTimetable;
   }
 })();
 
-/* 5C：按学员的 level 区间高亮 + 点击看细节 */
+/* ===== 5C framework (ported from console) ===== */
 (function(){
-  var LV=CONFIG.LEVELS||[]; if(!LV.length)return;
-  var q; try{q=QP;}catch(e){q=null;}
-  function num(v,d){v=parseInt(v,10);return isNaN(v)?d:v;}
-  var from=num(q&&q.get('from'),-1), to=num(q&&q.get('to'),-1);
-  var hasPlan=(from>=0&&to>=from);
-  var cards=[].slice.call(document.querySelectorAll('.ccard'));
-  cards.forEach(function(c){
-    var i=+c.getAttribute('data-lv');
-    if(hasPlan){
-      if(i>=from&&i<=to){
-        c.classList.add('in-plan');
-        c.insertAdjacentHTML('afterbegin','<span class="ccard__yours">★ <span class="zh">你的方案</span><span class="en">Your plan</span></span>');
-      } else { c.classList.add('off-plan'); }
-    }
+  var FIVEC = [
+    {c:"Copy", zh:"模仿", mini:"Dare to open your mouth", skill:"Copying skill", formula:"By Template", lv:"Level P1 · Pre-Beginner", chip:"P1",
+     col:"var(--p1)", ci:"#9A6E00", txt:"#3C2B00", cefr:"CEFR Pre-A1", classes:"48 classes",
+     core:"Speak by copying. 先模仿，再开口。",
+     desc:"The starting point — listen, repeat and copy real phrases until speaking feels safe. 听、重复、模仿，让开口不再害怕。",
+     body:"At Pre-Beginner, everything is built around copying. Learners listen, repeat and copy ready-made phrases so they can speak from day one — no grammar pressure, just confidence. 在 Pre-Beginner，一切围绕「模仿」：听、重复、照着说，第一天就能开口，没有语法压力。",
+     learn:[{ic:"people",en:"Greetings &amp; self-introduction",zh:"自我介绍"},{ic:"chat",en:"Classroom English",zh:"课堂用语"},{ic:"book",en:"Basic vocabulary — people, places, objects, actions",zh:"基础词汇"},{ic:"question",en:"Simple questions &amp; short answers",zh:"简单问答"},{ic:"calendar",en:"Numbers, time &amp; daily info",zh:"数字·时间·日常"},{ic:"briefcase",en:"Simple daily / workplace conversation",zh:"日常·职场对话"}],
+     gain:[{ic:"trend",en:"Recognise common English words",zh:"认识常见英语单词"},{ic:"headphones",en:"Understand simple instructions",zh:"理解简单指令"},{ic:"chat",en:"Give short basic answers",zh:"能给简短回答"},{ic:"star",en:"Build confidence to speak",zh:"建立开口信心"},{ic:"flag",en:"Ready for Level 1 sentence construction",zh:"为 Level 1 做准备"}]},
+    {c:"Construct", zh:"构句", mini:"Turn words into sentences", skill:"Construction skill", formula:"By Template", lv:"Level 1 · Beginner", chip:"L1",
+     col:"var(--l1)", ci:"#1F7D3C", txt:"#fff", cefr:"CEFR A1–A2", classes:"48 classes",
+     core:"Turn words into sentences. 把单词变成句子。",
+     desc:"Ready to build — combine words into full, correct sentences and start expanding them. 把单词组成完整句子，并学会扩展。",
+     body:"Level 1 is about construction. Learners move from single words to complete sentences using simple patterns, then expand them with details and reasons. Level 1 专注「构句」：用简单句型把单词组成完整句子，再加上细节与原因来扩展。",
+     learn:[{ic:"people",en:"Greetings &amp; self-introduction",zh:"自我介绍"},{ic:"blocks",en:"Building sentence patterns",zh:"句型公式"},{ic:"expand",en:"From simple to expanded sentences",zh:"简单→扩展句"},{ic:"question",en:"Questions &amp; fuller answers",zh:"更完整的问答"},{ic:"heart",en:"Daily life, routines, feelings &amp; preferences",zh:"日常·感受·偏好"},{ic:"chat",en:"Conversation with better responses",zh:"更好的对话回应"}],
+     gain:[{ic:"blocks",en:"Build complete sentences",zh:"组出完整句子"},{ic:"expand",en:"Add details and reasons",zh:"加入细节与原因"},{ic:"chat",en:"Give fuller answers",zh:"给更完整的回答"},{ic:"formula",en:"Use basic sentence patterns",zh:"运用基本句型"},{ic:"heart",en:"Talk about daily life clearly",zh:"清楚谈日常"},{ic:"flag",en:"Ready for Level 2 opinions &amp; longer ideas",zh:"为 Level 2 做准备"}]},
+    {c:"Convey", zh:"表达", mini:"Say your idea clearly", skill:"Conveying skill", formula:"Formula O.R.E.O", lv:"Level 2 · Elementary", chip:"L2",
+     col:"var(--l2)", ci:"#1276B5", txt:"#fff", cefr:"CEFR A2–B1", classes:"48 classes",
+     core:"Say your idea clearly. 把想法讲清楚。",
+     desc:"Express opinions and preferences with reasons and examples, so people understand you the first time. 用理由和例子表达想法，一次就让人听懂。",
+     body:"Level 2 develops confidence in conveying ideas. Using the O.R.E.O formula, learners share opinions, give reasons and examples, and respond to others clearly. Level 2 训练「表达」：用 O.R.E.O 公式分享观点、给理由与例子，清楚回应他人。",
+     learn:[{ic:"heart",en:"Preferences &amp; personal views",zh:"偏好与看法"},{ic:"formula",en:"Opinion formulas — O.R.E.O",zh:"表达公式"},{ic:"lightbulb",en:"From reply to better explanation",zh:"更好的解释"},{ic:"question",en:"Questions, opinions &amp; responses",zh:"提问与回应"},{ic:"megaphone",en:"Expressing preferences, ideas &amp; objections",zh:"表达想法与异议"},{ic:"chat",en:"Discussion / workplace conversation",zh:"讨论与职场对话"}],
+     gain:[{ic:"chat",en:"Share opinions with reasons",zh:"有理由地表达观点"},{ic:"heart",en:"Express preferences clearly",zh:"清楚表达偏好"},{ic:"lightbulb",en:"Give better explanations",zh:"给更好的解释"},{ic:"shield",en:"Respond to ideas and objections",zh:"回应想法与异议"},{ic:"wave",en:"Speak with better flow",zh:"表达更流畅"},{ic:"flag",en:"Ready for Level 3 discussions",zh:"为 Level 3 做准备"}]},
+    {c:"Convince", zh:"说服", mini:"Reason with logic", skill:"Convincing skill", formula:"Formula S.P.E.A.R", lv:"Level 3 · Intermediate", chip:"L3",
+     col:"var(--l3)", ci:"#C2351C", txt:"#fff", cefr:"CEFR B1–B2", classes:"48 classes",
+     core:"Convince with reasons. 有理有据地说服。",
+     desc:"Present clearly, defend your views, and handle questions with logic and evidence. 清楚陈述、捍卫观点、用逻辑与证据应对提问。",
+     body:"Level 3 focuses on clear, convincing communication. Using the S.P.E.A.R formula, learners present key messages, justify their views, defend answers and respond to objections with logic. Level 3 专注「说服」：用 S.P.E.A.R 公式陈述重点、说明立场、为答案辩护、有逻辑地回应异议。",
+     learn:[{ic:"screen",en:"Presentations &amp; key message delivery",zh:"重点陈述"},{ic:"scale",en:"Negotiation &amp; persuasion formulas",zh:"谈判·说服公式"},{ic:"shield",en:"From simple reply to stronger defence",zh:"更有力的回应"},{ic:"people",en:"Debate, questions &amp; defence",zh:"辩论与答辩"},{ic:"mic",en:"Impromptu, clarifying &amp; public speaking",zh:"即兴与公众表达"},{ic:"question",en:"Presentation Q&amp;A / professional conversation",zh:"演示问答"}],
+     gain:[{ic:"screen",en:"Present ideas clearly",zh:"清楚陈述想法"},{ic:"scale",en:"Negotiate more confidently",zh:"更有信心地谈判"},{ic:"shield",en:"Defend answers with reasons",zh:"有理由地答辩"},{ic:"question",en:"Handle debate &amp; questions",zh:"应对辩论与提问"},{ic:"mic",en:"Speak more spontaneously",zh:"更即兴地表达"},{ic:"flag",en:"Ready for Level 4 professional communication",zh:"为 Level 4 做准备"}]},
+    {c:"Captivate", zh:"影响", mini:"Speak with impact", skill:"Captivating skill", formula:"Formula T.A.R.G.E.T", lv:"Level 4 · Upper-Intermediate", chip:"L4",
+     col:"var(--l4)", ci:"#15335E", txt:"#fff", cefr:"CEFR B2–C1", classes:"48 classes",
+     core:"Speak with impact. 有影响力地表达。",
+     desc:"Lead meetings, present persuasively and adapt your tone to any professional audience. 主导会议、有说服力地演说，并因人调整语气。",
+     body:"Level 4 is advanced expression. Using the T.A.R.G.E.T formula, learners structure executive presentations, negotiate diplomatically, lead discussions and adapt tone to captivate any audience. Level 4 是「高级表达」：用 T.A.R.G.E.T 公式组织高管级演示、外交式谈判、主导讨论，并调整语气吸引听众。",
+     learn:[{ic:"screen",en:"Executive presentation &amp; message structuring",zh:"高管级演示"},{ic:"scale",en:"Strategic negotiation &amp; diplomatic language",zh:"策略谈判"},{ic:"shield",en:"High-level discussion, debate &amp; defending",zh:"高阶讨论与答辩"},{ic:"people",en:"Executive meeting communication",zh:"会议沟通主导"},{ic:"mic",en:"Public speaking, impromptu &amp; Q&amp;A",zh:"公众演说与即兴"},{ic:"sparkle",en:"Advanced expression &amp; audience awareness",zh:"精炼表达与听众意识"}],
+     gain:[{ic:"screen",en:"Present with impact",zh:"有影响力地演示"},{ic:"scale",en:"Negotiate with diplomacy",zh:"外交式谈判"},{ic:"shield",en:"Defend answers clearly",zh:"清楚答辩"},{ic:"people",en:"Lead discussions",zh:"主导讨论"},{ic:"mic",en:"Speak more spontaneously",zh:"更即兴地表达"},{ic:"sparkle",en:"Adapt tone to audience",zh:"因人调整语气"}]}
+  ];
+
+
+  var FORMULA={
+    OREO:{n:"O.R.E.O",lvl:"Level 2 \u00b7 Elementary",c:"#1276B5",how:"Structure a clear, supported opinion.",steps:[["O","Opinion","a clear personal stance"],["R","Reason","the main reason that supports it"],["E","Example","a concrete example or evidence"],["O","Opinion restated","a stronger concluding restatement"]]},
+    SPEAR:{n:"S.P.E.A.R",lvl:"Level 3 \u00b7 Intermediate",c:"#C2351C",how:"Build a full persuasive argument, step by step.",steps:[["S","State","present your position clearly"],["P","Point","give your main supporting idea"],["E","Explain","elaborate with details or data"],["A","Argue","address the opposite side"],["R","Restate","end with a confident conclusion"]]},
+    TARGET:{n:"T.A.R.G.E.T",lvl:"Level 4 \u00b7 Upper-Intermediate",c:"#15335E",how:"Balanced, evidence-based argument (C1).",steps:[["T","Thesis","a clear, nuanced central argument"],["A","Advantage","the main benefit supporting it"],["R","Risk","a limitation or downside"],["G","Guardrail","how to manage that risk"],["E","Evidence","research or data"],["T","Tie-back","conclusion linking back to the thesis"]]}
+  };
+
+  function fxKey(f){ if(!f) return null; var s=(''+f).toUpperCase().replace(/[^A-Z]/g,''); if(s.indexOf('OREO')>=0) return 'OREO'; if(s.indexOf('SPEAR')>=0) return 'SPEAR'; if(s.indexOf('TAGERT')>=0||s.indexOf('TARGET')>=0) return 'TARGET'; return null; }
+  function fxChip(cls,formula){ var k=fxKey(formula); if(!k) return '<span class="'+cls+'">'+formula+'</span>'; var d=FORMULA[k];
+    var rows=d.steps.map(function(st){ return '<span class="fx-tip__row"><i>'+st[0]+'</i><span><b>'+st[1]+'</b> \u2014 <em>'+st[2]+'</em></span></span>'; }).join('');
+    return '<span class="fx" tabindex="0" style="--fxc:'+d.c+'" aria-label="'+d.n+' formula \u2014 how it is taught"><span class="'+cls+'">'+formula+'</span>'+
+      '<span class="fx-tip" role="tooltip"><b class="fx-tip__t">'+d.n+' \u00b7 Formula</b><span class="fx-tip__s">'+d.lvl+' \u00b7 '+d.how+'</span>'+rows+'</span></span>'; }
+  var CICONS=[
+    '<svg class="svg-ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
+    '<svg class="svg-ic" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><path d="M17 14v6M14 17h6"/></svg>',
+    '<svg class="svg-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg>',
+    '<svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>',
+    '<svg class="svg-ic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>'
+  ];
+
+  var IC2={
+    people:'<circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.5a3 3 0 0 1 0 5.8"/><path d="M20.5 19a5.5 5.5 0 0 0-4-5.3"/>',
+    chat:'<path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/>',
+    book:'<path d="M12 6c-1.9-1.3-4.2-2-7-2v13c2.8 0 5.1.7 7 2 1.9-1.3 4.2-2 7-2V4c-2.8 0-5.1.7-7 2Z"/><path d="M12 6v13"/>',
+    question:'<circle cx="12" cy="12" r="9"/><path d="M9.3 9.3a3 3 0 0 1 5.5 1c0 2-2.8 2.4-2.8 2.4"/><path d="M12 17h.01"/>',
+    calendar:'<rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 9h16M9 3v4M15 3v4"/>',
+    briefcase:'<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 7V5.5A2 2 0 0 1 10 3.5h4a2 2 0 0 1 2 2V7"/><path d="M3 12.5h18"/>',
+    blocks:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><path d="M17 14v6M14 17h6"/>',
+    expand:'<path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>',
+    heart:'<path d="M12 20S4 15 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5C20 15 12 20 12 20Z"/>',
+    formula:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9h6M7 13h10M7 16.5h7"/>',
+    lightbulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/>',
+    megaphone:'<path d="M4 10v4l4 .5 7 4.5V5L8 9.5 4 10Z"/><path d="M17.5 9a4 4 0 0 1 0 6"/>',
+    screen:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M8.5 9l2.4 2.4L15 7.5"/>',
+    scale:'<path d="M12 4v16M7 8h10"/><path d="M7 8 4 14a3 3 0 0 0 6 0L7 8ZM17 8l-3 6a3 3 0 0 0 6 0L17 8Z"/>',
+    shield:'<path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',
+    mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/>',
+    sparkle:'<path d="M12 3l1.7 4.6L18.5 9.3l-4.8 1.7L12 16l-1.7-5L5.5 9.3l4.8-1.7L12 3Z"/><path d="M18.5 14l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z"/>',
+    wave:'<path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M3 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>',
+    trend:'<path d="M3 17l6-6 4 4 7-7"/><path d="M14 8h7v7"/>',
+    headphones:'<path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="6" rx="1.4"/><rect x="17.5" y="13" width="4" height="6" rx="1.4"/>',
+    flag:'<path d="M5 21V4"/><path d="M5 4h12l-2.2 4L17 12H5"/>',
+    star:'<path d="M12 3.5l2.5 5.2 5.7.8-4.1 4 1 5.7L12 16.6 6.9 19.2l1-5.7-4.1-4 5.7-.8L12 3.5Z"/>',
+    gradcap:'<path d="M3 9l9-4 9 4-9 4-9-4Z"/><path d="M7 11v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/><path d="M21 9v5"/>',
+    trophy:'<path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3"/><path d="M9 18h6M10 21h4M12 13v5"/>'
+  };
+  function svg(name){return '<svg class="svg-ic" viewBox="0 0 24 24">'+(IC2[name]||IC2.star)+'</svg>';}
+  var COLPAL=["#2E9E50","#2A5BD7","#7C5CFF","#E6A81E","#E0303B","#14A2B8"];
+
+  var grid=document.getElementById('fivecGrid'), detail=document.getElementById('ccDetail');
+  if(!grid)return;
+  /* 学员的 level 区间：用来标注「你的方案」 */
+  var pf=parseInt(QP&&QP.get('from'),10), pt=parseInt(QP&&QP.get('to'),10);
+  if(isNaN(pf))pf=-1; if(isNaN(pt))pt=pf;
+  function inPlan(i){return pf>=0&&i>=pf&&i<=pt;}
+
+  FIVEC.forEach(function(c,i){
+    var b=document.createElement('button');
+    b.className='cc rv'+(inPlan(i)?' is-plan':'');
+    b.setAttribute('data-c',i); b.setAttribute('data-step',i+1);
+    b.style.cssText='--c:'+c.col+';--ci:'+c.ci+';--txt:'+c.txt;
+    b.innerHTML=(inPlan(i)?'<span class="cc__plan">\u2605 <span class="zh">你的方案</span><span class="en">Your plan</span></span>':'')+
+      '<span class="cc__ic">'+CICONS[i]+'</span><div class="c-en">'+c.c+'</div><div class="c-zh">'+c.zh+'</div><div class="c-mini">'+c.mini+'</div><span class="cc__chip">'+c.chip+'</span>';
+    grid.appendChild(b);
   });
-  /* modal */
-  var mod=document.getElementById('cmod'), body=document.getElementById('cmodBody'), x=document.getElementById('cmodX');
-  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-  function openMod(i){
-    var l=LV[i]; if(!l)return;
-    var inPlan=hasPlan&&i>=from&&i<=to;
-    body.innerHTML=
-      '<div class="cmod__hd"><span class="cmod__k" style="background:'+l.color+'">'+esc(l.key)+'</span>'+
-        '<span class="cmod__t"><b>'+esc(l.tag)+'</b><i>Core skill · '+esc(l.skill)+'</i></span></div>'+
-      (inPlan?'<span class="cmod__tag" style="background:'+l.color+'"><span class="zh">★ 这一级在你的方案里</span><span class="en">★ In your plan</span></span>':'')+
-      '<h4><span class="zh">这一级解决什么</span><span class="en">What it solves</span></h4>'+
-      '<p class="cmod__now">'+esc(l.now)+'</p>'+
-      '<h4><span class="zh">课堂上你会学到</span><span class="en">What you\'ll learn</span></h4>'+
-      '<ul style="--mc:'+l.color+'">'+l.gain.map(function(g){return '<li>'+esc(g)+'</li>';}).join('')+'</ul>'+
-      '<div class="cmod__fut" style="background:'+hex2a(l.color,.1)+'"><b style="color:'+l.color+'"><span class="zh">学完之后 → </span><span class="en">After this → </span></b>'+esc(l.future)+'</div>';
-    mod.hidden=false; document.body.classList.add('vlb-open');
+
+  function renderC(i){
+    var c=FIVEC[i];
+    [].forEach.call(grid.querySelectorAll('.cc'),function(n,j){n.classList.toggle('is-active',j===i);});
+    detail.innerHTML=
+      '<div class="cc-detail" style="--c:'+c.col+';--ci:'+c.ci+';--txt:'+c.txt+'">'+
+        '<div class="cc-detail__top"><span class="cc-detail__c">'+c.c+'</span><span class="cc-detail__zh">'+c.zh+'</span></div>'+
+        '<p class="cc-summary__core">'+c.core+'</p>'+
+        '<p class="cc-summary__desc">'+c.desc+'</p>'+
+        '<div class="lvactions"><button class="cc-learn" data-cc-modal="'+i+'" style="--c:'+c.col+';--txt:'+c.txt+'">'+
+          '<span class="cc-learn__lv">'+c.lv+'</span>'+
+          '<span class="cc-learn__more">Learn more <span class="zh">\u67e5\u770b\u5b8c\u6574\u5185\u5bb9</span> \u2192</span></button></div>'+
+      '</div>';
   }
-  function hex2a(h,a){h=h.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
-  function closeMod(){mod.hidden=true;document.body.classList.remove('vlb-open');}
-  cards.forEach(function(c){c.addEventListener('click',function(){openMod(+c.getAttribute('data-lv'));});});
-  x.addEventListener('click',closeMod);
-  mod.addEventListener('click',function(e){if(e.target===mod)closeMod();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mod.hidden)closeMod();});
+  grid.addEventListener('click',function(e){
+    var n=e.target.closest('.cc'); if(!n)return;
+    var i=+n.getAttribute('data-c');
+    if(n.classList.contains('is-active')){n.classList.remove('is-active');detail.innerHTML='';return;}
+    renderC(i);
+    detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+
+  /* Layer 3: full-content popup */
+  var COLPAL2=(typeof COLPAL!=='undefined')?COLPAL:['#2A5BD7','#E6A81E','#E0303B','#7C5CFF','#1F9FE6','#2E9E50'];
+  var mbg=document.getElementById('ccModalBg'), mTitle=document.getElementById('ccModalTitle'), mBody=document.getElementById('ccModalBody');
+  function openCCModal(i){
+    var c=FIVEC[i];
+    mbg.style.setProperty('--c',c.col); mbg.style.setProperty('--ci',c.ci); mbg.style.setProperty('--txt',c.txt);
+    mTitle.innerHTML=c.lv;
+    var body=c.body, lead=body, rest='';
+    var di=body.indexOf('. ');
+    if(di>-1){ lead=body.slice(0,di+1); rest=body.slice(di+2); }
+    var learnLis=c.learn.map(function(x,k){var col=COLPAL2[k%COLPAL2.length];
+      return '<li><span class="ll-ic" style="color:'+col+';background:'+col+'1f">'+svg(x.ic)+'</span><span>'+x.en+' <span class="zh">'+x.zh+'</span></span></li>';}).join('');
+    var gainRows=c.gain.map(function(x,k){var col=COLPAL2[k%COLPAL2.length];
+      return '<div class="cc-gain__row"><span class="gr-ic" style="color:'+col+';background:'+col+'1f">'+svg(x.ic)+'</span><span class="gr-en">'+x.en+'</span><span class="gr-zh">'+x.zh+'</span></div>';}).join('');
+    mBody.innerHTML=
+      '<div class="cc-modal">'+
+        '<div class="cc-modal__kicker"><span class="cc-modal__c">'+c.c+'</span> \u00b7 '+c.skill+' '+fxChip('cc-modal__formula',c.formula)+'</div>'+
+        '<div class="cc-modal__meta"><span>'+svg('people')+c.cefr+'</span><span>'+svg('calendar')+c.classes+'</span></div>'+
+        '<div class="cc-intro"><span class="cc-intro__ic">'+svg('lightbulb')+'</span><div class="cc-intro__tx"><strong>'+lead+'</strong> '+rest+'</div></div>'+
+        '<div class="cc-modal__sec"><h4><span class="sec-ic sec-ic--learn">'+svg('gradcap')+'</span>What students learn in class <span class="zh">\u8bfe\u5802\u5b66\u4ec0\u4e48</span></h4><ul class="cc-learn-list">'+learnLis+'</ul></div>'+
+        '<div class="cc-divider"></div>'+
+        '<div class="cc-modal__sec cc-sec--gain"><h4><span class="sec-ic sec-ic--gain">'+svg('trophy')+'</span>What students gain <span class="zh">\u5b66\u751f\u6536\u83b7</span></h4><div class="cc-gain">'+gainRows+'</div></div>'+
+      '</div>';
+    mbg.hidden=false; document.body.classList.add('vlb-open');
+  }
+  function closeCC(){mbg.hidden=true;document.body.classList.remove('vlb-open');}
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('[data-cc-modal]');
+    if(btn){openCCModal(+btn.getAttribute('data-cc-modal'));}
+  });
+  document.getElementById('ccModalX').addEventListener('click',closeCC);
+  mbg.addEventListener('click',function(e){if(e.target===mbg)closeCC();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mbg.hidden)closeCC();});
+
+  /* 学员方案内的那一级，预设展开 */
+  if(pf>=0)renderC(pf);
 })();
 
 /* 6) 助学金截止日：温和的时效感（过期后转成「问下一批」，不留空白） */
