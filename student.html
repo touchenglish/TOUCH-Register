@@ -2355,6 +2355,16 @@ window.__openTimetable=openTimetable;
       mod.hidden=false; document.body.classList.add('vlb-open');
     });
   }
+
+  /* 关闭老师 profile：× / 点背景 / Esc（之前漏掉，导致关不掉） */
+  (function(){
+    var mod=document.getElementById('cmod'); if(!mod||mod.__closeBound)return;
+    mod.__closeBound=true;
+    function close(){ mod.hidden=true; document.body.classList.remove('vlb-open'); }
+    var x=document.getElementById('cmodX'); if(x)x.addEventListener('click',close);
+    mod.addEventListener('click',function(e){ if(e.target===mod)close(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!mod.hidden)close(); });
+  })();
 })();
 
 /* ===== 5C framework (ported from console) ===== */
