@@ -1587,7 +1587,7 @@ var CONFIG={
   FOUNDED_YEAR:2010,   /* 创办年份：页面上的「X 年经验」会自动依今年推算，不用手动改 */
   CUBE_LIVE_FACES:6,   /* 最多几面自动播放（会依手机流畅度自动收敛；设 0 = 全部用缩略图） */
   CUBE_MIN_FPS:38,     /* 低于这个帧率就停止再加播放器 */
-  LESSONS_PER_WEEK:3,   /* 估算时长用：一周上几堂（改这里会影响「约 X 个月」） */
+  LESSONS_PER_MONTH:12,  /* 时长换算：48 堂 = 4 个月（即每月 12 堂） */
   JOURNEY_DEFAULT_FROM:1,
   JOURNEY_DEFAULT_TO:3,
   LEVELS:[
@@ -2110,8 +2110,8 @@ var PSTU=(function(){
   var LES=(function(){var v=parseInt((q&&q.get('les'))||'',10);return (v>0&&v<=600)?v:0;})();
   var routeLine='';
   if(LES){
-    var perWeek=CONFIG.LESSONS_PER_WEEK||2;
-    var months=Math.max(1,Math.round(LES/(perWeek*4.33)));
+    var perMonth=CONFIG.LESSONS_PER_MONTH||12;
+    var months=Math.max(1,Math.round(LES/perMonth));
     routeLine='<span class="jroute"><b>'+LES+'</b> <span class="zh">堂课</span><span class="en">lessons</span>'+
       '<i></i><span class="zh">大约 <b>'+months+'</b> 个月</span><span class="en">about <b>'+months+'</b> months</span></span>';
   }
