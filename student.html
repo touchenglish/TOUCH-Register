@@ -525,7 +525,7 @@ body.te-en .jnote__who::after{content:" says"}
 .vmq+.vmq{margin-top:12px}
 .vmq__track{display:flex;gap:12px;width:max-content;will-change:transform;animation:vmqScroll 60s linear infinite}
 .vmq__track--right{animation-direction:reverse}
-@media(hover:hover) and (pointer:fine){.vmarquee:hover .vmq__track{animation-play-state:paused}}
+/* 滚动带不因鼠标悬停而停下——一直跑 */
 /* while a video is open, park background motion (saves CPU, no fight for attention) */
 body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{animation-play-state:paused}
 @keyframes vmqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -696,11 +696,9 @@ body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{anim
   width:66%;height:34px;border-radius:50%;background:radial-gradient(ellipse,rgba(31,120,210,.32),transparent 70%);
   filter:blur(9px);z-index:-1}
 .cube-spin{width:100%;height:100%;transform-style:preserve-3d;animation:gemFloat 6s ease-in-out infinite}
-.cubewrap.paused .cube-spin{animation-play-state:paused}
 @keyframes gemFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 /* inner: stand the cube on its corner + spin around the vertical body-diagonal */
 .cube-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:gemSpin 32s linear infinite;will-change:transform}
-.cubewrap.paused .cube-tilt{animation-play-state:paused}
 @keyframes gemSpin{
   from{transform:rotateX(-20deg) rotateY(0deg)}
   to{transform:rotateX(-20deg) rotateY(360deg)}
@@ -1021,8 +1019,8 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
           <span class="en">English is not only for exams.<br>It makes you <span class="vis">visible<i></i></span>.</span>
         </h1>
         <p class="hero__sub rv d2">
-          <span class="zh">你不需要「完美的英文」。你需要的是：开会敢讲、见客户敢开口、机会来的时候接得住。<b>16 年，我们只做一件事——带你从不敢开口，到被看见。</b></span>
-          <span class="en">You don't need "perfect English." You need to speak up in meetings, talk to clients with confidence, and be ready when opportunity comes. <b>For 16 years we've done one thing — take you from silent to seen.</b></span>
+          <span class="zh">你不需要「完美的英文」。你需要的是：开会敢讲、见客户敢开口、机会来的时候接得住。<b><span class="te-yrs">16</span> 年，我们只做一件事——带你从不敢开口，到被看见。</b></span>
+          <span class="en">You don't need "perfect English." You need to speak up in meetings, talk to clients with confidence, and be ready when opportunity comes. <b>For <span class="te-yrs">16</span> years we've done one thing — take you from silent to seen.</b></span>
         </p>
         <div class="hero__cta rv d3">
           <a class="btn btn--red" href="#price"><span class="zh">查看学习方案 →</span><span class="en">View my plan →</span></a>
@@ -1045,7 +1043,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       </div>
     </div>
     <div class="stats rv d4">
-      <div class="stat card"><b><em>16</em>+</b><span class="zh">年教学经验</span><span class="en">Years of experience</span></div>
+      <div class="stat card"><b><em class="te-yrs">16</em>+</b><span class="zh">年教学经验</span><span class="en">Years of experience</span></div>
       <div class="stat card"><b><em>16,397</em>+</b><span class="zh">位学员</span><span class="en">Learners trained</span></div>
       <div class="stat card"><b><em>97.5</em>%</b><span class="zh">学员进步率</span><span class="en">Improvement rate</span></div>
       <div class="stat card"><b><em>9–12</em></b><span class="zh">人小班教学</span><span class="en">Learners per class</span></div>
@@ -1226,7 +1224,7 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
     <div class="center rv" style="margin-top:70px">
       <span class="eyebrow"><span class="zh">线上为主 · 全马可上</span><span class="en">Online-first · nationwide</span></span>
       <h2 style="font-size:clamp(22px,3vw,30px)"><span class="zh">人在马来西亚哪里，<br>课就在哪里</span><span class="en">Wherever you are in Malaysia,<br>the class is right there</span></h2>
-      <p class="sub"><span class="zh">我们主要以线上真人直播授课——无论你在 KL、槟城、东马还是任何小镇，打开电脑就能上课。而且我们不只是一个 App：<b>16 年实体办学，5 间中心遍布 Johor 与 Selangor</b>，随时欢迎你来看看。</span><span class="en">We teach mainly through live online classes — join from KL, Penang, East Malaysia or any town, just open your laptop. And we're not just an app: <b>16 years of real teaching, with 5 physical centres across Johor and Selangor</b> you're always welcome to visit.</span></p>
+      <p class="sub"><span class="zh">我们主要以线上真人直播授课——无论你在 KL、槟城、东马还是任何小镇，打开电脑就能上课。而且我们不只是一个 App：<b><span class="te-yrs">16</span> 年实体办学，5 间中心遍布 Johor 与 Selangor</b>，随时欢迎你来看看。</span><span class="en">We teach mainly through live online classes — join from KL, Penang, East Malaysia or any town, just open your laptop. And we're not just an app: <b><span class="te-yrs">16</span> years of real teaching, with 5 physical centres across Johor and Selangor</b> you're always welcome to visit.</span></p>
     </div>
     <div class="onlblk">
       <div class="onlhero card rv" data-loc="online">
@@ -1582,6 +1580,7 @@ var CONFIG={
   ]
   }
   },
+  FOUNDED_YEAR:2010,   /* 创办年份：页面上的「X 年经验」会自动依今年推算，不用手动改 */
   CUBE_LIVE_FACES:6,   /* 最多几面自动播放（会依手机流畅度自动收敛；设 0 = 全部用缩略图） */
   CUBE_MIN_FPS:38,     /* 低于这个帧率就停止再加播放器 */
   LESSONS_PER_WEEK:3,   /* 估算时长用：一周上几堂（改这里会影响「约 X 个月」） */
@@ -1641,6 +1640,17 @@ var CONFIG={
   MISC_FEE:300,                 /* 报名 + 系统费 */
   STORY_QUOTE:{zh:"",en:"",by:""}   /* 学员原话引言（填了才显示），by 如 "Sally · Level 3" */
 };
+
+/* ============ 年资自动更新：今年 - 创办年份 ============ */
+(function(){
+  var y=(new Date()).getFullYear()-(CONFIG.FOUNDED_YEAR||2010);
+  if(!(y>0&&y<100))return;
+  [].forEach.call(document.querySelectorAll('.te-yrs'),function(el){el.textContent=y;});
+  try{
+    var m=document.querySelector('meta[name="description"]');
+    if(m)m.setAttribute('content',m.getAttribute('content').replace(/\d+ 年/,y+' 年'));
+  }catch(e){}
+})();
 
 /* ============ 每次进来都从顶部开始（除非链接带 #锚点） ============ */
 (function(){
@@ -1797,12 +1807,7 @@ io.observe(er);})();
     var s=STORIES.filter(function(x){return x.id===f.dataset.id;})[0]||STORIES[0];
     playStory(s);
   });
-  /* desktop hover pauses (to click a face); touch does NOT pause, so scrolling past never freezes it */
-  var canHover=false; try{canHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;}catch(e){}
-  if(canHover){
-    cubewrap.addEventListener('mouseenter',function(){cubewrap.classList.add('paused');});
-    cubewrap.addEventListener('mouseleave',function(){cubewrap.classList.remove('paused');});
-  }
+  /* 不因悬停或滑过而暂停——立方体一直转（仅在开启影片灯箱时才停） */
   window.addEventListener('resize',(function(){var t;return function(){clearTimeout(t);t=setTimeout(buildCube,200);};})());
 
   /* 自动播放（静音循环）：逐个载入 + 边测帧率边决定要不要继续，避免抢资源造成卡顿 */
