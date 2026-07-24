@@ -2084,7 +2084,7 @@ var PSTU=(function(){
       gainList(l)+
       '<div class="jstage__future"><b>'+(goal?'这就是未来的你 → ':'这一步之后 → ')+'</b>'+esc(l.future)+'</div>'+
       vids(l)+
-      '<button class="jstage__map" data-map="'+i+'">📄 看这一级的完整学习地图</button>'+
+      '<button class="jstage__map" data-map="'+i+'">📖 <span class="zh">看这一级课堂学什么</span><span class="en">What you learn at this level</span></button>'+
     '</div>';
   }
   function hex2rgba(h,a){h=h.replace('#','');var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);return 'rgba('+r+','+g+','+b+','+a+')';}
@@ -2094,7 +2094,9 @@ var PSTU=(function(){
       '<span>'+(i<from?'你的旅程之前 · ':'达成目标后，还能继续往上 · ')+esc(l.tag)+' '+esc(l.skill)+'</span>'+
       '<span class="cta">点击了解 ›</span></div>'+
       '<div class="jlock__bd"><p class="jstage__now" style="padding-top:8px"><span class="em">这一级：</span>'+esc(l.now)+'</p>'+gainList(l)+
-      '<div class="jstage__future">'+esc(l.future)+'</div>'+vids(l)+'</div></div>';
+      '<div class="jstage__future">'+esc(l.future)+'</div>'+vids(l)+
+      '<button class="jstage__map" data-map="'+i+'">📖 <span class="zh">看这一级课堂学什么</span><span class="en">What you learn at this level</span></button>'+
+      '</div></div>';
   }
 
   var stages=document.getElementById('jstages');
@@ -2121,7 +2123,7 @@ var PSTU=(function(){
   stages.addEventListener('click',function(e){
     var lh=e.target.closest('.jlock__hd'); if(lh){lh.parentNode.classList.toggle('open');return;}
     var v=e.target.closest('.jvid'); if(v&&window.__vlbOpen){window.__vlbOpen(v.getAttribute('data-yt'));return;}
-    var m=e.target.closest('.jstage__map'); if(m){alert('完整学习地图（PPT/PDF）之后放这里');}
+    var m=e.target.closest('.jstage__map'); if(m){ if(window.__open5C)window.__open5C(+m.getAttribute('data-map')); }
   });
 })();
 
@@ -2507,6 +2509,7 @@ window.__openTimetable=openTimetable;
   }
   function closeCC(){mbg.hidden=true;document.body.classList.remove('vlb-open');}
   cards.forEach(function(c){c.addEventListener('click',function(){openCCModal(+c.getAttribute('data-lv'));});});
+  window.__open5C=openCCModal;   /* 供「完整学习地图」按钮呼叫 */
   document.getElementById('ccModalX').addEventListener('click',closeCC);
   mbg.addEventListener('click',function(e){if(e.target===mbg)closeCC();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mbg.hidden)closeCC();});
