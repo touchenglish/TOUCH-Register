@@ -553,7 +553,7 @@ body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{anim
 .vlb__vid iframe{width:100%;height:100%;border:0}
 .vlb__x{position:absolute;top:-16px;right:-8px;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:#fff;color:var(--ink);font-size:22px;font-weight:700;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
 @media(max-width:560px){.vlb__x{top:-52px;right:0}}
-.hero__note{margin-top:14px;font-size:13px;color:var(--mut)}
+.hero__note{margin-top:30px;font-size:13px;color:var(--mut)}
 .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px}
 .stat{padding:18px 26px;border-radius:20px;min-width:150px}
 .stat b{display:block;font-size:clamp(24px,3vw,32px);letter-spacing:-.02em}
@@ -1026,10 +1026,6 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
           <span class="zh">你不需要「完美的英文」。你需要的是：开会敢讲、见客户敢开口、机会来的时候接得住。<b><span class="te-yrs">16</span> 年，我们只做一件事——带你从不敢开口，到被看见。</b></span>
           <span class="en">You don't need "perfect English." You need to speak up in meetings, talk to clients with confidence, and be ready when opportunity comes. <b>For <span class="te-yrs">16</span> years we've done one thing — take you from silent to seen.</b></span>
         </p>
-        <div class="hero__cta rv d3">
-          <a class="btn btn--red" href="#price"><span class="zh">查看学习方案 →</span><span class="en">View my plan →</span></a>
-          <a class="btn btn--ghost" href="#stories"><span class="zh">看学员真实改变</span><span class="en">See Real Learner Stories</span></a>
-        </div>
         <p class="hero__note rv d3"><span class="zh">MOE 认可 · HRDC Claimable · 小班 9–12 人</span><span class="en">MOE recognised · HRDC claimable · Small class 9–12</span></p>
       </div>
       <div class="hero__media rv d2">
@@ -1600,22 +1596,22 @@ var CONFIG={
      now:"只会蹦单词，讲不成一句完整的话",
      gain:["讲出完整的句子","加上原因和细节","回答得更完整"],
      future:"自我介绍、聊日常，你能讲成一段话，不再只是单词",
-     videos:["fynOoEpUtEQ","hEju5LBQ6v4"]},
+     videos:[]},
     {key:"L2", tag:"Level 2", skill:"Conveying", color:"#1F9FE6",
      now:"有想法，却不知道怎么讲清楚、讲出观点",
      gain:["讲出自己的看法","说明理由和例子","回应不同的意见"],
      future:"开会时你敢发言，讲得有条理，别人听得懂你的想法",
-     videos:["iuqZKTf44bQ","qYAzzpC083Y"]},
+     videos:[]},
     {key:"L3", tag:"Level 3", skill:"Convincing", color:"#E8472B",
      now:"讲是能讲，但没分量，说服不了人、撑不住反问",
      gain:["清楚地做汇报和 presentation","谈判和说服他人","面对质疑也稳住立场"],
      future:"见客户、做汇报、被追问，你都稳得住，讲得有说服力",
-     videos:["8AsA0yF385s","GmtQmlFOioo"]},
+     videos:[]},
     {key:"L4", tag:"Level 4", skill:"Captivating", color:"#15335E",
      now:"讲得对，但还不够精准、不够有影响力",
      gain:["有影响力地演讲","外交式的谈判","带讨论、看对象调整语气"],
      future:"你的英文精准、专业、有分量——你在场，大家会听你的",
-     videos:["qhlJQ8baMIE"]}
+     videos:[]}
   ],
   CASE_VIDEOS:[
     "dW0WfzzcQJY","BSom6KeM69E","_Na5XJUTZYE","BbB0WMARIw8","qhlJQ8baMIE","tMJCH5m2H9g","UEVXUXii09U","BngQV_xe0B4"
@@ -2053,7 +2049,7 @@ var PSTU=(function(){
 
   /* stage card builder */
   function vids(l){
-    if(!l.videos||!l.videos.length)return '<div class="jstage__vids"><div class="jvid" style="background:linear-gradient(150deg,#E7EEFA,#DCE6F5)"></div></div>';
+    if(!l.videos||!l.videos.length)return '';   /* 暂时不放视频；把 CONFIG.LEVELS 里的 videos 填回去就会自动显示 */
     return '<div class="jstage__vids">'+l.videos.map(function(id){
       return '<button class="jvid" data-yt="'+esc(id)+'"><img loading="lazy" src="https://i.ytimg.com/vi/'+esc(id)+'/hqdefault.jpg" alt=""><span class="jvid__pl"></span></button>';
     }).join('')+'</div>';
