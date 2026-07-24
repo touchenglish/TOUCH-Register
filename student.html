@@ -1805,7 +1805,7 @@ io.observe(er);})();
 
   /* 自动播放（静音循环）：逐个载入 + 边测帧率边决定要不要继续，避免抢资源造成卡顿 */
   (function(){
-    var loaded=false, timers=[], stopped=false;
+    var loaded=false, timers=[], stopped=false, passes=0, trusted=false;
     var reduce=false; try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
     var saveData=false; try{saveData=!!(navigator.connection&&navigator.connection.saveData);}catch(e){}
     var MAX=(CONFIG.CUBE_LIVE_FACES===0)?0:(CONFIG.CUBE_LIVE_FACES||6);
@@ -1817,8 +1817,21 @@ io.observe(er);})();
     var ORDER=[0,1,3,2,4,5];
     function fps(cb){
       var f=0,t0=performance.now();
-      function tick(t){ f++; if(t-t0<520)requestAnimationFrame(tick); else cb(f/((t-t0)/1000)); }
+      function tick(t){ f++; if(t-t0<600)requestAnimationFrame(tick); else cb(f/((t-t0)/1000)); }
       requestAnimationFrame(tick);
+    }
+    /* 等画面稳定后再量；量到偏低会再给一次机会，连两次不合格才停 */
+    function gate(retry,cb){
+      timers.push(setTimeout(function(){
+        if(!loaded||stopped)return;
+        if(document.hidden){cb(true);return;}          /* 分页在背景时不做判断 */
+        fps(function(v){
+          if(!loaded||stopped)return;
+          if(v>=MINFPS)return cb(true);
+          if(retry>0)return gate(retry-1,cb);
+          cb(false);
+        });
+      },900));
     }
     function mount(f,done){
       var id=f.getAttribute('data-id');
@@ -1847,16 +1860,18 @@ io.observe(er);})();
       idle(function(){
         mount(f,function(){
           if(!loaded||stopped)return;
-          /* 装好一个就量一次：顺就继续，卡就停 */
-          fps(function(v){
+          /* 前两个要通过流畅度检查；确认这台机器扛得住之后，剩下的快速装完 */
+          if(trusted){ timers.push(setTimeout(function(){ step(k+1); },300)); return; }
+          gate(1,function(ok){
             if(!loaded||stopped)return;
-            if(v<MINFPS){ stopped=true; return; }
-            timers.push(setTimeout(function(){ step(k+1); },400));
+            if(!ok){ stopped=true; return; }
+            passes++; if(passes>=2)trusted=true;
+            timers.push(setTimeout(function(){ step(k+1); },250));
           });
         });
       });
     }
-    function load(){ if(loaded)return; loaded=true; stopped=false; step(0); }
+    function load(){ if(loaded)return; loaded=true; stopped=false; passes=0; trusted=false; step(0); }
     function unload(){
       if(!loaded)return; loaded=false; stopped=false;
       timers.forEach(clearTimeout); timers=[];
