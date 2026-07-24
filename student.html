@@ -505,7 +505,7 @@ body.te-en .jnote__who::after{content:" says"}
 .is-picked{position:relative;outline:2px solid var(--blue);outline-offset:2px}
 .pickedtag{position:absolute;top:10px;left:10px;z-index:4;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:999px;padding:4px 11px;box-shadow:0 6px 14px -6px rgba(31,120,210,.6)}
 /* grant deadline line */
-.grantdue{margin-top:14px;font-size:13px;font-weight:700;color:#8a6516;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.3);border-radius:12px;padding:10px 14px;display:inline-block}
+.grantdue{margin-top:14px;font-size:13px;font-weight:700;color:#8a6516;background:rgba(210,162,60,.12);border:1px solid rgba(210,162,60,.3);border-radius:12px;padding:10px 14px;display:block;line-height:1.6}
 .grantdue b{color:#6d4f0c}
 .grantdue.is-last{color:#a3200f;background:rgba(232,71,43,.12);border-color:rgba(232,71,43,.34)}
 .grantdue.is-last b{color:#8c1a0c}
@@ -741,11 +741,6 @@ body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{anim
 .squote cite{display:block;margin-top:12px;font-style:normal;font-size:13px;font-weight:700;color:var(--mut)}
 
 /* mobile sticky action bar */
-.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 14px calc(10px + env(safe-area-inset-bottom));gap:10px;
-  background:rgba(243,247,252,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(21,53,123,.1)}
-.mbar a{flex:1;padding:13px 10px;font-size:14px}
-.mbar .btn--wa{background:linear-gradient(180deg,#31C960,#22A94E);color:#fff;box-shadow:0 10px 24px -10px rgba(34,169,78,.55)}
-@media(max-width:700px){body.has-mbar .mbar{display:flex}body.has-mbar{padding-bottom:74px}}
 
 /* proof link card */
 .proof{display:flex;align-items:center;gap:18px;padding:22px 26px;margin-top:22px;transition:.3s}
@@ -864,7 +859,8 @@ a.lcard:hover{transform:translateY(-4px)}
 /* grant banner */
 .grant{display:flex;gap:18px;align-items:flex-start;padding:26px 28px;margin-top:38px;border:1.5px solid rgba(210,162,60,.4);background:linear-gradient(150deg,rgba(255,251,240,.85),rgba(255,255,255,.6))}
 .grant__ic{font-size:30px;flex:none;margin-top:2px}
-.grant__t b{font-size:16px;display:block;margin-bottom:8px;color:#7a5a12}
+.grant__t>b{font-size:16px;display:block;margin-bottom:8px;color:#7a5a12}
+.grant__t p b{color:#7a5a12;font-weight:800}
 .grant__t p{font-size:13.5px;color:var(--ink2);line-height:1.75}
 
 /* advisor card */
@@ -1408,10 +1404,6 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
   </div>
 </section>
 
-<div class="mbar" id="mbar">
-  <a class="btn btn--wa" id="mbarWa" href="tel:1700816893"><span class="zh">问顾问</span><span class="en">Ask advisor</span></a>
-  <a class="btn btn--red" href="#price"><span class="zh">我的方案</span><span class="en">My plan</span></a>
-</div>
 <div class="ccmodal" id="ccModalBg" hidden><div class="ccmodal__card"><button class="ccmodal__x" id="ccModalX" aria-label="close">&times;</button><div class="ccmodal__title" id="ccModalTitle"></div><div class="ccmodal__body" id="ccModalBody"></div></div></div>
 <div class="cmod" id="cmod" hidden><div class="cmod__box"><button class="cmod__x" id="cmodX" aria-label="close">&times;</button><div id="cmodBody"></div></div></div>
 <div class="vlb" id="vlb" hidden><div class="vlb__box"><button class="vlb__x" id="vlbX" aria-label="close">&times;</button><div class="vlb__vid" id="vlbVid"></div></div></div>
@@ -2519,7 +2511,7 @@ window.__openTimetable=openTimetable;
 (function(){
   var due=''; try{due=(QP.get('due')||'').trim();}catch(e){}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(due))return;
-  var g=document.querySelector('.grant'); if(!g)return;
+  var g=document.querySelector('.grant .grant__t')||document.querySelector('.grant'); if(!g)return;
   var dd=due.split('-');
   /* 用「日历日」比较，避免时分秒造成的边界误差 */
   var end=new Date(+dd[0],+dd[1]-1,+dd[2]); if(isNaN(end))return;
@@ -2577,13 +2569,6 @@ window.__openTimetable=openTimetable;
   }
 })();
 
-/* mobile sticky bar: appears after hero, advisor WA if configured */
-(function(){
-  if(ADV&&ADV.wa){document.getElementById('mbarWa').href='https://wa.me/'+ADV.wa;}
-  var hero=document.querySelector('.hero');
-  function chk(){document.body.classList.toggle('has-mbar',window.scrollY>hero.offsetHeight*0.7);}
-  window.addEventListener('scroll',chk,{passive:true});chk();
-})();
 </script>
 </body>
 </html>
