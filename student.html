@@ -171,28 +171,10 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .fx-tip__row i{flex:none;width:19px;height:19px;border-radius:6px;display:inline-grid;place-items:center;font-family:inherit;font-weight:800;font-size:10px;font-style:normal;color:#fff;background:linear-gradient(157deg,color-mix(in srgb,var(--fxc,#2B9BEA) 45%,#fff),var(--fxc,#2B9BEA) 62%,color-mix(in srgb,var(--fxc,#2B9BEA) 80%,#0a1a2a));box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 7px -3px rgba(21,53,123,.5)}
 .fx-tip__row b{color:var(--ink);font-weight:700}
 .fx-tip__row em{color:var(--ink2);font-style:normal}
-.fivec{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:6px}
-.cc{text-align:left;background:rgba(255,255,255,.72);border:1.5px solid rgba(21,53,123,.12);border-radius:18px;
   padding:20px 16px;transition:.18s;position:relative;overflow:hidden}
-.cc::before{content:attr(data-step);position:absolute;top:12px;right:14px;font-family:inherit;
   font-weight:800;font-size:30px;color:rgba(21,53,123,.12);transition:.18s}
-.cc:hover{transform:translateY(-3px);box-shadow:0 18px 50px -18px rgba(21,53,123,.22);border-color:#2B9BEA}
-.cc.is-active{border-color:var(--red);background:#fff;box-shadow:0 26px 60px -22px rgba(21,53,123,.3)}
-.cc.is-active::before{color:rgba(224,48,59,.3)}
-.cc .c-en{font-family:inherit;font-weight:800;font-size:19px;color:var(--blue);letter-spacing:-.01em}
-.cc.is-active .c-en{color:var(--red)}
-.cc .c-zh{font-size:14px;color:var(--ink2);font-weight:600;margin-top:2px}
-.cc .c-mini{font-size:12px;color:var(--mut);margin-top:10px}
-.cc-detail{margin-top:18px;background:linear-gradient(160deg,var(--blue),#0E2A63);color:#fff;
   border-radius:22px;padding:28px;box-shadow:0 26px 60px -22px rgba(21,53,123,.3);animation:rise .35s ease}
-.cc-detail__top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.cc-detail__c{font-family:inherit;font-weight:800;font-size:32px}
-.cc-detail__zh{font-size:18px;color:rgba(255,255,255,.8)}
-.cc-detail__formula{margin-left:auto;background:var(--red);font-family:inherit;font-weight:700;
   font-size:13px;padding:7px 14px;border-radius:9px;letter-spacing:.05em}
-.cc-detail__body{margin-top:16px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.92);max-width:62ch}
-.cc-detail__lvl{margin-top:16px;font-size:13px;color:rgba(255,255,255,.62);display:flex;gap:8px;align-items:center}
-.cc-detail__lvl .lv{background:rgba(255,255,255,.14);padding:4px 10px;border-radius:7px;font-weight:600;color:#fff}
 .cc-modal{position:relative}
 .cc-modal__kicker{font-family:inherit;font-weight:700;font-size:14px;color:var(--ci);display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:4px}
 .cc-modal__c{font-size:18px;font-weight:800}
@@ -230,39 +212,16 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .cc-deco svg{width:100%;height:auto;display:block}
 .cc-gain__row,.cc-learn-list li{position:relative;z-index:1}
 .cc-modal__sec,.cc-intro,.cc-modal__meta,.cc-modal__kicker{position:relative;z-index:1}
-.cc-summary__core{font-family:inherit;font-weight:700;font-size:clamp(17px,2vw,21px);line-height:1.3;color:var(--ink);margin-top:14px}
-.cc-summary__desc{font-size:14.5px;line-height:1.6;color:var(--ink2);margin-top:10px;max-width:60ch}
-.cc-learn{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:20px;
   padding:13px 20px;border-radius:13px;background:var(--c);color:var(--txt);transition:transform .14s,box-shadow .18s;
   box-shadow:0 8px 22px -8px var(--c)}
 .cc-learn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px var(--c)}
 .cc-learn:active{transform:translateY(0)}
-.cc-learn__lv{font-family:inherit;font-weight:800;font-size:15.5px;letter-spacing:-.01em}
-.cc-learn__more{font-size:11.5px;font-weight:600;opacity:.85}
-.cc-learn__more .zh{opacity:.9}
-.fivec .cc{background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);
   border:1.5px solid rgba(255,255,255,.72);box-shadow:0 10px 30px rgba(20,33,50,.1)}
-.fivec .cc::before{color:rgba(255,255,255,.6)}
-.fivec .cc .c-en{color:var(--ci)}
-.fivec .cc:hover{border-color:var(--c);transform:translateY(-4px)}
-.fivec .cc.is-active{border-color:var(--c);background:rgba(255,255,255,.74);
   box-shadow:0 0 0 3px rgba(255,255,255,.8),0 18px 42px -10px var(--c)}
-.fivec .cc.is-active::before{color:var(--c);opacity:.22}
-.fivec .cc.is-active .c-en{color:var(--ci)}
-.fivec .cc__chip{display:inline-block;margin-top:10px;font-family:inherit;font-weight:800;font-size:10.5px;
   letter-spacing:.04em;padding:3px 9px;border-radius:7px;background:var(--c);color:var(--txt)}
-#ccDetail .cc-detail{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
   border:1px solid rgba(255,255,255,.7);border-left:5px solid var(--c);color:var(--ink);
   box-shadow:0 16px 46px rgba(20,33,50,.14),inset 0 1px 0 rgba(255,255,255,.7)}
-#ccDetail .cc-detail__c{color:var(--ci)}
-#ccDetail .cc-detail__zh{color:var(--ink2)}
-#ccDetail .cc-detail__body{color:var(--ink)}
-#ccDetail .cc-detail__formula{background:var(--c);color:var(--txt)}
-#ccDetail .cc-detail__lvl{color:var(--ink2)}
-#ccDetail .cc-detail__lvl .lv{background:var(--c);color:var(--txt)}
 .svg-ic{display:block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.cc:hover .cc__ic{color:var(--ci)}
-.cc.is-active .cc__ic{background:var(--c);color:var(--txt);border-color:transparent}
 .lvmore .cc-learn{width:100%}
 .lvcc.cc-detail{position:relative;margin-top:14px;background:rgba(255,255,255,.32);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);border:none;border-top:2px solid color-mix(in srgb,var(--c) 42%,transparent);border-radius:16px;box-shadow:none;color:var(--ink)}
 .lvcc .cc-detail__c{color:var(--ci)}
@@ -270,18 +229,15 @@ mark::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;ba
 .lvcc .cc-detail__top{padding-right:36px}
 .lvcc .cc-learn__lv i{font-style:normal;font-weight:500;opacity:.82;margin-left:6px;font-family:var(--cjk)}
 .lvcc .cc-detail__top .lvtag--cefr{margin-left:auto}
-.lvactions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
-.lvactions .cc-learn{margin-top:0}
 #sysFocus .lessons .lc5 .fivec{margin-top:0}
 /* 5C full-content modal shell + plan badge */
 .ccmodal{position:fixed;inset:0;z-index:220;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(6,18,46,.72);backdrop-filter:blur(8px)}
 .ccmodal[hidden]{display:none}
 .ccmodal__card{position:relative;width:min(680px,100%);max-height:88vh;overflow:auto;border-radius:24px;padding:26px 26px 30px;background:linear-gradient(160deg,rgba(255,255,255,.97),rgba(244,248,254,.97));box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
 .ccmodal__x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;background:rgba(21,53,123,.07);color:var(--ink);font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:3}
+.ccmodal__plan{display:inline-flex;align-items:center;gap:5px;margin:12px 0 2px;font-size:11.5px;font-weight:800;border-radius:999px;padding:5px 13px}
 .ccmodal__title{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--mut);text-transform:uppercase;padding-right:40px;margin-bottom:6px}
-.cc{cursor:pointer}
 .cc__plan{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.03em;color:#fff;background:var(--ci);border-radius:999px;padding:3px 9px;margin-bottom:9px}
-.cc.is-plan{border-color:var(--c);box-shadow:0 14px 34px -18px var(--c)}
 @media(max-width:860px){.fivec{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.fivec{grid-template-columns:1fr}}
 
@@ -1162,8 +1118,13 @@ footer{padding:36px 0 46px;text-align:center;font-size:12.5px;color:var(--mut)}
       <h2><span class="zh">5C 学习系统：<br>一步一步，把你带到台前</span><span class="en">The 5C System:<br>step by step, into the spotlight</span></h2>
       <p class="sub"><span class="zh">不是零散的课，而是一套完整路径。每一个 C，对应一个 Level，解决一个真实的表达问题。</span><span class="en">Not scattered lessons — one complete path. Each C matches a level and solves one real communication problem.</span></p>
     </div>
-    <div class="fivec" id="fivecGrid"><!-- cards injected --></div>
-    <div id="ccDetail"></div>
+    <div class="cgrid">
+      <div class="ccard card rv" data-lv="0" style="--cc:#EBB12A"><span class="ccard__n">C1 · P1</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Copy</b><i><span class="zh">模仿 · 打基础</span><span class="en">Imitate · Foundation</span></i><p><span class="zh">从正确的发音和句型开始，先能跟着说，告别「不敢出声」。</span><span class="en">Start with sounds and patterns. Speak along first — stop being silent.</span></p></div>
+      <div class="ccard card rv d1" data-lv="1" style="--cc:#2E9E50"><span class="ccard__n">C2 · L1</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Construct</b><i><span class="zh">组句 · 讲完整</span><span class="en">Build · Full sentences</span></i><p><span class="zh">把单词组成完整句子，日常对话不再东拼西凑。</span><span class="en">Turn words into full sentences — no more piecing things together.</span></p></div>
+      <div class="ccard card rv d2" data-lv="2" style="--cc:#1F9FE6"><span class="ccard__n">C3 · L2</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Convey</b><i><span class="zh">表达 · 讲清楚</span><span class="en">Express · Be clear</span></i><p><span class="zh">把想法讲清楚：报告、汇报、说明，让人一次听懂。</span><span class="en">Make your point clearly — reports, updates, explanations people get first time.</span></p></div>
+      <div class="ccard card rv d3" data-lv="3" style="--cc:#E8472B"><span class="ccard__n">C4 · L3</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Convince</b><i><span class="zh">说服 · 有分量</span><span class="en">Persuade · Carry weight</span></i><p><span class="zh">在会议和谈判里表达立场、争取资源，你的话开始有分量。</span><span class="en">Hold your ground in meetings and negotiations. Your words start to carry weight.</span></p></div>
+      <div class="ccard card rv d4" data-lv="4" style="--cc:#15335E"><span class="ccard__n">C5 · L4</span><span class="ccard__more"><span class="zh">看细节 ›</span><span class="en">Details ›</span></span><b>Captivate</b><i><span class="zh">感染 · 被记住</span><span class="en">Captivate · Be remembered</span></i><p><span class="zh">Presentation、演讲、带团队——让人愿意听你讲，并记住你。</span><span class="en">Presentations, speeches, leading teams — people listen, and remember you.</span></p></div>
+    </div>
     </div>
   </div>
 </section>
@@ -2374,49 +2335,26 @@ window.__openTimetable=openTimetable;
   function svg(name){return '<svg class="svg-ic" viewBox="0 0 24 24">'+(IC2[name]||IC2.star)+'</svg>';}
   var COLPAL=["#2E9E50","#2A5BD7","#7C5CFF","#E6A81E","#E0303B","#14A2B8"];
 
-  var grid=document.getElementById('fivecGrid'), detail=document.getElementById('ccDetail');
-  if(!grid)return;
-  /* 学员的 level 区间：用来标注「你的方案」 */
+  var cards=[].slice.call(document.querySelectorAll('.ccard[data-lv]'));
+  if(!cards.length)return;
+  /* 学员的 level 区间：高亮「你的方案」 */
   var pf=parseInt(QP&&QP.get('from'),10), pt=parseInt(QP&&QP.get('to'),10);
   if(isNaN(pf))pf=-1; if(isNaN(pt))pt=pf;
-  function inPlan(i){return pf>=0&&i>=pf&&i<=pt;}
-
-  FIVEC.forEach(function(c,i){
-    var b=document.createElement('button');
-    b.className='cc rv'+(inPlan(i)?' is-plan':'');
-    b.setAttribute('data-c',i); b.setAttribute('data-step',i+1);
-    b.style.cssText='--c:'+c.col+';--ci:'+c.ci+';--txt:'+c.txt;
-    b.innerHTML=(inPlan(i)?'<span class="cc__plan">\u2605 <span class="zh">你的方案</span><span class="en">Your plan</span></span>':'')+
-      '<span class="cc__ic">'+CICONS[i]+'</span><div class="c-en">'+c.c+'</div><div class="c-zh">'+c.zh+'</div><div class="c-mini">'+c.mini+'</div><span class="cc__chip">'+c.chip+'</span>';
-    grid.appendChild(b);
+  var hasPlan=(pf>=0&&pt>=pf);
+  cards.forEach(function(c){
+    var i=+c.getAttribute('data-lv');
+    if(!hasPlan)return;
+    if(i>=pf&&i<=pt){
+      c.classList.add('in-plan');
+      c.insertAdjacentHTML('afterbegin','<span class="ccard__yours">\u2605 <span class="zh">你的方案</span><span class="en">Your plan</span></span>');
+    }else{ c.classList.add('off-plan'); }
   });
 
-  function renderC(i){
-    var c=FIVEC[i];
-    [].forEach.call(grid.querySelectorAll('.cc'),function(n,j){n.classList.toggle('is-active',j===i);});
-    detail.innerHTML=
-      '<div class="cc-detail" style="--c:'+c.col+';--ci:'+c.ci+';--txt:'+c.txt+'">'+
-        '<div class="cc-detail__top"><span class="cc-detail__c">'+c.c+'</span><span class="cc-detail__zh">'+c.zh+'</span></div>'+
-        '<p class="cc-summary__core">'+c.core+'</p>'+
-        '<p class="cc-summary__desc">'+c.desc+'</p>'+
-        '<div class="lvactions"><button class="cc-learn" data-cc-modal="'+i+'" style="--c:'+c.col+';--txt:'+c.txt+'">'+
-          '<span class="cc-learn__lv">'+c.lv+'</span>'+
-          '<span class="cc-learn__more">Learn more <span class="zh">\u67e5\u770b\u5b8c\u6574\u5185\u5bb9</span> \u2192</span></button></div>'+
-      '</div>';
-  }
-  grid.addEventListener('click',function(e){
-    var n=e.target.closest('.cc'); if(!n)return;
-    var i=+n.getAttribute('data-c');
-    if(n.classList.contains('is-active')){n.classList.remove('is-active');detail.innerHTML='';return;}
-    renderC(i);
-    detail.scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
-
-  /* Layer 3: full-content popup */
+  /* 点卡片 → 直接开完整内容弹窗（内容来自 console 的 5C） */
   var COLPAL2=(typeof COLPAL!=='undefined')?COLPAL:['#2A5BD7','#E6A81E','#E0303B','#7C5CFF','#1F9FE6','#2E9E50'];
   var mbg=document.getElementById('ccModalBg'), mTitle=document.getElementById('ccModalTitle'), mBody=document.getElementById('ccModalBody');
   function openCCModal(i){
-    var c=FIVEC[i];
+    var c=FIVEC[i]; if(!c)return;
     mbg.style.setProperty('--c',c.col); mbg.style.setProperty('--ci',c.ci); mbg.style.setProperty('--txt',c.txt);
     mTitle.innerHTML=c.lv;
     var body=c.body, lead=body, rest='';
@@ -2426,9 +2364,11 @@ window.__openTimetable=openTimetable;
       return '<li><span class="ll-ic" style="color:'+col+';background:'+col+'1f">'+svg(x.ic)+'</span><span>'+x.en+' <span class="zh">'+x.zh+'</span></span></li>';}).join('');
     var gainRows=c.gain.map(function(x,k){var col=COLPAL2[k%COLPAL2.length];
       return '<div class="cc-gain__row"><span class="gr-ic" style="color:'+col+';background:'+col+'1f">'+svg(x.ic)+'</span><span class="gr-en">'+x.en+'</span><span class="gr-zh">'+x.zh+'</span></div>';}).join('');
+    var mine=(hasPlan&&i>=pf&&i<=pt)?'<span class="ccmodal__plan" style="background:'+c.col+';color:'+c.txt+'">\u2605 <span class="zh">这一级在你的方案里</span><span class="en">In your plan</span></span>':'';
     mBody.innerHTML=
       '<div class="cc-modal">'+
         '<div class="cc-modal__kicker"><span class="cc-modal__c">'+c.c+'</span> \u00b7 '+c.skill+' '+fxChip('cc-modal__formula',c.formula)+'</div>'+
+        mine+
         '<div class="cc-modal__meta"><span>'+svg('people')+c.cefr+'</span><span>'+svg('calendar')+c.classes+'</span></div>'+
         '<div class="cc-intro"><span class="cc-intro__ic">'+svg('lightbulb')+'</span><div class="cc-intro__tx"><strong>'+lead+'</strong> '+rest+'</div></div>'+
         '<div class="cc-modal__sec"><h4><span class="sec-ic sec-ic--learn">'+svg('gradcap')+'</span>What students learn in class <span class="zh">\u8bfe\u5802\u5b66\u4ec0\u4e48</span></h4><ul class="cc-learn-list">'+learnLis+'</ul></div>'+
@@ -2438,16 +2378,10 @@ window.__openTimetable=openTimetable;
     mbg.hidden=false; document.body.classList.add('vlb-open');
   }
   function closeCC(){mbg.hidden=true;document.body.classList.remove('vlb-open');}
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest&&e.target.closest('[data-cc-modal]');
-    if(btn){openCCModal(+btn.getAttribute('data-cc-modal'));}
-  });
+  cards.forEach(function(c){c.addEventListener('click',function(){openCCModal(+c.getAttribute('data-lv'));});});
   document.getElementById('ccModalX').addEventListener('click',closeCC);
   mbg.addEventListener('click',function(e){if(e.target===mbg)closeCC();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mbg.hidden)closeCC();});
-
-  /* 学员方案内的那一级，预设展开 */
-  if(pf>=0)renderC(pf);
 })();
 
 /* 6) 助学金截止日：温和的时效感（过期后转成「问下一批」，不留空白） */
