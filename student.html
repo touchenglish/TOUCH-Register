@@ -711,8 +711,9 @@ body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{anim
 .cface img{width:100%;height:100%;object-fit:cover;opacity:.97}
 .cface__v{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
 .cface__v iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:178%;height:100%;border:0;pointer-events:none}
-.cface.is-live .cface__pl{display:none}
-.cface.is-live img{opacity:0;transition:opacity .5s ease}
+.cface.is-playing .cface__pl{display:none}
+.cface__v iframe{opacity:0;transition:opacity .45s ease}
+.cface.is-playing .cface__v iframe{opacity:1}
 .cface{contain:paint}
 .cface::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,rgba(14,42,99,.6));pointer-events:none}
 /* iridescent holographic edge */
@@ -1823,17 +1824,21 @@ io.observe(er);})();
       ifr.setAttribute('allow','autoplay; encrypted-media');
       ifr.setAttribute('tabindex','-1');
       ifr.setAttribute('loading','eager');
+      ifr.addEventListener('load',function(){
+        /* 播放器真的开始跑了才淡入、才收起播放键；在那之前一直显示缩略图 */
+        timers.push(setTimeout(function(){ f.classList.add('is-playing'); },700));
+      });
       ifr.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+
               '&controls=0&modestbranding=1&playsinline=1&rel=0&fs=0&disablekb=1&iv_load_policy=3';
       slot.appendChild(ifr);
-      f.classList.add('is-live');          /* 该面隐藏播放键 */
+      f.classList.add('is-live');
     }
     function load(){
       if(loaded)return; loaded=true;
       var picks=pick(faces());
       picks.forEach(function(f,k){
         /* 错开 700ms 逐个载入，让滚动不被一次性阻塞 */
-        timers.push(setTimeout(function(){ idle(function(){ mount(f); }); }, k*700));
+        timers.push(setTimeout(function(){ idle(function(){ mount(f); }); }, k*450));
       });
     }
     function unload(){
@@ -1841,14 +1846,14 @@ io.observe(er);})();
       timers.forEach(clearTimeout); timers=[];
       faces().forEach(function(f){
         var sl=f.querySelector('.cface__v'); if(sl)sl.innerHTML='';
-        f.classList.remove('is-live');
+        f.classList.remove('is-live'); f.classList.remove('is-playing');
       });
     }
     if('IntersectionObserver' in window){
       /* rootMargin 拉大：还没滑到就先开始准备，到位时已经在播 */
       new IntersectionObserver(function(es){
         es.forEach(function(e){ if(e.isIntersecting)load(); else unload(); });
-      },{rootMargin:'600px 0px',threshold:0}).observe(cubewrap);
+      },{rootMargin:'1000px 0px',threshold:0}).observe(cubewrap);
     }else{ load(); }
   })();
 
