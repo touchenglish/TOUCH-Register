@@ -530,6 +530,8 @@ body.te-en .jnote__who::after{content:" says"}
 body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{animation-play-state:paused}
 @keyframes vmqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.vmq__track{animation:none}.vmq{overflow-x:auto}}
+.vmarquee.is-off .vmq__track{animation-play-state:paused}
+.vmarquee.is-off .vmq__track{will-change:auto}
 .vcard{flex:none;width:150px;border-radius:12px;overflow:hidden;cursor:pointer;background:#0b1f47;border:1px solid rgba(255,255,255,.1);transition:.22s}
 .vcard:hover{transform:translateY(-3px);border-color:rgba(120,190,255,.5);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
 .vcard__th{position:relative;aspect-ratio:16/9;background:#0E2A63}
@@ -2000,6 +2002,14 @@ var PSTU=(function(){
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close();});
 })();
 
+/* 滚动带：离开画面即暂停，减少无谓的 GPU 合成 */
+(function(){
+  var m=document.querySelector('.vmarquee'); if(!m||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ m.classList.toggle('is-off',!e.isIntersecting); });
+  },{rootMargin:'150px 0px',threshold:0}).observe(m);
+})();
+
 /* ===== Your English Transformation (journey) ===== */
 (function(){
   var LV=CONFIG.LEVELS||[]; if(!LV.length)return;
@@ -2523,9 +2533,28 @@ window.__openTimetable=openTimetable;
     '<button class="phone__sound" aria-label="sound">\uD83D\uDD07 <span class="zh">点击听声音</span><span class="en">Tap for sound</span></button>';
   var btn=screen.querySelector('.phone__sound');
   btn.addEventListener('click',function(){
-    screen.querySelector('iframe').src=embed(0,1);
-    btn.remove();
+    var f=screen.querySelector('iframe'); if(f)f.src=embed(0,1);
+    btn.remove(); screen.setAttribute('data-sound','1');
   });
+  /* 滚出画面就卸载，避免在背景持续解码影响其它区块的滚动流畅度 */
+  var phone=document.getElementById('principalPhone');
+  if(phone&&'IntersectionObserver' in window){
+    var live=true;
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          if(live)return; live=true;
+          if(!screen.querySelector('iframe')){
+            var snd=screen.getAttribute('data-sound')==='1';
+            screen.insertAdjacentHTML('afterbegin','<iframe src="'+embed(snd?0:1,snd?1:0)+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>');
+          }
+        }else{
+          if(!live)return; live=false;
+          var f=screen.querySelector('iframe'); if(f)f.remove();
+        }
+      });
+    },{rootMargin:'200px 0px',threshold:0}).observe(phone);
+  }
 })();
 
 /* mobile sticky bar: appears after hero, advisor WA if configured */
