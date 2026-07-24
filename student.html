@@ -709,6 +709,9 @@ body.vlb-open .vmq__track,body.vlb-open .cube-spin,body.vlb-open .cube-tilt{anim
   box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 26px rgba(31,120,210,.28),0 22px 46px -16px rgba(21,53,123,.55);
   -webkit-backface-visibility:hidden;backface-visibility:hidden}
 .cface img{width:100%;height:100%;object-fit:cover;opacity:.97}
+.cface__v{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
+.cface__v iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:178%;height:100%;border:0;pointer-events:none}
+.cube.is-live .cface__pl{opacity:.55}
 .cface::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,rgba(14,42,99,.6));pointer-events:none}
 /* iridescent holographic edge */
 .cface__edge{position:absolute;inset:0;border-radius:30px;pointer-events:none;
@@ -1756,6 +1759,7 @@ io.observe(er);})();
     cube.innerHTML=items.map(function(s,i){
       return '<button class="cface" data-id="'+esc(s.id)+'" style="transform:'+FACE_TF[i]+' translateZ('+half+'px)">'+
         '<img loading="lazy" src="https://i.ytimg.com/vi/'+esc(s.id)+'/hqdefault.jpg" alt="">'+
+        '<span class="cface__v"></span>'+
         '<span class="cface__edge"></span><span class="cface__pl"></span></button>';
     }).join('');
   }
@@ -1785,6 +1789,41 @@ io.observe(er);})();
     cubewrap.addEventListener('mouseleave',function(){cubewrap.classList.remove('paused');});
   }
   window.addEventListener('resize',(function(){var t;return function(){clearTimeout(t);t=setTimeout(buildCube,200);};})());
+
+  /* 六面自动播放（静音循环）：只在立方体进入画面时加载，滑走即卸载以省电与效能 */
+  (function(){
+    var loaded=false, io=null;
+    var reduce=false; try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+    var saveData=false; try{saveData=!!(navigator.connection&&navigator.connection.saveData);}catch(e){}
+    if(reduce||saveData)return;                    /* 尊重省电/减少动态设定 */
+    function load(){
+      if(loaded)return; loaded=true;
+      [].forEach.call(cube.querySelectorAll('.cface'),function(f){
+        var id=f.getAttribute('data-id'); if(!id)return;
+        var slot=f.querySelector('.cface__v'); if(!slot||slot.firstChild)return;
+        var ifr=document.createElement('iframe');
+        ifr.setAttribute('allow','autoplay; encrypted-media');
+        ifr.setAttribute('tabindex','-1');
+        ifr.src='https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+
+                '&controls=0&modestbranding=1&playsinline=1&rel=0&fs=0&disablekb=1&iv_load_policy=3';
+        slot.appendChild(ifr);
+      });
+      cube.classList.add('is-live');
+    }
+    function unload(){
+      if(!loaded)return; loaded=false;
+      [].forEach.call(cube.querySelectorAll('.cface__v'),function(sl){sl.innerHTML='';});
+      cube.classList.remove('is-live');
+    }
+    if('IntersectionObserver' in window){
+      io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting)load(); else unload(); });
+      },{rootMargin:'80px',threshold:0.15});
+      io.observe(cubewrap);
+    }else{ load(); }
+    /* 换视频（后台改动）时重建，重新加载 */
+    window.__cubeReload=function(){unload();};
+  })();
 
 })();
 
